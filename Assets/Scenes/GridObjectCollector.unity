@@ -316,7 +316,7 @@ PrefabInstance:
     - target: {fileID: 114181230191376748, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       propertyPath: obstacle
       value: 
-      objectReference: {fileID: -2451728617343004851, guid: 9535baa8976bc1d4a9335da439f30384, type: 3}
+      objectReference: {fileID: -2451728617343004851, guid: 9453fb14eff1d5042b07cf9c29302fa2, type: 3}
     - target: {fileID: 114181230191376748, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       propertyPath: objective
       value: 

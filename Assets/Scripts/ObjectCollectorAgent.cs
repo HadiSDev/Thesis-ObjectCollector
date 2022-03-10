@@ -3,13 +3,10 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
-using Random = UnityEngine.Random;
 
 public class ObjectCollectorAgent : Agent
 {
     ObjectCollectorSettings m_ObjectCollectorSettings;
-    public GameObject area;
-    ObjectCollectorArea m_MyArea;
     Rigidbody m_AgentRb;
     // Speed of agent rotation.
     public float turnSpeed = 300;
@@ -23,10 +20,9 @@ public class ObjectCollectorAgent : Agent
     public float stepCost = -0.001f;
 
     // Capacity Settings
-    public bool enableCapacity = false;
+    public bool enableCapacity;
     public float maxCapacity = 25;
-    private float collectedCapacity = 0;
-    public float depositRewardPerObjective = 0.1f;
+    private float m_CollectedCapacity;
 
     // Station
 
@@ -35,7 +31,6 @@ public class ObjectCollectorAgent : Agent
     public override void Initialize()
     {
         m_AgentRb = GetComponent<Rigidbody>();
-        m_MyArea = area.GetComponent<ObjectCollectorArea>();
         m_ObjectCollectorSettings = FindObjectOfType<ObjectCollectorSettings>();
         m_ResetParams = Academy.Instance.EnvironmentParameters;
         SetResetParameters();
@@ -52,7 +47,7 @@ public class ObjectCollectorAgent : Agent
 
         if (enableCapacity)
         {
-            var capacityRatio = collectedCapacity / maxCapacity;
+            var capacityRatio = m_CollectedCapacity / maxCapacity;
             sensor.AddObservation(capacityRatio);
         }
     }
@@ -127,7 +122,7 @@ public class ObjectCollectorAgent : Agent
             2f, Random.Range(-m_MyArea.range, m_MyArea.range))
             + area.transform.position;
         transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));*/
-        collectedCapacity = 0;
+        m_CollectedCapacity = 0;
         SetResetParameters();
     }
 
@@ -135,16 +130,20 @@ public class ObjectCollectorAgent : Agent
     {
         if (collision.gameObject.CompareTag("objective"))
         {
-            if (!enableCapacity || collectedCapacity + 1f <= maxCapacity)
+            if (!enableCapacity || m_CollectedCapacity + 1f <= maxCapacity)
             {
                 collision.gameObject.GetComponent<ObjectLogic>().OnEaten();
-                collectedCapacity += 1f;
+                m_CollectedCapacity += 1f;
 
                 AddReward(1f);
                 if (contribute)
                 {
                     m_ObjectCollectorSettings.totalScore += 1;
                 }
+            }
+            else if (Math.Abs(m_CollectedCapacity - maxCapacity) < 0.2)
+            {
+                AddReward(-1f);
             }
         }
 
@@ -156,11 +155,11 @@ public class ObjectCollectorAgent : Agent
         if (collision.gameObject.CompareTag("station") && enableCapacity)
         {
             var n_objects = GameObject.FindGameObjectsWithTag("objective").Length;
-            if (collectedCapacity > 0)
+            if (m_CollectedCapacity > 0)
             {
-                var reward = depositRewardPerObjective * collectedCapacity;
+                var reward = m_CollectedCapacity / maxCapacity;
                 AddReward(reward);
-                collectedCapacity = 0;
+                m_CollectedCapacity = 0;
             }
             else if (n_objects == 0)
             {
@@ -171,8 +170,8 @@ public class ObjectCollectorAgent : Agent
 
     private void EndEpsiodeIfNoObjectives()
     {
-        var n_objects = GameObject.FindGameObjectsWithTag("objective").Length;
-        if (n_objects == 0 && !enableCapacity || n_objects == 0  && collectedCapacity == 0)
+        var nObjects = GameObject.FindGameObjectsWithTag("objective").Length;
+        if (nObjects == 0 && !enableCapacity || nObjects == 0  && m_CollectedCapacity == 0)
         {
             Debug.Log("Epsiode Ended");
             EndEpisode();
