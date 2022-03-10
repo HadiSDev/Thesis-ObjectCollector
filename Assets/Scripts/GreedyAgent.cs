@@ -8,6 +8,9 @@ public class GreedyAgent : MonoBehaviour
     private NavMeshAgent m_Agent;
     private Transform m_Target;
 
+    public float checkEvery; // check every x second
+    float m_Time;
+
     private ObjectCollectorSettings m_ObjectCollectorSettings;
 
     void Start()
@@ -53,13 +56,10 @@ public class GreedyAgent : MonoBehaviour
         }
     }
 
-    public float checkEvery; // check every x second
-    float time;
-
     void Update()
     {
-        time += Time.deltaTime;
-        if (!(time >= checkEvery)) return;
+        m_Time += Time.deltaTime;
+        if (!(m_Time >= checkEvery)) return;
         m_Target = FindClosestObject()?.transform;
         if (m_Target == null)
         {
@@ -69,7 +69,7 @@ public class GreedyAgent : MonoBehaviour
         {
             m_Agent.SetDestination(m_Target.position);
         }
-        time = 0;
+        m_Time = 0;
     }
 
 }
