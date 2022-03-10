@@ -312,10 +312,10 @@ MonoBehaviour:
   m_CompressionType: 1
   m_ObservationType: 0
   m_ChannelLabels: []
-  m_Debug_CreateSensorOnAwake: 0
+  m_Debug_CreateSensorOnAwake: 1
   m_Debug_CreateSensorOnValidate: 1
   m_Debug_FrameInterval: 1
-  m_Debug_DrawGridBuffer: 0
+  m_Debug_DrawGridBuffer: 1
   m_Debug_GridBufferDrawer:
     Context: {fileID: 0}
     Editor: {fileID: 0}
@@ -1002,6 +1002,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
+  enableGlobalSensorComponents: 1
   turnSpeed: 300
   moveSpeed: 2
   contribute: 1
@@ -1085,6 +1086,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  enableGlobalSensorComponents: 0
 --- !u!1 &1494943057
 GameObject:
   m_ObjectHideFlags: 0
