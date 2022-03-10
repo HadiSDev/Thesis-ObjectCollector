@@ -61,16 +61,27 @@ public class ObjectCollectorArea : Area
 
     public void ResetObjectiveArea(GameObject[] agents)
     {
-        var firstStation = stations[0];
+        var firstStation = stations.Length == 0 ? null : stations[0];
         foreach (GameObject agent in agents)
         {
-            if (agent.transform.parent == gameObject.transform)
+            if (agent.transform.parent != gameObject.transform)
             {
-                /*firstStation.transform.position = new Vector3(Random.Range(-range, range), 1f,
-                    Random.Range(-range, range))  + transform.position;*/
-                agent.transform.position = firstStation.transform.position;
-                agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
+                continue;
             }
+            
+            if (firstStation != null)
+            {
+                agent.transform.position = firstStation.transform.position;
+            }
+            else
+            {
+                agent.transform.position = new Vector3(Random.Range(-range, range), 1f,
+                    Random.Range(-range, range))  + transform.position;
+            }
+            /*firstStation.transform.position = new Vector3(Random.Range(-range, range), 1f,
+                    Random.Range(-range, range))  + transform.position;*/
+                
+            agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
         }
 
         CreateObjectives(numObjectives, objective);
