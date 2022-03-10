@@ -99,7 +99,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ml-agents": {
-      "version": "git+https://github.com/Unity-Technologies/ml-agents.git?path=com.unity.ml-agents#release_19",
+      "version": "git+https://github.com/HadiSDev/ml-agents.git?path=com.unity.ml-agents#release_23",
       "depth": 0,
       "source": "git",
       "dependencies": {
@@ -107,7 +107,7 @@
         "com.unity.modules.imageconversion": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       },
-      "hash": "68474b92978ac4c6f26a4e170d257c6d8de72025"
+      "hash": "8f069a3ee2141e3738478fbbbb5988f06bbff811"
     },
     "com.unity.ml-agents.extensions": {
       "version": "git+https://github.com/Unity-Technologies/ml-agents.git?path=com.unity.ml-agents.extensions#release_19",

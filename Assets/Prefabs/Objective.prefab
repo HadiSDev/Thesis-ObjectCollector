@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 135161629589834772}
   - component: {fileID: 23208712281262040}
   - component: {fileID: 114154930672833238}
+  - component: {fileID: -6486784317443778156}
   m_Layer: 0
   m_Name: Objective
   m_TagString: objective
@@ -112,3 +113,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawn: 0
   myArea: {fileID: 0}
+--- !u!114 &-6486784317443778156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699568242032636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f06e7c5ae2f9934e93db866ce90ef93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Shape:
+    m_ScanResultsByLOD: []
+    m_LocalPoints: []
+    m_WorldPoints: []
+    m_MergeDisconnected: 0
+    m_Flatten: 0
+    m_MaxLOD: 0
+    m_SelectedLOD: 0
+    m_ScanLOD: 0
+    m_GizmoLOD: 0
+    m_Projection: 0
+    m_PointCount: 0
+    m_DrawGrid: 0

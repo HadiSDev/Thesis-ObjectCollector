@@ -1,7 +1,11 @@
 
+using System;
+using MBaske.Sensors.Grid;
+using Unity.MLAgents;
 using Unity.MLAgentsExamples;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class ObjectCollectorArea : Area
 {
