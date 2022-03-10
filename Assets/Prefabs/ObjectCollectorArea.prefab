@@ -273,6 +273,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e14a1d4accf634e3fb9b5bc94d023393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objective: {fileID: 0}
+  objective: {fileID: 1699568242032636, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
   numObjectives: 0
   range: 45
+  obstacle: {fileID: -2451728617343004851, guid: 9453fb14eff1d5042b07cf9c29302fa2, type: 3}
+  numObstacles: 0
+  stations: []
+  maxSpawnAttemptsPerObstacle: 10
