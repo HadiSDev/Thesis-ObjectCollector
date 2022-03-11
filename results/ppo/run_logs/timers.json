@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1646994479",
+        "python_version": "3.8.12 | packaged by conda-forge | (default, Oct 12 2021, 21:19:05) [MSC v.1916 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\tools\\Anaconda3\\envs\\Thesis\\Scripts\\mlagents-learn .\\config\\GridObjectCollector.yaml --env=GridObjectCollector",
+        "mlagents_version": "0.28.0",
+        "mlagents_envs_version": "0.28.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.10.2",
+        "numpy_version": "1.21.5",
+        "end_time_seconds": "1646994481"
+    },
+    "total": 2.6598333000000003,
+    "count": 1,
+    "self": 0.010446800000000422,
+    "children": {
+        "run_training.setup": {
+            "total": 0.17628590000000033,
+            "count": 1,
+            "self": 0.17628590000000033
+        },
+        "TrainerController.start_learning": {
+            "total": 2.4731005999999995,
+            "count": 1,
+            "self": 0.00043810000000021887,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 2.4726371,
+                    "count": 1,
+                    "self": 2.4726371
+                },
+                "trainer_threads": {
+                    "total": 1.0999999995320309e-06,
+                    "count": 1,
+                    "self": 1.0999999995320309e-06
+                },
+                "TrainerController._save_models": {
+                    "total": 2.4299999999755073e-05,
+                    "count": 1,
+                    "self": 2.4299999999755073e-05
+                }
+            }
+        }
+    }
+}
