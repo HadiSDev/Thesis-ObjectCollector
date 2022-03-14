@@ -1,4 +1,6 @@
 using System;
+using CustomDetectableObjects;
+using MBaske.Sensors.Grid;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -8,6 +10,7 @@ public class ObjectCollectorAgent : Agent
 {
     ObjectCollectorSettings m_ObjectCollectorSettings;
     Rigidbody m_AgentRb;
+
     // Speed of agent rotation.
     public float turnSpeed = 300;
 
@@ -24,6 +27,9 @@ public class ObjectCollectorAgent : Agent
     public float maxCapacity = 25;
     private float m_CollectedCapacity;
 
+    // Dynamically mark detected objectives
+    public bool markDetectedObjects;
+    private GridSensorComponent3D POVGrid;
     // Station
 
     EnvironmentParameters m_ResetParams;
@@ -33,6 +39,10 @@ public class ObjectCollectorAgent : Agent
         m_AgentRb = GetComponent<Rigidbody>();
         m_ObjectCollectorSettings = FindObjectOfType<ObjectCollectorSettings>();
         m_ResetParams = Academy.Instance.EnvironmentParameters;
+        if (markDetectedObjects)
+        {
+            POVGrid = GetComponent<GridSensorComponent3D>();
+        }
         SetResetParameters();
     }
 
@@ -49,6 +59,17 @@ public class ObjectCollectorAgent : Agent
         {
             var capacityRatio = m_CollectedCapacity / maxCapacity;
             sensor.AddObservation(capacityRatio);
+        }
+    }
+
+    public void MarkDetectedObjectives(string tag)
+    {
+        var detectedObjects = POVGrid.GetDetectedGameObjects(tag);
+        foreach (var detected in detectedObjects)
+        {
+            // Toggle switches in custom detectableobject class to display objectives correctly in global view
+            detected.GetComponent<DetectableVisibleObject>().isNotDetected = false;
+            detected.GetComponent<DetectableVisibleObject>().isDetected = true;
         }
     }
 
@@ -91,6 +112,10 @@ public class ObjectCollectorAgent : Agent
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
         MoveAgent(actionBuffers);
+        if (markDetectedObjects)
+        {
+            MarkDetectedObjectives("objective");
+        }
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
