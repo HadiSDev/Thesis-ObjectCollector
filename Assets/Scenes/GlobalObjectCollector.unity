@@ -260,7 +260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114181230191376748, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       propertyPath: numObjectives
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 114181230191376748, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       propertyPath: stations.Array.size
@@ -826,8 +826,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ObservationShape: 2 channels x 30 width x 32 height
-  m_SensorName: GridSensor
+  m_ObservationShape: 3 channels x 30 width x 32 height
+  m_SensorName: GridSensor3DNearView
   m_ObservationStacks: 1
   m_CompressionType: 1
   m_ObservationType: 0
@@ -843,7 +843,7 @@ MonoBehaviour:
     IsEnabled: 0
     IsStandby: 0
   m_GridShape:
-    NumChannels: 2
+    NumChannels: 3
     Width: 30
     Height: 32
   m_ClearCacheOnReset: 1
@@ -913,21 +913,21 @@ MonoBehaviour:
     - Name: Detected
       Type: 2
       Index: 0
-      Enabled: 0
-      Color: {r: 0.9607843, g: 0.16470587, b: 0.17250058, a: 1}
+      Enabled: 1
+      Color: {r: 0.102760404, g: 0.9339623, b: 0.048460312, a: 1}
     - Name: NotDetected
       Type: 2
       Index: 1
       Enabled: 1
       Color: {r: 0.23461027, g: 0.9716981, b: 0.050418302, a: 1}
     m_DetectorSpaceType: 1
-  m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
+  m_SensorResolution: 1.31 meters (3.00 deg at 25.00 meters)
   m_CellArc: 3
   m_LatAngleNorth: 45
   m_LatAngleSouth: 50
   m_LonAngle: 45
   m_MinDistance: 0
-  m_MaxDistance: 50
+  m_MaxDistance: 25
   m_DistanceNormalization:
     Value: 1
     Weighted: 0
@@ -937,7 +937,7 @@ MonoBehaviour:
     y: -50.5
     width: 90
     height: 96
-  m_GridResolution: 2.6179938
+  m_GridResolution: 1.3089969
 --- !u!114 &1198645849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1006,7 +1006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ObservationShape: 1 channel x 40 width x 40 height
-  m_SensorName: GridSensor
+  m_SensorName: GridSensor2DOverview
   m_ObservationStacks: 1
   m_CompressionType: 1
   m_ObservationType: 0

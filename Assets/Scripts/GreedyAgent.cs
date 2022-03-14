@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using CustomDetectableObjects;
+using MBaske.Sensors.Grid;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +9,7 @@ public class GreedyAgent : MonoBehaviour
 {
     private NavMeshAgent m_Agent;
     private Transform m_Target;
+    private GridSensorComponent3D grid;
 
     public float checkEvery; // check every x second
     float m_Time;
@@ -18,6 +21,8 @@ public class GreedyAgent : MonoBehaviour
         StartCoroutine(ExampleCoroutine());
         m_ObjectCollectorSettings = FindObjectOfType<ObjectCollectorSettings>();
         m_Agent = GetComponent<NavMeshAgent>();
+        grid = GetComponent<GridSensorComponent3D>();
+
     }
 
     IEnumerator ExampleCoroutine()
@@ -26,7 +31,7 @@ public class GreedyAgent : MonoBehaviour
         m_Target = FindClosestObject().transform;
         m_Agent.destination = m_Target.position;
     }
-
+    
     public GameObject FindClosestObject()
     {
         GameObject[] gos;
@@ -55,9 +60,16 @@ public class GreedyAgent : MonoBehaviour
             collision.gameObject.GetComponent<ObjectLogic>().OnEaten();
         }
     }
-
+    
     void Update()
     {
+        var detected = grid.GetDetectedGameObjects("objective");
+        foreach (var det in detected)
+        {
+            det.GetComponent<DetectableVisibleObject>().isNotDetected = false;
+            det.GetComponent<DetectableVisibleObject>().isDetected = true;
+        }
+        
         m_Time += Time.deltaTime;
         if (!(m_Time >= checkEvery)) return;
         m_Target = FindClosestObject()?.transform;
