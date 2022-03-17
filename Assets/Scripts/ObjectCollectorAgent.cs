@@ -30,6 +30,7 @@ public class ObjectCollectorAgent : Agent
     // Dynamically mark detected objectives
     public bool markDetectedObjects;
     private GridSensorComponent3D POVGrid;
+    
     // Station
 
     EnvironmentParameters m_ResetParams;
