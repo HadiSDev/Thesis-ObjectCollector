@@ -5,6 +5,7 @@ using Unity.MLAgents.Sensors;
 using System.Collections.Generic;
 using System;
 using NaughtyAttributes;
+using Unity.VisualScripting;
 
 namespace MBaske.Sensors.Grid
 {
@@ -167,7 +168,11 @@ namespace MBaske.Sensors.Grid
             {
                 for (int i = 0, n = items.Count; i < n; i++)
                 {
-                    yield return ((DetectableGameObject)items[i].Detectable).gameObject;
+                    var item = ((DetectableGameObject)items[i].Detectable).gameObject;
+                    if (item != null)
+                    {
+                        yield return item;
+                    }
                 }
             }
         }

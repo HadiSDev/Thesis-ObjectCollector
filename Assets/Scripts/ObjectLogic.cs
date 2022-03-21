@@ -15,7 +15,7 @@ public class ObjectLogic : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

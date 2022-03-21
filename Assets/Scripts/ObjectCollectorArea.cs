@@ -1,8 +1,10 @@
 
 using System;
+using System.Collections.Generic;
 using MBaske.Sensors.Grid;
 using Unity.MLAgents;
 using Unity.MLAgentsExamples;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -16,6 +18,8 @@ public class ObjectCollectorArea : Area
     public int numObstacles;
     public GameObject[] stations;
     public int maxSpawnAttemptsPerObstacle = 10;
+    
+    private IList<GameObject> m_Objectives = new List<GameObject>();
 
     void CreateObjectives(int num, GameObject type)
     {
@@ -25,6 +29,20 @@ public class ObjectCollectorArea : Area
                 Random.Range(-range, range)) + transform.position,
                 Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 90f)));
             f.GetComponent<ObjectLogic>().myArea = this;
+            m_Objectives.Add(f);
+        }
+    }
+
+    public void ResetObjectives()
+    {
+        foreach (var obj in m_Objectives)
+        {
+            obj.transform.position = new Vector3(
+                Random.Range(-range, range),
+                1f,
+                Random.Range(-range, range)) + transform.position;
+            obj.SetActive(true);
+            
         }
     }
 
@@ -68,6 +86,7 @@ public class ObjectCollectorArea : Area
         var firstStation = stations.Length == 0 ? null : stations[0];
         foreach (GameObject agent in agents)
         {
+            agent.SetActive(true);
             if (agent.transform.parent != gameObject.transform)
             {
                 continue;
@@ -88,7 +107,14 @@ public class ObjectCollectorArea : Area
             agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
         }
 
-        CreateObjectives(numObjectives, objective);
+        if (m_Objectives.Count > 0)
+        {
+            ResetObjectives();
+        }
+        else
+        {
+            CreateObjectives(numObjectives, objective);
+        }
         CreateObstacles();
     }
 
