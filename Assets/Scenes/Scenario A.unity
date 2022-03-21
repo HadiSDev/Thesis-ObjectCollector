@@ -972,7 +972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ObservationShape: 3 channels x 30 width x 3 height
+  m_ObservationShape: 3 channels x 42 width x 16 height
   m_SensorName: GridSensor
   m_ObservationStacks: 1
   m_CompressionType: 1
@@ -990,8 +990,8 @@ MonoBehaviour:
     IsStandby: 0
   m_GridShape:
     NumChannels: 3
-    Width: 30
-    Height: 3
+    Width: 42
+    Height: 16
   m_ClearCacheOnReset: 0
   m_ColliderBufferSize: 128
   m_TmpObjectToAdd: {fileID: 0}
@@ -1041,9 +1041,9 @@ MonoBehaviour:
     m_DetectorSpaceType: 1
   m_SensorResolution: 1.31 meters (3.00 deg at 25.00 meters)
   m_CellArc: 3
-  m_LatAngleNorth: 6
-  m_LatAngleSouth: 1
-  m_LonAngle: 45
+  m_LatAngleNorth: 24
+  m_LatAngleSouth: 24
+  m_LonAngle: 62
   m_MinDistance: 1
   m_MaxDistance: 25
   m_DistanceNormalization:
@@ -1051,10 +1051,10 @@ MonoBehaviour:
     Weighted: 0
   m_LonLatRect:
     serializedVersion: 2
-    x: -45
-    y: -2
-    width: 90
-    height: 9
+    x: -63
+    y: -24
+    width: 126
+    height: 48
   m_GridResolution: 1.3089969
 --- !u!114 &913384627
 MonoBehaviour:
