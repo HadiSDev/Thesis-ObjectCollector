@@ -14,6 +14,7 @@ public class ObjectCollectorSettings : MonoBehaviour
     public GameObject[] agents;
     [HideInInspector] public ObjectCollectorArea[] listArea;
     
+    public bool m_Is_evaluating;
     // Statistics
     private List<Stats> m_Records = new List<Stats>();
     private int resetCounter;
@@ -48,9 +49,9 @@ public class ObjectCollectorSettings : MonoBehaviour
         resetCounter++;
         if (resetCounter % agents.Length == 0)
         {
-            if (m_Counter < sampleSize)
+            if (m_Is_evaluating == false || m_Counter < sampleSize)
             {
-                if (!firstReset)
+                if (!firstReset && m_Is_evaluating)
                 {
                     AppendStatToRecordList();
                 }
@@ -71,7 +72,7 @@ public class ObjectCollectorSettings : MonoBehaviour
                 totalScore = 0;
                 m_Counter++;
             }
-            else if(m_Counter == sampleSize) // To avoid multiple writes when all agents call method EnvironmentReset (GreedyAgent)
+            else if(m_Is_evaluating && m_Counter == sampleSize) // To avoid multiple writes when all agents call method EnvironmentReset (GreedyAgent)
             {
                 Directory.CreateDirectory(BASE_DIRECTORY + directory);
                 AppendStatToRecordList();
@@ -83,7 +84,9 @@ public class ObjectCollectorSettings : MonoBehaviour
                     csv.Dispose();
                 }
                 m_Counter++;
+#if UNITY_EDITOR
                 UnityEditor.EditorApplication.ExitPlaymode();
+#endif
             }
         }
     }
