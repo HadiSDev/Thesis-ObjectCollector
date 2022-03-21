@@ -365,6 +365,10 @@ PrefabInstance:
       propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1650582994016103254, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2106566910232743969, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       propertyPath: m_ShowGizmos
       value: 1
@@ -379,6 +383,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
+--- !u!114 &190823801 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5282837996963436425, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
+  m_PrefabInstance: {fileID: 190823800}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f06e7c5ae2f9934e93db866ce90ef93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &228753760
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,11 +640,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625137506}
   m_CullTransparentMesh: 0
---- !u!1 &679774804 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1819751139121548, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
-  m_PrefabInstance: {fileID: 190823800}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &679774806 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
@@ -813,7 +823,8 @@ GameObject:
   - component: {fileID: 913384622}
   - component: {fileID: 913384621}
   - component: {fileID: 913384620}
-  - component: {fileID: 913384619}
+  - component: {fileID: 913384627}
+  - component: {fileID: 913384626}
   m_Layer: 0
   m_Name: Agent
   m_TagString: agent
@@ -837,42 +848,6 @@ Transform:
   m_Father: {fileID: 679774806}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &913384619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 913384617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a501962d056745d1a30e99146ee39fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SensorName: GridSensor
-  m_CellScale: {x: 1, y: 0.01, z: 1}
-  m_GridSize: {x: 40, y: 1, z: 40}
-  m_RotateWithAgent: 1
-  m_AgentGameObject: {fileID: 913384617}
-  m_DetectableTags:
-  - objective
-  - agent
-  - wall
-  - station
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 307
-  m_MaxColliderBufferSize: 500
-  m_InitialColliderBufferSize: 4
-  m_DebugColors:
-  - {r: 0.40392157, g: 0.7372549, b: 0.41960785, a: 0}
-  - {r: 0.12941177, g: 0.5882353, b: 0.9529412, a: 0}
-  - {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 0}
-  - {r: 0.9150943, g: 0.5492737, b: 0.3833036, a: 0}
-  m_GizmoYOffset: 0
-  m_ShowGizmos: 1
-  m_CompressionType: 1
-  m_ObservationStacks: 1
 --- !u!114 &913384620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -916,7 +891,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
-  area: {fileID: 679774804}
+  enableGlobalSensorComponents: 0
   turnSpeed: 300
   moveSpeed: 2
   contribute: 1
@@ -924,7 +899,7 @@ MonoBehaviour:
   stepCost: -0.001
   enableCapacity: 1
   maxCapacity: 25
-  depositRewardPerObjective: 0.1
+  markDetectedObjects: 0
 --- !u!114 &913384623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -947,7 +922,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: e90644dd4dad8364d905d97f4d4dad9f, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: GridObjectCollector
@@ -985,6 +960,128 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &913384626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913384617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ObservationShape: 3 channels x 30 width x 3 height
+  m_SensorName: GridSensor
+  m_ObservationStacks: 1
+  m_CompressionType: 1
+  m_ObservationType: 0
+  m_ChannelLabels: []
+  m_Debug_CreateSensorOnAwake: 0
+  m_Debug_CreateSensorOnValidate: 1
+  m_Debug_FrameInterval: 1
+  m_Debug_DrawGridBuffer: 1
+  m_Debug_GridBufferDrawer:
+    Context: {fileID: 0}
+    Editor: {fileID: 0}
+    GridSizeRatio: 0
+    IsEnabled: 0
+    IsStandby: 0
+  m_GridShape:
+    NumChannels: 3
+    Width: 30
+    Height: 3
+  m_ClearCacheOnReset: 0
+  m_ColliderBufferSize: 128
+  m_TmpObjectToAdd: {fileID: 0}
+  m_GameObjectSettingsList:
+  - Tag: wall
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 190823801}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.2935217, g: 0.0862108, b: 0.6712413, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: station
+    Enabled: 0
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.5915224, g: 0.1922305, b: 0.055646956, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: objective
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
+    m_UserObservables:
+      m_Observables:
+      - Name: Detected
+        Type: 2
+        Index: 0
+        Enabled: 1
+        Color: {r: 0.18067783, g: 0.76579165, b: 0.107460864, a: 1}
+      - Name: NotDetected
+        Type: 2
+        Index: 1
+        Enabled: 1
+        Color: {r: 0.32897434, g: 0.70801044, b: 0.47183475, a: 1}
+    m_Observables:
+    - Name: Detected
+      Type: 2
+      Index: 0
+      Enabled: 1
+      Color: {r: 0.18067783, g: 0.76579165, b: 0.107460864, a: 1}
+    - Name: NotDetected
+      Type: 2
+      Index: 1
+      Enabled: 1
+      Color: {r: 0.32897434, g: 0.70801044, b: 0.47183475, a: 1}
+    m_DetectorSpaceType: 1
+  m_SensorResolution: 1.31 meters (3.00 deg at 25.00 meters)
+  m_CellArc: 3
+  m_LatAngleNorth: 6
+  m_LatAngleSouth: 1
+  m_LonAngle: 45
+  m_MinDistance: 1
+  m_MaxDistance: 25
+  m_DistanceNormalization:
+    Value: 1
+    Weighted: 0
+  m_LonLatRect:
+    serializedVersion: 2
+    x: -45
+    y: -2
+    width: 90
+    height: 9
+  m_GridResolution: 1.3089969
+--- !u!114 &913384627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913384617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &916917435
 PrefabInstance:
   m_ObjectHideFlags: 0

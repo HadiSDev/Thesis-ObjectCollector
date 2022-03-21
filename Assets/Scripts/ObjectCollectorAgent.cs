@@ -84,7 +84,7 @@ public class ObjectCollectorAgent : Agent
 
     public void MoveAgent(ActionBuffers actionBuffers)
     {
-        EndEpsiodeIfNoObjectives();
+        //EndEpsiodeIfNoObjectives();
 
         var dirToGo = Vector3.zero;
         var rotateDir = Vector3.zero;
@@ -173,7 +173,7 @@ public class ObjectCollectorAgent : Agent
             }
         }
 
-        EndEpsiodeIfNoObjectives();
+        
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -187,10 +187,8 @@ public class ObjectCollectorAgent : Agent
                 AddReward(reward);
                 m_CollectedCapacity = 0;
             }
-            else if (n_objects == 0)
-            {
-                EndEpisode();
-            }
+            
+            EndEpsiodeIfNoObjectives();
         }
     }
 
