@@ -94,7 +94,6 @@ public class ObjectCollectorAgent : Agent, IStats
 
     public void MoveAgent(ActionBuffers actionBuffers)
     {
-        //EndEpsiodeIfNoObjectives();
         var dirToGo = Vector3.zero;
         var rotateDir = Vector3.zero;
 
