@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 using CustomDetectableObjects;
+using Interfaces;
 using MBaske.Sensors.Grid;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GreedyAgent : MonoBehaviour
+public class GreedyAgent : MonoBehaviour, IStats
 {
     private NavMeshAgent m_Agent;
     private Transform m_Target;
     private GridSensorComponent3D grid;
+    
+    public float dist_travelled;
+    private Vector3 previous_pos;
 
     public float checkEvery; // check every x second
     float m_Time;
@@ -22,6 +29,7 @@ public class GreedyAgent : MonoBehaviour
         m_ObjectCollectorSettings = FindObjectOfType<ObjectCollectorSettings>();
         m_Agent = GetComponent<NavMeshAgent>();
         grid = GetComponent<GridSensorComponent3D>();
+        previous_pos = m_Agent.transform.position;
 
     }
 
@@ -69,6 +77,10 @@ public class GreedyAgent : MonoBehaviour
             det.GetComponent<DetectableVisibleObject>().isNotDetected = false;
             det.GetComponent<DetectableVisibleObject>().isDetected = true;
         }
+
+        var cur_position = m_Agent.transform.position;
+        dist_travelled+= Vector3.Distance(previous_pos, cur_position);
+        previous_pos = cur_position;
         
         m_Time += Time.deltaTime;
         if (!(m_Time >= checkEvery)) return;
@@ -76,6 +88,7 @@ public class GreedyAgent : MonoBehaviour
         if (m_Target == null)
         {
             m_ObjectCollectorSettings.EnvironmentReset();
+            dist_travelled = 0f;
         }
         else
         {
@@ -84,4 +97,23 @@ public class GreedyAgent : MonoBehaviour
         m_Time = 0;
     }
 
+    public void ResetStats()
+    {
+        dist_travelled = 0;
+    }
+
+    public float GetAgentCumulativeDistance()
+    {
+        return dist_travelled;
+    }
+
+    public int GetAgentStepCount()
+    {
+        return 0;
+    }
+
+    public float GetAgentCumulativeReward()
+    {
+        return 0f;
+    }
 }

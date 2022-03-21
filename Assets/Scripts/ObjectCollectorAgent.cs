@@ -1,12 +1,15 @@
 using System;
+using System.Linq;
 using CustomDetectableObjects;
+using Interfaces;
 using MBaske.Sensors.Grid;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using Unity.VisualScripting;
 
-public class ObjectCollectorAgent : Agent
+public class ObjectCollectorAgent : Agent, IStats
 {
     ObjectCollectorSettings m_ObjectCollectorSettings;
     Rigidbody m_AgentRb;
@@ -18,6 +21,12 @@ public class ObjectCollectorAgent : Agent
     public float moveSpeed = 2;
     public bool contribute;
     public bool useVectorObs;
+
+    // Statistics
+    private Vector3 prev_pos;
+    public float AgentTravelledDist;
+    public int AgentStepCount;
+    public float AgentCumulativeReward;
 
     // Punishment Settings
     public float stepCost = -0.001f;
@@ -32,12 +41,13 @@ public class ObjectCollectorAgent : Agent
     private GridSensorComponent3D POVGrid;
     
     // Station
-
     EnvironmentParameters m_ResetParams;
 
     public override void Initialize()
     {
         m_AgentRb = GetComponent<Rigidbody>();
+        prev_pos = transform.position; 
+        
         m_ObjectCollectorSettings = FindObjectOfType<ObjectCollectorSettings>();
         m_ResetParams = Academy.Instance.EnvironmentParameters;
         if (markDetectedObjects)
@@ -84,8 +94,7 @@ public class ObjectCollectorAgent : Agent
 
     public void MoveAgent(ActionBuffers actionBuffers)
     {
-        EndEpsiodeIfNoObjectives();
-
+        //EndEpsiodeIfNoObjectives();
         var dirToGo = Vector3.zero;
         var rotateDir = Vector3.zero;
 
@@ -101,6 +110,13 @@ public class ObjectCollectorAgent : Agent
 
         m_AgentRb.AddForce(dirToGo * moveSpeed, ForceMode.VelocityChange);
         transform.Rotate(rotateDir, Time.fixedDeltaTime * turnSpeed);
+
+        // Update statisics
+        AgentTravelledDist += Vector3.Distance(prev_pos, m_AgentRb.position);
+        AgentStepCount = StepCount;
+        AgentCumulativeReward = GetCumulativeReward();
+        prev_pos = m_AgentRb.position;
+
 
         if (m_AgentRb.velocity.sqrMagnitude > 25f) // slow it down
         {
@@ -118,7 +134,7 @@ public class ObjectCollectorAgent : Agent
             MarkDetectedObjectives("objective");
         }
     }
-
+    
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var continuousActionsOut = actionsOut.ContinuousActions;
@@ -149,6 +165,7 @@ public class ObjectCollectorAgent : Agent
             + area.transform.position;
         transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));*/
         m_CollectedCapacity = 0;
+        ResetStats();
         SetResetParameters();
     }
 
@@ -173,7 +190,10 @@ public class ObjectCollectorAgent : Agent
             }
         }
 
-        EndEpsiodeIfNoObjectives();
+        if (!enableCapacity)
+        {
+            EndEpsiodeIfNoObjectives();
+        }
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -187,9 +207,10 @@ public class ObjectCollectorAgent : Agent
                 AddReward(reward);
                 m_CollectedCapacity = 0;
             }
-            else if (n_objects == 0)
+            
+            if (n_objects == 0 && m_CollectedCapacity == 0)
             {
-                EndEpisode();
+                DisableAgentAndTerminateEpisodeIfDone();
             }
         }
     }
@@ -199,9 +220,25 @@ public class ObjectCollectorAgent : Agent
         var nObjects = GameObject.FindGameObjectsWithTag("objective").Length;
         if (nObjects == 0 && !enableCapacity || nObjects == 0  && m_CollectedCapacity == 0)
         {
-            Debug.Log("Epsiode Ended");
+            Debug.Log("Agent Epsiode Ended");
+            DisableAgentAndTerminateEpisodeIfDone();
+        }
+    }
+
+    public void DisableAgentAndTerminateEpisodeIfDone()
+    {
+        gameObject.SetActive(false);
+        // End episode if all agents are disabled
+        var num_active_agents = GameObject.FindGameObjectsWithTag("agent").Length;
+        if (num_active_agents == 0)
+        {
             EndEpisode();
         }
+    }
+
+    public void EnableAgent()
+    {
+        gameObject.SetActive(true);
     }
 
     public void SetAgentScale()
@@ -213,5 +250,27 @@ public class ObjectCollectorAgent : Agent
     public void SetResetParameters()
     {
         SetAgentScale();
+    }
+
+    public float GetAgentCumulativeDistance()
+    {
+        return AgentTravelledDist;
+    }
+    
+    public int GetAgentStepCount()
+    {
+        return AgentStepCount;
+    }
+
+    public float GetAgentCumulativeReward()
+    {
+        return AgentCumulativeReward;
+    }
+
+    public void ResetStats()
+    {
+        AgentCumulativeReward = 0f;
+        AgentStepCount = 0;
+        AgentTravelledDist = 0f;
     }
 }
