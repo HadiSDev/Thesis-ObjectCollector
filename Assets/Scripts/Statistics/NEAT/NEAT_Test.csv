@@ -1,0 +1,2 @@
+Id,NumOfAgents,CompletionTime,MinReward,AvgReward,MaxReward,MinAgentStep,AvgAgentStep,MaxAgentStep,MinDistTravelled,AvgDistTravelled,MaxDistTravelled
+0,1,0,0,0,0,0,0,0,0,0,0

@@ -5,13 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/GridObjectCollector.unity
-    guid: 1396eaa63e40ecc408906a6e2888b906
-  - enabled: 0
-    path: Assets/Scenes/GlobalAllObjectCollector.unity
-    guid: c14ff60f3692dc9499ed053f9f2c62bb
   - enabled: 1
-    path: Assets/Scenes/Scenario A.unity
-    guid: bffedad8643839846b7bf7d75486600a
+    path: Assets/Scenes/GlobalObjectCollectorNEAT.unity
+    guid: 20a4c3f538d15e64aadb795800e9aa2e
   m_configObjects: {}
