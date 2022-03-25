@@ -71,6 +71,11 @@ public class ObjectCollectorAgent : Agent, IStats
             var capacityRatio = m_CollectedCapacity / maxCapacity;
             sensor.AddObservation(capacityRatio);
         }
+        
+        sensor.AddObservation(m_AgentRb.position.x);
+        sensor.AddObservation(m_AgentRb.position.z);
+        sensor.AddObservation(m_AgentRb.rotation.x);
+        sensor.AddObservation(m_AgentRb.rotation.z);
     }
 
     public void MarkDetectedObjectives(string tag)
@@ -100,11 +105,9 @@ public class ObjectCollectorAgent : Agent, IStats
         var continuousActions = actionBuffers.ContinuousActions;
 
         var forward = Mathf.Clamp(continuousActions[0], -1f, 1f);
-        var right = Mathf.Clamp(continuousActions[1], -1f, 1f);
-        var rotate = Mathf.Clamp(continuousActions[2], -1f, 1f);
+        var rotate = Mathf.Clamp(continuousActions[1], -1f, 1f);
 
         dirToGo = transform.forward * forward;
-        dirToGo += transform.right * right;
         rotateDir = -transform.up * rotate;
 
         m_AgentRb.AddForce(dirToGo * moveSpeed, ForceMode.VelocityChange);
@@ -243,7 +246,7 @@ public class ObjectCollectorAgent : Agent, IStats
     public void SetAgentScale()
     {
         float agentScale = m_ResetParams.GetWithDefault("agent_scale", 1.0f);
-        gameObject.transform.localScale = new Vector3(agentScale, agentScale, agentScale);
+        //gameObject.transform.localScale = new Vector3(agentScale, agentScale/8, agentScale);
     }
 
     public void SetResetParameters()
