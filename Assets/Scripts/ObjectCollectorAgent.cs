@@ -3,6 +3,7 @@ using System.Linq;
 using CustomDetectableObjects;
 using Interfaces;
 using MBaske.Sensors.Grid;
+using Statistics;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -24,6 +25,8 @@ public class ObjectCollectorAgent : Agent, IStats
 
     // Statistics
     private Vector3 prev_pos;
+    private DateTime m_Start;
+    private int m_Count;
     public float AgentTravelledDist;
     public int AgentStepCount;
     public float AgentCumulativeReward;
@@ -42,6 +45,7 @@ public class ObjectCollectorAgent : Agent, IStats
     
     // Station
     EnvironmentParameters m_ResetParams;
+    private ObjectCollectorArea m_ObjectCollectorArea;
 
     public override void Initialize()
     {
@@ -49,6 +53,7 @@ public class ObjectCollectorAgent : Agent, IStats
         prev_pos = transform.position; 
         
         m_ObjectCollectorSettings = FindObjectOfType<ObjectCollectorSettings>();
+        m_ObjectCollectorArea = FindObjectOfType<ObjectCollectorArea>();
         m_ResetParams = Academy.Instance.EnvironmentParameters;
         if (markDetectedObjects)
         {
@@ -72,10 +77,18 @@ public class ObjectCollectorAgent : Agent, IStats
             sensor.AddObservation(capacityRatio);
         }
         
-        sensor.AddObservation(m_AgentRb.position.x);
-        sensor.AddObservation(m_AgentRb.position.z);
-        sensor.AddObservation(m_AgentRb.rotation.y);
-        sensor.AddObservation(m_AgentRb.rotation.w);
+        var progress = m_ObjectCollectorSettings.totalCollected / m_ObjectCollectorArea.numObjectives;
+        
+        sensor.AddObservation(progress);
+        
+        var localPosition = transform.localPosition;
+        sensor.AddObservation(localPosition.x);
+        sensor.AddObservation(localPosition.z);
+
+        var rotation = transform.rotation;
+        
+        sensor.AddObservation(rotation.y);
+        sensor.AddObservation(rotation.w);
     }
 
     public void MarkDetectedObjectives(string tag)
@@ -142,7 +155,7 @@ public class ObjectCollectorAgent : Agent, IStats
         var continuousActionsOut = actionsOut.ContinuousActions;
         if (Input.GetKey(KeyCode.D))
         {
-            continuousActionsOut[2] = 1;
+            continuousActionsOut[1] = -1;
         }
         if (Input.GetKey(KeyCode.W))
         {
@@ -150,7 +163,7 @@ public class ObjectCollectorAgent : Agent, IStats
         }
         if (Input.GetKey(KeyCode.A))
         {
-            continuousActionsOut[2] = -1;
+            continuousActionsOut[1] = 1;
         }
         if (Input.GetKey(KeyCode.S))
         {
@@ -179,7 +192,7 @@ public class ObjectCollectorAgent : Agent, IStats
             {
                 collision.gameObject.GetComponent<ObjectLogic>().OnEaten();
                 m_CollectedCapacity += 1f;
-
+                m_ObjectCollectorSettings.totalCollected += 1f;
                 AddReward(1f);
                 if (contribute)
                 {
@@ -229,20 +242,18 @@ public class ObjectCollectorAgent : Agent, IStats
 
     public void DisableAgentAndTerminateEpisodeIfDone()
     {
+        StatisticsWriter.AppendAgentStats(AgentCumulativeReward, AgentTravelledDist, AgentStepCount);
         gameObject.SetActive(false);
         // End episode if all agents are disabled
         var num_active_agents = GameObject.FindGameObjectsWithTag("agent").Length;
         if (num_active_agents == 0)
         {
+            StatisticsWriter.AppendStatToRecordList(m_Count, DateTime.Now-m_Start); // Add record to list
+            StatisticsWriter.PrepareEpisodeStats();                                         // Reset lists
             EndEpisode();
         }
     }
-
-    public void EnableAgent()
-    {
-        gameObject.SetActive(true);
-    }
-
+    
     public void SetAgentScale()
     {
         float agentScale = m_ResetParams.GetWithDefault("agent_scale", 1.0f);
@@ -271,6 +282,17 @@ public class ObjectCollectorAgent : Agent, IStats
 
     public void ResetStats()
     {
+        if (AgentStepCount == MaxStep)
+        {
+            StatisticsWriter.AppendAgentStatsMaxStep(AgentCumulativeReward,
+                AgentTravelledDist,
+                AgentStepCount,
+                m_Count,
+                (DateTime.Now-m_Start));
+        }
+
+        m_Start = DateTime.Now;
+        m_Count++;
         AgentCumulativeReward = 0f;
         AgentStepCount = 0;
         AgentTravelledDist = 0f;
