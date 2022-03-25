@@ -36,7 +36,9 @@ public class ObjectCollectorSettings : MonoBehaviour
 
     StatsRecorder m_Recorder;
     private bool firstReset = true;
-    
+    [HideInInspector]
+    public float totalCollected;
+
     public void Awake()
     {
         agents = GameObject.FindGameObjectsWithTag("agent").AsEnumerable().Where(a => a.layer == 0).ToArray();
@@ -66,6 +68,7 @@ public class ObjectCollectorSettings : MonoBehaviour
             
                 m_StartTime = DateTime.Now;
                 totalScore = 0;
+                totalCollected = 0;
                 m_Counter++;
             }
             else if(m_Is_evaluating && m_Counter == sampleSize) // To avoid multiple writes when all agents call method EnvironmentReset (GreedyAgent)
