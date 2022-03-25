@@ -3,6 +3,7 @@ using System.Linq;
 using CustomDetectableObjects;
 using Interfaces;
 using MBaske.Sensors.Grid;
+using Statistics;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -24,6 +25,8 @@ public class ObjectCollectorAgent : Agent, IStats
 
     // Statistics
     private Vector3 prev_pos;
+    private DateTime m_Start;
+    private int m_Count;
     public float AgentTravelledDist;
     public int AgentStepCount;
     public float AgentCumulativeReward;
@@ -229,20 +232,18 @@ public class ObjectCollectorAgent : Agent, IStats
 
     public void DisableAgentAndTerminateEpisodeIfDone()
     {
+        StatisticsWriter.AppendAgentStats(AgentCumulativeReward, AgentTravelledDist, AgentStepCount);
         gameObject.SetActive(false);
         // End episode if all agents are disabled
         var num_active_agents = GameObject.FindGameObjectsWithTag("agent").Length;
         if (num_active_agents == 0)
         {
+            StatisticsWriter.AppendStatToRecordList(m_Count, DateTime.Now-m_Start); // Add record to list
+            StatisticsWriter.PrepareEpisodeStats();                                         // Reset lists
             EndEpisode();
         }
     }
-
-    public void EnableAgent()
-    {
-        gameObject.SetActive(true);
-    }
-
+    
     public void SetAgentScale()
     {
         float agentScale = m_ResetParams.GetWithDefault("agent_scale", 1.0f);
@@ -271,6 +272,17 @@ public class ObjectCollectorAgent : Agent, IStats
 
     public void ResetStats()
     {
+        if (AgentStepCount == MaxStep)
+        {
+            StatisticsWriter.AppendAgentStatsMaxStep(AgentCumulativeReward,
+                AgentTravelledDist,
+                AgentStepCount,
+                m_Count,
+                (DateTime.Now-m_Start));
+        }
+
+        m_Start = DateTime.Now;
+        m_Count++;
         AgentCumulativeReward = 0f;
         AgentStepCount = 0;
         AgentTravelledDist = 0f;
