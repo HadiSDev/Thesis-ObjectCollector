@@ -42,6 +42,7 @@ public class ObjectCollectorAgent : Agent, IStats
     
     // Station
     EnvironmentParameters m_ResetParams;
+    private ObjectCollectorArea m_ObjectCollectorArea;
 
     public override void Initialize()
     {
@@ -49,6 +50,7 @@ public class ObjectCollectorAgent : Agent, IStats
         prev_pos = transform.position; 
         
         m_ObjectCollectorSettings = FindObjectOfType<ObjectCollectorSettings>();
+        m_ObjectCollectorArea = FindObjectOfType<ObjectCollectorArea>();
         m_ResetParams = Academy.Instance.EnvironmentParameters;
         if (markDetectedObjects)
         {
@@ -72,10 +74,18 @@ public class ObjectCollectorAgent : Agent, IStats
             sensor.AddObservation(capacityRatio);
         }
         
-        sensor.AddObservation(m_AgentRb.position.x);
-        sensor.AddObservation(m_AgentRb.position.z);
-        sensor.AddObservation(m_AgentRb.rotation.x);
-        sensor.AddObservation(m_AgentRb.rotation.z);
+        var progress = m_ObjectCollectorSettings.totalCollected / m_ObjectCollectorArea.numObjectives;
+        
+        sensor.AddObservation(progress);
+        
+        var localPosition = transform.localPosition;
+        sensor.AddObservation(localPosition.x);
+        sensor.AddObservation(localPosition.z);
+
+        var rotation = transform.rotation;
+        
+        sensor.AddObservation(rotation.y);
+        sensor.AddObservation(rotation.w);
     }
 
     public void MarkDetectedObjectives(string tag)
@@ -142,7 +152,7 @@ public class ObjectCollectorAgent : Agent, IStats
         var continuousActionsOut = actionsOut.ContinuousActions;
         if (Input.GetKey(KeyCode.D))
         {
-            continuousActionsOut[2] = 1;
+            continuousActionsOut[1] = -1;
         }
         if (Input.GetKey(KeyCode.W))
         {
@@ -150,7 +160,7 @@ public class ObjectCollectorAgent : Agent, IStats
         }
         if (Input.GetKey(KeyCode.A))
         {
-            continuousActionsOut[2] = -1;
+            continuousActionsOut[1] = 1;
         }
         if (Input.GetKey(KeyCode.S))
         {
@@ -179,7 +189,7 @@ public class ObjectCollectorAgent : Agent, IStats
             {
                 collision.gameObject.GetComponent<ObjectLogic>().OnEaten();
                 m_CollectedCapacity += 1f;
-
+                m_ObjectCollectorSettings.totalCollected += 1f;
                 AddReward(1f);
                 if (contribute)
                 {

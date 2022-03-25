@@ -1,11 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading;
 using CustomDetectableObjects;
 using Interfaces;
 using MBaske.Sensors.Grid;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
