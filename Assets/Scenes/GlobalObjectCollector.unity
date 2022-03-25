@@ -294,6 +294,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1859550319896127297, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3878853332429348805, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_UseGravity
       value: 1
@@ -314,7 +318,8 @@ PrefabInstance:
       propertyPath: m_Acceleration
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 427571421720108408, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
 --- !u!1001 &190823800
 PrefabInstance:
@@ -732,7 +737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ObservationShape: 4 channels x 30 width x 32 height
+  m_ObservationShape: 3 channels x 30 width x 32 height
   m_SensorName: GridSensor3DNearView
   m_ObservationStacks: 1
   m_CompressionType: 1
@@ -749,7 +754,7 @@ MonoBehaviour:
     IsEnabled: 0
     IsStandby: 0
   m_GridShape:
-    NumChannels: 4
+    NumChannels: 3
     Width: 30
     Height: 32
   m_ClearCacheOnReset: 1
@@ -783,20 +788,6 @@ MonoBehaviour:
       Index: -1
       Enabled: 1
       Color: {r: 0.18904841, g: 0.24054267, b: 0.9294856, a: 1}
-    m_DetectorSpaceType: 1
-  - Tag: wall
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 1
-    Detectable: {fileID: 2049223457}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.6320754, g: 0.59927905, b: 0.59927905, a: 1}
     m_DetectorSpaceType: 1
   - Tag: objective
     Enabled: 1
@@ -1099,7 +1090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ObservationShape: 4 channels x 30 width x 32 height
+  m_ObservationShape: 3 channels x 30 width x 32 height
   m_SensorName: GridSensor3DNearView
   m_ObservationStacks: 1
   m_CompressionType: 1
@@ -1116,7 +1107,7 @@ MonoBehaviour:
     IsEnabled: 0
     IsStandby: 0
   m_GridShape:
-    NumChannels: 4
+    NumChannels: 3
     Width: 30
     Height: 32
   m_ClearCacheOnReset: 1
@@ -1150,20 +1141,6 @@ MonoBehaviour:
       Index: -1
       Enabled: 1
       Color: {r: 0.18904841, g: 0.24054267, b: 0.9294856, a: 1}
-    m_DetectorSpaceType: 1
-  - Tag: wall
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 1
-    Detectable: {fileID: 2049223457}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.6320754, g: 0.59927905, b: 0.59927905, a: 1}
     m_DetectorSpaceType: 1
   - Tag: objective
     Enabled: 1
@@ -1275,6 +1252,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1537121661968964, guid: 5889392e3f05b448a8a06c5def6c2dec, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4943719350691982, guid: 5889392e3f05b448a8a06c5def6c2dec, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1594,7 +1575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ObservationShape: 4 channels x 30 width x 32 height
+  m_ObservationShape: 3 channels x 32 width x 13 height
   m_SensorName: GridSensor3DNearView
   m_ObservationStacks: 1
   m_CompressionType: 1
@@ -1611,9 +1592,9 @@ MonoBehaviour:
     IsEnabled: 0
     IsStandby: 0
   m_GridShape:
-    NumChannels: 4
-    Width: 30
-    Height: 32
+    NumChannels: 3
+    Width: 32
+    Height: 13
   m_ClearCacheOnReset: 1
   m_ColliderBufferSize: 512
   m_TmpObjectToAdd: {fileID: 0}
@@ -1646,20 +1627,6 @@ MonoBehaviour:
       Enabled: 1
       Color: {r: 0.18904841, g: 0.24054267, b: 0.9294856, a: 1}
     m_DetectorSpaceType: 1
-  - Tag: wall
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 1
-    Detectable: {fileID: 2049223457}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.6320754, g: 0.59927905, b: 0.59927905, a: 1}
-    m_DetectorSpaceType: 1
   - Tag: objective
     Enabled: 1
     DetectionType: 2
@@ -1689,23 +1656,23 @@ MonoBehaviour:
       Enabled: 1
       Color: {r: 0.23461027, g: 0.9716981, b: 0.050418302, a: 1}
     m_DetectorSpaceType: 1
-  m_SensorResolution: 1.31 meters (3.00 deg at 25.00 meters)
-  m_CellArc: 3
-  m_LatAngleNorth: 45
-  m_LatAngleSouth: 50
-  m_LonAngle: 45
+  m_SensorResolution: 1.12 meters (4.00 deg at 16.00 meters)
+  m_CellArc: 4
+  m_LatAngleNorth: 24.4
+  m_LatAngleSouth: 24.4
+  m_LonAngle: 62.2
   m_MinDistance: 0
-  m_MaxDistance: 25
+  m_MaxDistance: 16
   m_DistanceNormalization:
     Value: 1
     Weighted: 0
   m_LonLatRect:
     serializedVersion: 2
-    x: -45
-    y: -50.5
-    width: 90
-    height: 96
-  m_GridResolution: 1.3089969
+    x: -64
+    y: -26
+    width: 128
+    height: 52
+  m_GridResolution: 1.1170107
 --- !u!114 &1198645849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1761,83 +1728,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &1198645865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198645832}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec8722596ac4fb346894cd62602b3999, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ObservationShape: 1 channel x 40 width x 40 height
-  m_SensorName: GridSensor2DOverview
-  m_ObservationStacks: 1
-  m_CompressionType: 1
-  m_ObservationType: 0
-  m_ChannelLabels: []
-  m_Debug_CreateSensorOnAwake: 1
-  m_Debug_CreateSensorOnValidate: 1
-  m_Debug_FrameInterval: 1
-  m_Debug_DrawGridBuffer: 1
-  m_Debug_GridBufferDrawer:
-    Context: {fileID: 0}
-    Editor: {fileID: 0}
-    GridSizeRatio: 0
-    IsEnabled: 0
-    IsStandby: 0
-  m_GridShape:
-    NumChannels: 1
-    Width: 40
-    Height: 40
-  m_ClearCacheOnReset: 1
-  m_ColliderBufferSize: 64
-  m_TmpObjectToAdd: {fileID: 0}
-  m_GameObjectSettingsList:
-  - Tag: objective
-    Enabled: 1
-    DetectionType: 0
-    Modifier: 0
-    Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
-    m_UserObservables:
-      m_Observables:
-      - Name: Detected
-        Type: 2
-        Index: 0
-        Enabled: 0
-        Color: {r: 0.8167503, g: 0.770953, b: 0.18855137, a: 1}
-      - Name: NotDetected
-        Type: 2
-        Index: 1
-        Enabled: 1
-        Color: {r: 0.27896035, g: 0.7830189, b: 0.08495018, a: 1}
-    m_Observables:
-    - Name: Detected
-      Type: 2
-      Index: 0
-      Enabled: 0
-      Color: {r: 0.8167503, g: 0.770953, b: 0.18855137, a: 1}
-    - Name: NotDetected
-      Type: 2
-      Index: 1
-      Enabled: 1
-      Color: {r: 0.27896035, g: 0.7830189, b: 0.08495018, a: 1}
-    m_DetectorSpaceType: 0
-  m_RotationType: 0
-  m_DetectionBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 40, y: 1, z: 40}
-  m_EditorBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 40, y: 1, z: 40}
-  m_CellSize: 2
-  m_NumCells: {x: 40, y: 1, z: 40}
-  m_DetectionSize: {x: 80, y: 2, z: 80}
-  m_BoundsSize: {x: 80, y: 2, z: 80}
-  m_Offset: {x: 0, y: 0, z: 0}
 --- !u!114 &1198645866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1961,9 +1851,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agents: []
   listArea: []
-  sampleSize: 2
-  fileName: GreedyStatisticsv1
-  directory: Munk
+  m_Is_evaluating: 1
+  sampleSize: 1
+  fileName: Wunu1
+  directory: Wunu1
   totalScore: 0
   elapsedTime: {fileID: 625137508}
   scoreText: {fileID: 1418304526}
@@ -2163,6 +2054,34 @@ PrefabInstance:
       propertyPath: m_Shape.m_WorldPoints.Array.data[8].z
       value: -2.054562
       objectReference: {fileID: 0}
+    - target: {fileID: 1859550318399098255, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550318399098352, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_Height
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550318399098352, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550318399098353, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550318582659342, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550318582659343, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550318582659343, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1859550319030650438, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_Name
       value: Catamaran_vehicle
@@ -2171,9 +2090,25 @@ PrefabInstance:
       propertyPath: m_TagString
       value: agent
       objectReference: {fileID: 0}
+    - target: {fileID: 1859550319030650439, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550319030650440, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1859550319030650442, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550319030650442, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550319030650442, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1859550319030650442, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2215,6 +2150,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1859550319221868389, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550319393437532, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550319393437533, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550319393437533, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550319393437534, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_Size.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550319896127296, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550319896127297, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550319896127297, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550320247801982, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550320247801983, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859550320247801983, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 3878853332429348805, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_UseGravity
       value: 1
@@ -2228,6 +2207,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7463671533895504813, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463671533895504813, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_BaseOffset
       value: 4.5
       objectReference: {fileID: 0}
@@ -2235,7 +2218,8 @@ PrefabInstance:
       propertyPath: m_Acceleration
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 427571421720108408, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
 --- !u!1001 &1897966936
 PrefabInstance:
@@ -2364,6 +2348,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: agent
       objectReference: {fileID: 0}
+    - target: {fileID: 1859550319030650439, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1859550319030650442, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2408,6 +2396,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1859550319896127297, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3878853332429348805, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_UseGravity
       value: 1
@@ -2428,7 +2420,8 @@ PrefabInstance:
       propertyPath: m_Acceleration
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 427571421720108408, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
 --- !u!1 &1956702417
 GameObject:
@@ -2497,40 +2490,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2049223452 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1457179540742082, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
-  m_PrefabInstance: {fileID: 190823800}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2049223457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049223452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f06e7c5ae2f9934e93db866ce90ef93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Shape:
-    m_ScanResultsByLOD:
-    - LocalPoints:
-      - {x: -1.499939, y: -25, z: -1.499939}
-    m_LocalPoints:
-    - {x: -1.499939, y: -25, z: -1.499939}
-    m_WorldPoints:
-    - {x: -0.01499939, y: -9.965, z: -0.01499939}
-    m_MergeDisconnected: 0
-    m_Flatten: 0
-    m_MaxLOD: 0
-    m_SelectedLOD: 0
-    m_ScanLOD: 0
-    m_GizmoLOD: 0
-    m_Projection: 0
-    m_PointCount: 1
-    m_DrawGrid: 2
 --- !u!850595691 &2070719092
 LightingSettings:
   m_ObjectHideFlags: 0
