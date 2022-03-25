@@ -74,8 +74,8 @@ public class ObjectCollectorAgent : Agent, IStats
         
         sensor.AddObservation(m_AgentRb.position.x);
         sensor.AddObservation(m_AgentRb.position.z);
-        sensor.AddObservation(m_AgentRb.rotation.x);
-        sensor.AddObservation(m_AgentRb.rotation.z);
+        sensor.AddObservation(m_AgentRb.rotation.y);
+        sensor.AddObservation(m_AgentRb.rotation.w);
     }
 
     public void MarkDetectedObjectives(string tag)
