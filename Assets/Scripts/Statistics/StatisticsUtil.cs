@@ -15,8 +15,7 @@ namespace Statistics
         
         private static readonly string BASE_DIRECTORY = "./Assets/Scripts/Statistics/";
         private static List<Stats> m_Records = new List<Stats>();
-        
-        
+
         private static List<float> m_AgentRewards = new List<float>();
         private static List<float> m_AgentTravelDist = new List<float>();
         private static List<int> m_AgentSteps = new List<int>();
@@ -25,7 +24,7 @@ namespace Statistics
         public static int NumAgents { get; set; }
         public static string FileName { get; set; }
         public static string WriteDirectory { get; set; }
-        
+        public static bool IsEvaluating { get; set; }
 
         public static void AppendAgentStats(float agentReward, float agentTravelDist, int agentStep)
         {
@@ -40,7 +39,7 @@ namespace Statistics
             m_AgentTravelDist.Add(agentTravelDist);
             m_AgentSteps.Add(agentStep);
 
-            if (++updateCounter % NumAgents == 0)
+            if (++updateCounter % NumAgents == 0 && IsEvaluating)
             {
                 AppendStatToRecordList(id, elapTime);
                 plotResults();

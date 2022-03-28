@@ -48,6 +48,7 @@ public class ObjectCollectorSettings : MonoBehaviour
         StatisticsWriter.NumAgents = agents.Length;
         StatisticsWriter.FileName = fileName;
         StatisticsWriter.WriteDirectory = directory;
+        StatisticsWriter.IsEvaluating = m_Is_evaluating;
 
     }
 
