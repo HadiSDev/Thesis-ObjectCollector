@@ -94,6 +94,8 @@ public class ObjectCollectorArea : Area
             
             if (firstStation != null)
             {
+                firstStation.transform.position = new Vector3(Random.Range(-range, range), 0.5f,
+                    Random.Range(-range, range))  + transform.position;
                 agent.transform.position = firstStation.transform.position;
             }
             else
@@ -101,8 +103,7 @@ public class ObjectCollectorArea : Area
                 agent.transform.position = new Vector3(Random.Range(-range, range), 1f,
                     Random.Range(-range, range))  + transform.position;
             }
-            /*firstStation.transform.position = new Vector3(Random.Range(-range, range), 1f,
-                    Random.Range(-range, range))  + transform.position;*/
+            
                 
             agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
         }
