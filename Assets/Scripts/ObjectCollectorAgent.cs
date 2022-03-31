@@ -9,6 +9,7 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class ObjectCollectorAgent : Agent, IStats
 {
@@ -19,7 +20,7 @@ public class ObjectCollectorAgent : Agent, IStats
     public float turnSpeed = 300;
 
     // Speed of agent movement.
-    public float moveSpeed = 2;
+    public float moveSpeed = 1;
     public bool contribute;
     public bool useVectorObs;
 
@@ -30,6 +31,8 @@ public class ObjectCollectorAgent : Agent, IStats
     public float AgentTravelledDist;
     public int AgentStepCount;
     public float AgentCumulativeReward;
+
+    public Text m_capacityText;
 
     // Punishment Settings
     public float stepCost = -0.001f;
@@ -110,16 +113,17 @@ public class ObjectCollectorAgent : Agent, IStats
         return new Color32(r, g, b, 255);
     }
 
-    public void MoveAgent(ActionBuffers actionBuffers)
+    private void MoveAgent(ActionBuffers actionBuffers)
     {
         var dirToGo = Vector3.zero;
         var rotateDir = Vector3.zero;
 
         var continuousActions = actionBuffers.ContinuousActions;
+        
 
-        var forward = Mathf.Clamp(continuousActions[0], -1f, 1f);
+        var forward = Mathf.Clamp(continuousActions[0], 0, 1f);
         var rotate = Mathf.Clamp(continuousActions[1], -1f, 1f);
-
+        //Debug.Log($"forward: {forward}, rotate: {rotate}");
         dirToGo = transform.forward * forward;
         rotateDir = -transform.up * rotate;
 
@@ -184,7 +188,7 @@ public class ObjectCollectorAgent : Agent, IStats
         SetResetParameters();
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerObjective(Collider collision)
     {
         if (collision.gameObject.CompareTag("objective"))
         {
@@ -192,16 +196,13 @@ public class ObjectCollectorAgent : Agent, IStats
             {
                 collision.gameObject.GetComponent<ObjectLogic>().OnEaten();
                 m_CollectedCapacity += 1f;
+                m_capacityText.text = $"Capacity: {m_CollectedCapacity}, Reward: {AgentCumulativeReward}";
                 m_ObjectCollectorSettings.totalCollected += 1f;
                 AddReward(1f);
                 if (contribute)
                 {
                     m_ObjectCollectorSettings.totalScore += 1;
                 }
-            }
-            else if (Math.Abs(m_CollectedCapacity - maxCapacity) < 0.2)
-            {
-                AddReward(-1f);
             }
         }
 
@@ -221,6 +222,7 @@ public class ObjectCollectorAgent : Agent, IStats
                 var reward = m_CollectedCapacity / maxCapacity;
                 AddReward(reward);
                 m_CollectedCapacity = 0;
+                m_capacityText.text = $"Capacity: {m_CollectedCapacity}";
             }
             
             if (n_objects == 0 && m_CollectedCapacity == 0)
@@ -228,6 +230,8 @@ public class ObjectCollectorAgent : Agent, IStats
                 DisableAgentAndTerminateEpisodeIfDone();
             }
         }
+
+        OnTriggerObjective(collision);
     }
 
     private void EndEpsiodeIfNoObjectives()

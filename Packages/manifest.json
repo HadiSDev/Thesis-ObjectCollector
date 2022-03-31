@@ -10,7 +10,7 @@
     "com.unity.ml-agents.extensions": "git+https://github.com/Unity-Technologies/ml-agents.git?path=com.unity.ml-agents.extensions#release_19",
     "com.unity.test-framework": "1.1.31",
     "com.unity.textmeshpro": "3.0.6",
-    "com.unity.timeline": "1.6.4",
+    "com.unity.timeline": "1.7.1",
     "com.unity.toolchain.win-x86_64-linux-x86_64": "1.0.0",
     "com.unity.ugui": "1.0.0",
     "com.unity.visualscripting": "1.7.6",
