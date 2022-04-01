@@ -112,6 +112,11 @@ public class ObjectCollectorAgent : Agent, IStats
 
     private void MoveAgent(ActionBuffers actionBuffers)
     {
+        if (!enabled)
+        {
+            return;
+        }
+        
         var dirToGo = Vector3.zero;
         var rotateDir = Vector3.zero;
 
@@ -153,6 +158,11 @@ public class ObjectCollectorAgent : Agent, IStats
     
     public override void Heuristic(in ActionBuffers actionsOut)
     {
+        if (!enabled)
+        {
+            return;
+        }
+        
         var continuousActionsOut = actionsOut.ContinuousActions;
         if (Input.GetKey(KeyCode.D))
         {
@@ -176,10 +186,6 @@ public class ObjectCollectorAgent : Agent, IStats
     {
         m_ObjectCollectorSettings.EnvironmentReset();
         m_AgentRb.velocity = Vector3.zero;
-        /*transform.position = new Vector3(Random.Range(-m_MyArea.range, m_MyArea.range),
-            2f, Random.Range(-m_MyArea.range, m_MyArea.range))
-            + area.transform.position;
-        transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));*/
         m_CollectedCapacity = 0;
         ResetStats();
         SetResetParameters();
