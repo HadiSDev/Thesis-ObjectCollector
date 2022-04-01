@@ -67,12 +67,9 @@ public class ObjectCollectorAgent : Agent, IStats
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        if (useVectorObs)
-        {
-            var localVelocity = transform.InverseTransformDirection(m_AgentRb.velocity);
-            sensor.AddObservation(localVelocity.x);
-            sensor.AddObservation(localVelocity.z);
-        }
+        var localVelocity = transform.InverseTransformDirection(m_AgentRb.velocity);
+        sensor.AddObservation(localVelocity.x);
+        sensor.AddObservation(localVelocity.z);
 
         if (enableCapacity)
         {
