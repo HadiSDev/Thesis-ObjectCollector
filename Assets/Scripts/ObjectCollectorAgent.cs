@@ -67,12 +67,9 @@ public class ObjectCollectorAgent : Agent, IStats
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        if (useVectorObs)
-        {
-            var localVelocity = transform.InverseTransformDirection(m_AgentRb.velocity);
-            sensor.AddObservation(localVelocity.x);
-            sensor.AddObservation(localVelocity.z);
-        }
+        var localVelocity = transform.InverseTransformDirection(m_AgentRb.velocity);
+        sensor.AddObservation(localVelocity.x);
+        sensor.AddObservation(localVelocity.z);
 
         if (enableCapacity)
         {
@@ -115,6 +112,11 @@ public class ObjectCollectorAgent : Agent, IStats
 
     private void MoveAgent(ActionBuffers actionBuffers)
     {
+        if (!enabled)
+        {
+            return;
+        }
+        
         var dirToGo = Vector3.zero;
         var rotateDir = Vector3.zero;
 
@@ -142,7 +144,7 @@ public class ObjectCollectorAgent : Agent, IStats
             m_AgentRb.velocity *= 0.95f;
         }
 
-        AddReward(stepCost);
+        m_ObjectCollectorSettings.m_AgentGroup.AddGroupReward(stepCost);
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -156,6 +158,11 @@ public class ObjectCollectorAgent : Agent, IStats
     
     public override void Heuristic(in ActionBuffers actionsOut)
     {
+        if (!enabled)
+        {
+            return;
+        }
+        
         var continuousActionsOut = actionsOut.ContinuousActions;
         if (Input.GetKey(KeyCode.D))
         {
@@ -179,10 +186,6 @@ public class ObjectCollectorAgent : Agent, IStats
     {
         m_ObjectCollectorSettings.EnvironmentReset();
         m_AgentRb.velocity = Vector3.zero;
-        /*transform.position = new Vector3(Random.Range(-m_MyArea.range, m_MyArea.range),
-            2f, Random.Range(-m_MyArea.range, m_MyArea.range))
-            + area.transform.position;
-        transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));*/
         m_CollectedCapacity = 0;
         ResetStats();
         SetResetParameters();
@@ -198,7 +201,7 @@ public class ObjectCollectorAgent : Agent, IStats
                 m_CollectedCapacity += 1f;
                 m_capacityText.text = $"Capacity: {m_CollectedCapacity}, Reward: {AgentCumulativeReward}";
                 m_ObjectCollectorSettings.totalCollected += 1f;
-                AddReward(1f);
+                m_ObjectCollectorSettings.m_AgentGroup.AddGroupReward(1f);
                 if (contribute)
                 {
                     m_ObjectCollectorSettings.totalScore += 1;
@@ -220,7 +223,7 @@ public class ObjectCollectorAgent : Agent, IStats
             if (m_CollectedCapacity > 0)
             {
                 var reward = m_CollectedCapacity / maxCapacity;
-                AddReward(reward);
+                m_ObjectCollectorSettings.m_AgentGroup.AddGroupReward(reward);
                 m_CollectedCapacity = 0;
                 m_capacityText.text = $"Capacity: {m_CollectedCapacity}";
             }
@@ -254,7 +257,8 @@ public class ObjectCollectorAgent : Agent, IStats
         {
             StatisticsWriter.AppendStatToRecordList(m_Count, DateTime.Now-m_Start); // Add record to list
             StatisticsWriter.PrepareEpisodeStats();                                         // Reset lists
-            EndEpisode();
+            m_ObjectCollectorSettings.m_AgentGroup.EndGroupEpisode();
+
         }
     }
     

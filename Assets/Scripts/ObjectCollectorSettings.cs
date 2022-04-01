@@ -13,7 +13,8 @@ using Statistics;
 public class ObjectCollectorSettings : MonoBehaviour
 {
     public GameObject[] agents;
-    [HideInInspector] public ObjectCollectorArea[] listArea;
+    [HideInInspector] 
+    public ObjectCollectorArea[] listArea;
     
     public bool m_Is_evaluating;
     // Statistics
@@ -38,6 +39,33 @@ public class ObjectCollectorSettings : MonoBehaviour
     private bool firstReset = true;
     [HideInInspector]
     public float totalCollected;
+    
+    [HideInInspector]
+    public SimpleMultiAgentGroup m_AgentGroup;
+    
+    [Header("Max Environment Steps")] public int MaxEnvironmentSteps = 6000;
+    private int m_ResetTimer;
+    
+    private void Start()
+    {
+        m_AgentGroup = new SimpleMultiAgentGroup();
+        var agents = FindObjectsOfType<Agent>();
+        foreach (var item in agents)
+        {
+            // Add to team manager
+            m_AgentGroup.RegisterAgent(item);
+        }
+    }
+
+    void FixedUpdate()
+    {
+        m_ResetTimer += 1;
+        if (m_ResetTimer >= MaxEnvironmentSteps && MaxEnvironmentSteps > 0)
+        {
+            m_AgentGroup.GroupEpisodeInterrupted();
+            EnvironmentReset();
+        }
+    }
 
     public void Awake()
     {
@@ -55,6 +83,8 @@ public class ObjectCollectorSettings : MonoBehaviour
     public void EnvironmentReset()
     {
         resetCounter++;
+        //Reset counter
+        m_ResetTimer = 0;
         if (resetCounter % agents.Length == 0)
         {
             if (m_Is_evaluating == false || m_Counter < sampleSize)
@@ -64,6 +94,11 @@ public class ObjectCollectorSettings : MonoBehaviour
                 foreach (var fa in listArea)
                 {
                     fa.ResetObjectiveArea(agents);
+                    
+                    foreach (var agent in FindObjectsOfType<Agent>())
+                    {
+                        m_AgentGroup.RegisterAgent(agent);
+                    }
                 }
                 ClearObjects(GameObject.FindGameObjectsWithTag("obstacle"));
             
