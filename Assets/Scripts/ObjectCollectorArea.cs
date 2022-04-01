@@ -97,6 +97,7 @@ public class ObjectCollectorArea : Area
                 firstStation.transform.position = new Vector3(Random.Range(-range, range), 0.5f,
                     Random.Range(-range, range))  + transform.position;
                 agent.transform.position = firstStation.transform.position;
+                
             }
             else
             {

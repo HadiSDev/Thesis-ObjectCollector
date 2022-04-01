@@ -144,7 +144,7 @@ public class ObjectCollectorAgent : Agent, IStats
             m_AgentRb.velocity *= 0.95f;
         }
 
-        AddReward(stepCost);
+        m_ObjectCollectorSettings.m_AgentGroup.AddGroupReward(stepCost);
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -201,7 +201,7 @@ public class ObjectCollectorAgent : Agent, IStats
                 m_CollectedCapacity += 1f;
                 m_capacityText.text = $"Capacity: {m_CollectedCapacity}, Reward: {AgentCumulativeReward}";
                 m_ObjectCollectorSettings.totalCollected += 1f;
-                AddReward(1f);
+                m_ObjectCollectorSettings.m_AgentGroup.AddGroupReward(1f);
                 if (contribute)
                 {
                     m_ObjectCollectorSettings.totalScore += 1;
@@ -223,7 +223,7 @@ public class ObjectCollectorAgent : Agent, IStats
             if (m_CollectedCapacity > 0)
             {
                 var reward = m_CollectedCapacity / maxCapacity;
-                AddReward(reward);
+                m_ObjectCollectorSettings.m_AgentGroup.AddGroupReward(reward);
                 m_CollectedCapacity = 0;
                 m_capacityText.text = $"Capacity: {m_CollectedCapacity}";
             }
@@ -257,7 +257,8 @@ public class ObjectCollectorAgent : Agent, IStats
         {
             StatisticsWriter.AppendStatToRecordList(m_Count, DateTime.Now-m_Start); // Add record to list
             StatisticsWriter.PrepareEpisodeStats();                                         // Reset lists
-            EndEpisode();
+            m_ObjectCollectorSettings.m_AgentGroup.EndGroupEpisode();
+
         }
     }
     
