@@ -1,6 +1,6 @@
 
 behaviors:
-  DungeonEscape:
+  GridObjectCollector:
     trainer_type: poca
     hyperparameters:
       batch_size: 1024
