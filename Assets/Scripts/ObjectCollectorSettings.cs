@@ -12,7 +12,7 @@ using Statistics;
 
 public class ObjectCollectorSettings : MonoBehaviour
 {
-    public GameObject[] agents;
+    private Agent[] agents;
     [HideInInspector] 
     public ObjectCollectorArea[] listArea;
     
@@ -49,7 +49,6 @@ public class ObjectCollectorSettings : MonoBehaviour
     private void Start()
     {
         m_AgentGroup = new SimpleMultiAgentGroup();
-        var agents = FindObjectsOfType<Agent>();
         foreach (var item in agents)
         {
             // Add to team manager
@@ -69,7 +68,7 @@ public class ObjectCollectorSettings : MonoBehaviour
 
     public void Awake()
     {
-        agents = GameObject.FindGameObjectsWithTag("agent").AsEnumerable().Where(a => a.layer == 0).ToArray();
+        agents = FindObjectsOfType<Agent>();
         Academy.Instance.OnEnvironmentReset += EnvironmentReset;
         m_Recorder = Academy.Instance.StatsRecorder;
         

@@ -32,7 +32,6 @@ public class ObjectCollectorAgent : Agent, IStats
     public int AgentStepCount;
     public float AgentCumulativeReward;
 
-    public Text m_capacityText;
 
     // Punishment Settings
     public float stepCost = -0.001f;
@@ -199,7 +198,6 @@ public class ObjectCollectorAgent : Agent, IStats
             {
                 collision.gameObject.GetComponent<ObjectLogic>().OnEaten();
                 m_CollectedCapacity += 1f;
-                m_capacityText.text = $"Capacity: {m_CollectedCapacity}, Reward: {AgentCumulativeReward}";
                 m_ObjectCollectorSettings.totalCollected += 1f;
                 m_ObjectCollectorSettings.m_AgentGroup.AddGroupReward(1f);
                 if (contribute)
@@ -225,7 +223,6 @@ public class ObjectCollectorAgent : Agent, IStats
                 var reward = m_CollectedCapacity / maxCapacity;
                 m_ObjectCollectorSettings.m_AgentGroup.AddGroupReward(reward);
                 m_CollectedCapacity = 0;
-                m_capacityText.text = $"Capacity: {m_CollectedCapacity}";
             }
             
             if (n_objects == 0 && m_CollectedCapacity == 0)
@@ -258,6 +255,7 @@ public class ObjectCollectorAgent : Agent, IStats
             StatisticsWriter.AppendStatToRecordList(m_Count, DateTime.Now-m_Start); // Add record to list
             StatisticsWriter.PrepareEpisodeStats();                                         // Reset lists
             m_ObjectCollectorSettings.m_AgentGroup.EndGroupEpisode();
+            m_ObjectCollectorSettings.EnvironmentReset();
 
         }
     }

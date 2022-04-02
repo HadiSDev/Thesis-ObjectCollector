@@ -81,12 +81,12 @@ public class ObjectCollectorArea : Area
         }
     }
 
-    public void ResetObjectiveArea(GameObject[] agents)
+    public void ResetObjectiveArea(Agent[] agents)
     {
         var firstStation = stations.Length == 0 ? null : stations[0];
-        foreach (GameObject agent in agents)
+        foreach (var agent in agents)
         {
-            agent.SetActive(true);
+            agent.gameObject.SetActive(true);
             if (agent.transform.parent != gameObject.transform)
             {
                 continue;
