@@ -45,10 +45,12 @@ public class ObjectCollectorAgent : Agent, IStats
     public bool markDetectedObjects;
     private GridSensorComponent3D POVGrid;
     private BufferSensorComponent _bufferSensorObjectives;
+    private BufferSensorComponent _bufferSensorAgents;
     
     // Station
     EnvironmentParameters m_ResetParams;
     private ObjectCollectorArea m_ObjectCollectorArea;
+    
 
     public override void Initialize()
     {
@@ -57,7 +59,14 @@ public class ObjectCollectorAgent : Agent, IStats
         
         m_ObjectCollectorSettings = FindObjectOfType<ObjectCollectorSettings>();
         m_ObjectCollectorArea = FindObjectOfType<ObjectCollectorArea>();
-        _bufferSensorObjectives = GetComponent<BufferSensorComponent>();
+        var bufferSensors = GetComponents<BufferSensorComponent>();
+
+        if (bufferSensors != null)
+        {
+            _bufferSensorObjectives = GetComponents<BufferSensorComponent>().FirstOrDefault(b => b.SensorName == "ObjectivesSensor");
+            _bufferSensorAgents = GetComponents<BufferSensorComponent>().FirstOrDefault(b => b.SensorName == "AgentsSensor");
+        }
+        
         m_ResetParams = Academy.Instance.EnvironmentParameters;
         if (markDetectedObjects)
         {
@@ -90,20 +99,32 @@ public class ObjectCollectorAgent : Agent, IStats
         
         sensor.AddObservation(rotation.y);
         sensor.AddObservation(rotation.w);
-
+        
+        var station = GameObject.FindGameObjectWithTag("station").transform.localPosition;
+        var distance = Vector3.Distance(localPosition, station);
+        sensor.AddObservation(distance);
+        
         if (_bufferSensorObjectives != null)
         {
             var objectives = GameObject.FindGameObjectsWithTag("objective");
-            var station = GameObject.FindGameObjectWithTag("station").transform.localPosition;
+            
 
             foreach (var objective in objectives)
             {
                 var pos = objective.transform.localPosition;
                 _bufferSensorObjectives.AppendObservation(new []{pos.x, pos.z});
             }
+        }
 
-            var distance = Vector3.Distance(localPosition, station);
-            sensor.AddObservation(distance);
+        if (_bufferSensorAgents != null)
+        {
+            var agents = GameObject.FindGameObjectsWithTag("agent");
+
+            foreach (var agent in agents)
+            {
+                var pos = agent.transform.localPosition;
+                _bufferSensorAgents.AppendObservation(new []{pos.x, pos.z});
+            }
         }
     }
 
