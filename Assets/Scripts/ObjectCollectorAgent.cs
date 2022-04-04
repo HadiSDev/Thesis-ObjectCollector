@@ -118,7 +118,7 @@ public class ObjectCollectorAgent : Agent, IStats
 
         if (_bufferSensorAgents != null)
         {
-            var agents = GameObject.FindGameObjectsWithTag("agent");
+            var agents = GameObject.FindGameObjectsWithTag("agent").Where(a => a != gameObject);
 
             foreach (var agent in agents)
             {
