@@ -1,13 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.MLAgents;
-using CsvHelper;
 using Statistics;
 
 public class ObjectCollectorSettings : MonoBehaviour
@@ -43,7 +38,7 @@ public class ObjectCollectorSettings : MonoBehaviour
     [HideInInspector]
     public SimpleMultiAgentGroup m_AgentGroup;
     
-    [Header("Max Environment Steps")] public int MaxEnvironmentSteps = 6000;
+    [Header("Max Environment Steps")] public int MaxEnvironmentSteps = 5000;
     private int m_ResetTimer;
     
     private void Start()
@@ -84,36 +79,34 @@ public class ObjectCollectorSettings : MonoBehaviour
         resetCounter++;
         //Reset counter
         m_ResetTimer = 0;
-        if (resetCounter % agents.Length == 0)
+        
+        if (m_Is_evaluating == false || m_Counter < sampleSize)
         {
-            if (m_Is_evaluating == false || m_Counter < sampleSize)
+            // Reset map
+            listArea = FindObjectsOfType<ObjectCollectorArea>();
+            foreach (var fa in listArea)
             {
-                // Reset map
-                listArea = FindObjectsOfType<ObjectCollectorArea>();
-                foreach (var fa in listArea)
-                {
-                    fa.ResetObjectiveArea(agents);
+                fa.ResetObjectiveArea(agents);
                     
-                    foreach (var agent in FindObjectsOfType<Agent>())
-                    {
-                        m_AgentGroup.RegisterAgent(agent);
-                    }
+                foreach (var agent in FindObjectsOfType<Agent>())
+                {
+                    m_AgentGroup.RegisterAgent(agent);
                 }
-                ClearObjects(GameObject.FindGameObjectsWithTag("obstacle"));
+            }
+            ClearObjects(GameObject.FindGameObjectsWithTag("obstacle"));
             
-                m_StartTime = DateTime.Now;
-                totalScore = 0;
-                totalCollected = 0;
-                m_Counter++;
-            }
-            else if(m_Is_evaluating && m_Counter == sampleSize) // To avoid multiple writes when all agents call method EnvironmentReset (GreedyAgent)
-            {
-                m_Counter++;
-                StatisticsWriter.plotResults();
+            m_StartTime = DateTime.Now;
+            totalScore = 0;
+            totalCollected = 0;
+            m_Counter++;
+        }
+        else if(m_Is_evaluating && m_Counter == sampleSize) // To avoid multiple writes when all agents call method EnvironmentReset (GreedyAgent)
+        {
+            m_Counter++;
+            StatisticsWriter.plotResults();
 #if UNITY_EDITOR
-                UnityEditor.EditorApplication.ExitPlaymode();
+            UnityEditor.EditorApplication.ExitPlaymode();
 #endif
-            }
         }
     }
     
