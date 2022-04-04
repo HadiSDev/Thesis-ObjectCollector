@@ -44,6 +44,7 @@ public class ObjectCollectorAgent : Agent, IStats
     // Dynamically mark detected objectives
     public bool markDetectedObjects;
     private GridSensorComponent3D POVGrid;
+    private BufferSensorComponent _bufferSensorObjectives;
     
     // Station
     EnvironmentParameters m_ResetParams;
@@ -56,6 +57,7 @@ public class ObjectCollectorAgent : Agent, IStats
         
         m_ObjectCollectorSettings = FindObjectOfType<ObjectCollectorSettings>();
         m_ObjectCollectorArea = FindObjectOfType<ObjectCollectorArea>();
+        _bufferSensorObjectives = GetComponent<BufferSensorComponent>();
         m_ResetParams = Academy.Instance.EnvironmentParameters;
         if (markDetectedObjects)
         {
@@ -88,6 +90,21 @@ public class ObjectCollectorAgent : Agent, IStats
         
         sensor.AddObservation(rotation.y);
         sensor.AddObservation(rotation.w);
+
+        if (_bufferSensorObjectives != null)
+        {
+            var objectives = GameObject.FindGameObjectsWithTag("objective");
+            var station = GameObject.FindGameObjectWithTag("station").transform.localPosition;
+
+            foreach (var objective in objectives)
+            {
+                var pos = objective.transform.localPosition;
+                _bufferSensorObjectives.AppendObservation(new []{pos.x, pos.z});
+            }
+
+            var distance = Vector3.Distance(localPosition, station);
+            sensor.AddObservation(distance);
+        }
     }
 
     public void MarkDetectedObjectives(string tag)
