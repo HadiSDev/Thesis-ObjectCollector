@@ -1,0 +1,65 @@
+{
+    "GridObjectCollector": {
+        "checkpoints": [
+            {
+                "steps": 18499954,
+                "file_path": "results/Problem_A_full_5_Poca/GridObjectCollector/GridObjectCollector-18499954.onnx",
+                "reward": null,
+                "creation_time": 1649164945.2987795,
+                "auxillary_file_paths": [
+                    "results/Problem_A_full_5_Poca/GridObjectCollector/GridObjectCollector-18499954.pt"
+                ]
+            },
+            {
+                "steps": 18999976,
+                "file_path": "results/Problem_A_full_5_Poca/GridObjectCollector/GridObjectCollector-18999976.onnx",
+                "reward": null,
+                "creation_time": 1649167178.4404757,
+                "auxillary_file_paths": [
+                    "results/Problem_A_full_5_Poca/GridObjectCollector/GridObjectCollector-18999976.pt"
+                ]
+            },
+            {
+                "steps": 19499969,
+                "file_path": "results/Problem_A_full_5_Poca/GridObjectCollector/GridObjectCollector-19499969.onnx",
+                "reward": null,
+                "creation_time": 1649169553.7327235,
+                "auxillary_file_paths": [
+                    "results/Problem_A_full_5_Poca/GridObjectCollector/GridObjectCollector-19499969.pt"
+                ]
+            },
+            {
+                "steps": 19999943,
+                "file_path": "results/Problem_A_full_5_Poca/GridObjectCollector/GridObjectCollector-19999943.onnx",
+                "reward": null,
+                "creation_time": 1649171905.2130134,
+                "auxillary_file_paths": [
+                    "results/Problem_A_full_5_Poca/GridObjectCollector/GridObjectCollector-19999943.pt"
+                ]
+            },
+            {
+                "steps": 20000007,
+                "file_path": "results/Problem_A_full_5_Poca/GridObjectCollector/GridObjectCollector-20000007.onnx",
+                "reward": null,
+                "creation_time": 1649171905.7939682,
+                "auxillary_file_paths": [
+                    "results/Problem_A_full_5_Poca/GridObjectCollector/GridObjectCollector-20000007.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 20000007,
+            "file_path": "results/Problem_A_full_5_Poca/GridObjectCollector.onnx",
+            "reward": null,
+            "creation_time": 1649171905.7939682,
+            "auxillary_file_paths": [
+                "results/Problem_A_full_5_Poca/GridObjectCollector/GridObjectCollector-20000007.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.8.1+cu102"
+    }
+}
