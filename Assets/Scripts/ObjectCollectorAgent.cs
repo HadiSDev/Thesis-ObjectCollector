@@ -90,29 +90,30 @@ public class ObjectCollectorAgent : Agent, IStats
         var progress = m_ObjectCollectorSettings.totalCollected / m_ObjectCollectorArea.numObjectives;
         
         sensor.AddObservation(progress);
-        
-        var localPosition = transform.localPosition;
-        sensor.AddObservation(localPosition.x);
-        sensor.AddObservation(localPosition.z);
 
-        var rotation = transform.rotation;
-        
-        sensor.AddObservation(rotation.y);
-        sensor.AddObservation(rotation.w);
+        var agentPos = transform.position;
+        var areaPos = m_ObjectCollectorArea.transform.position;
+        sensor.AddObservation((agentPos.x - areaPos.x) / 50f);
+        sensor.AddObservation((agentPos.z - areaPos.z) / 50f);
+
+        var forward = transform.forward;
+        sensor.AddObservation(forward.x);
+        sensor.AddObservation(forward.z);
         
         var station = GameObject.FindGameObjectWithTag("station").transform.localPosition;
-        var distance = Vector3.Distance(localPosition, station);
+        var distance = Vector3.Distance(agentPos, station) / 50f;
         sensor.AddObservation(distance);
         
         if (_bufferSensorObjectives != null)
         {
             var objectives = GameObject.FindGameObjectsWithTag("objective");
             
-
             foreach (var objective in objectives)
             {
                 var pos = objective.transform.localPosition;
-                _bufferSensorObjectives.AppendObservation(new []{pos.x, pos.z});
+                var x = (pos.x - agentPos.x) / 50f;
+                var z = (pos.z - agentPos.z) / 50f;
+                _bufferSensorObjectives.AppendObservation(new []{x, z});
             }
         }
 
@@ -123,7 +124,9 @@ public class ObjectCollectorAgent : Agent, IStats
             foreach (var agent in agents)
             {
                 var pos = agent.transform.localPosition;
-                _bufferSensorAgents.AppendObservation(new []{pos.x, pos.z});
+                var x = (pos.x - agentPos.x) / 50f;
+                var z = (pos.z - agentPos.z) / 50f;
+                _bufferSensorAgents.AppendObservation(new []{x, z});
             }
         }
     }
