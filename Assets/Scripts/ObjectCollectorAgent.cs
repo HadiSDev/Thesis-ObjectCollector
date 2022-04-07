@@ -101,8 +101,10 @@ public class ObjectCollectorAgent : Agent, IStats
         sensor.AddObservation(forward.z);
         
         var station = GameObject.FindGameObjectWithTag("station").transform.localPosition;
-        var distance = Vector3.Distance(agentPos, station) / 50f;
-        sensor.AddObservation(distance);
+        var stationX = (station.x - agentPos.x) / 50f;
+        var stationZ = (station.z - agentPos.z) / 50f;
+        
+        sensor.AddObservation(new []{stationX, stationZ});
         
         if (_bufferSensorObjectives != null)
         {
