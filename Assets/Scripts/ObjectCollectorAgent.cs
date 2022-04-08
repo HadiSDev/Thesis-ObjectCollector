@@ -78,8 +78,7 @@ public class ObjectCollectorAgent : Agent, IStats
     public override void CollectObservations(VectorSensor sensor)
     {
         var localVelocity = transform.InverseTransformDirection(m_AgentRb.velocity);
-        sensor.AddObservation(localVelocity.x);
-        sensor.AddObservation(localVelocity.z);
+        sensor.AddObservation(new []{localVelocity.x, localVelocity.z});
 
         if (enableCapacity)
         {
@@ -93,8 +92,8 @@ public class ObjectCollectorAgent : Agent, IStats
 
         var agentPos = transform.position;
         var areaPos = m_ObjectCollectorArea.transform.position;
-        sensor.AddObservation((agentPos.x - areaPos.x) / 50f);
-        sensor.AddObservation((agentPos.z - areaPos.z) / 50f);
+        sensor.AddObservation(new []{(agentPos.x - areaPos.x) / 50f, (agentPos.z - areaPos.z) / 50f});
+
 
         var forward = transform.forward;
         sensor.AddObservation(forward.x);

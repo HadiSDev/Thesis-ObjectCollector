@@ -3,7 +3,7 @@ behaviors:
     trainer_type: poca
     hyperparameters:
       batch_size: 1024
-      buffer_size: 1024
+      buffer_size: 10240
       learning_rate: 0.0003
       beta: 0.01
       epsilon: 0.2
@@ -11,7 +11,7 @@ behaviors:
       num_epoch: 3
       learning_rate_schedule: constant
     network_settings:
-      normalize: true
+      normalize: false
       hidden_units: 256
       num_layers: 2
       vis_encode_type: fully_connected
