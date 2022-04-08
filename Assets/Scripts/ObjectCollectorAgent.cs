@@ -37,7 +37,6 @@ public class ObjectCollectorAgent : Agent, IStats
     public float stepCost = -0.001f;
 
     // Capacity Settings
-    public bool enableCapacity;
     public float maxCapacity = 25;
     private float m_CollectedCapacity;
 
@@ -80,24 +79,16 @@ public class ObjectCollectorAgent : Agent, IStats
         var localVelocity = transform.InverseTransformDirection(m_AgentRb.velocity);
         sensor.AddObservation(new []{localVelocity.x, localVelocity.z});
 
-        if (enableCapacity)
-        {
-            var capacityRatio = m_CollectedCapacity / maxCapacity;
-            sensor.AddObservation(capacityRatio);
-        }
-        
-        var progress = m_ObjectCollectorSettings.totalCollected / m_ObjectCollectorArea.numObjectives;
-        
-        sensor.AddObservation(progress);
+        var capacityRatio = m_CollectedCapacity / maxCapacity;
+        sensor.AddObservation(capacityRatio);
 
         var agentPos = transform.position;
         var areaPos = m_ObjectCollectorArea.transform.position;
-        sensor.AddObservation(new []{(agentPos.x - areaPos.x) / 50f, (agentPos.z - areaPos.z) / 50f});
+        sensor.AddObservation(new []{(areaPos.x - agentPos.x) / 50f, (areaPos.z - agentPos.z) / 50f});
 
 
         var forward = transform.forward;
-        sensor.AddObservation(forward.x);
-        sensor.AddObservation(forward.z);
+        sensor.AddObservation(new []{forward.x, forward.z});
         
         var station = GameObject.FindGameObjectWithTag("station").transform.localPosition;
         var stationX = (station.x - agentPos.x) / 50f;
@@ -236,7 +227,7 @@ public class ObjectCollectorAgent : Agent, IStats
     {
         if (collision.gameObject.CompareTag("objective"))
         {
-            if (!enableCapacity || m_CollectedCapacity + 1f <= maxCapacity)
+            if (m_CollectedCapacity + 1f <= maxCapacity)
             {
                 collision.gameObject.GetComponent<ObjectLogic>().OnEaten();
                 m_CollectedCapacity += 1f;
@@ -248,16 +239,11 @@ public class ObjectCollectorAgent : Agent, IStats
                 }
             }
         }
-
-        if (!enableCapacity)
-        {
-            EndEpsiodeIfNoObjectives();
-        }
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("station") && enableCapacity)
+        if (collision.gameObject.CompareTag("station"))
         {
             var n_objects = GameObject.FindGameObjectsWithTag("objective").Length;
             if (m_CollectedCapacity > 0)
@@ -279,7 +265,7 @@ public class ObjectCollectorAgent : Agent, IStats
     private void EndEpsiodeIfNoObjectives()
     {
         var nObjects = GameObject.FindGameObjectsWithTag("objective").Length;
-        if (nObjects == 0 && !enableCapacity || nObjects == 0  && m_CollectedCapacity == 0)
+        if (nObjects == 0  && m_CollectedCapacity == 0)
         {
             Debug.Log("Agent Epsiode Ended");
             DisableAgentAndTerminateEpisodeIfDone();
