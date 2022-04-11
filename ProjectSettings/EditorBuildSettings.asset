@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Startup/Startup.unity
     guid: 9c6ff482aefcb4942a2ede837510c3aa
   - enabled: 1
-    path: Assets/Scenes/Problem A/Full/Problem_A_full_2.unity
-    guid: 1fd0eb7f3df113c43abc8df41c25455f
-  - enabled: 1
     path: Assets/Scenes/Problem A/Full/Problem_A_full_3.unity
     guid: e14a4d6a9e607494aa0fee9f8b82bb16
   - enabled: 1
@@ -23,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Problem A/Full/Problem_A_full_1.unity
     guid: 4e3a2058677df134d91d8e86329f4711
+  - enabled: 1
+    path: Assets/Scenes/Problem A/Full/Problem_A_full_2.unity
+    guid: 3debbb617a4a4bd47bf5cdb6e297247a
   m_configObjects: {}

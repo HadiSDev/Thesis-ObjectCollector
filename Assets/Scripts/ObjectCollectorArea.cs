@@ -140,7 +140,7 @@ public class ObjectCollectorArea : Area
         }
         else
         {
-            CreateStations(5);
+            CreateStations(3);
         }
 
         if (m_Objectives.Count > 0)
