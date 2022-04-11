@@ -9,18 +9,18 @@ EditorBuildSettings:
     path: Assets/Startup/Startup.unity
     guid: 9c6ff482aefcb4942a2ede837510c3aa
   - enabled: 1
-    path: Assets/Scenes/Problem A/Full/Problem_A_full_3.unity
-    guid: e14a4d6a9e607494aa0fee9f8b82bb16
-  - enabled: 1
-    path: Assets/Scenes/Problem A/Full/Problem_A_full_4.unity
-    guid: e70d9278c2216c94e915c1de89d3369e
-  - enabled: 1
-    path: Assets/Scenes/Problem A/Full/Problem_A_full_5.unity
-    guid: 74ffa118fbfa4b44fa6482bbb629f510
-  - enabled: 1
     path: Assets/Scenes/Problem A/Full/Problem_A_full_1.unity
     guid: 4e3a2058677df134d91d8e86329f4711
   - enabled: 1
     path: Assets/Scenes/Problem A/Full/Problem_A_full_2.unity
     guid: 3debbb617a4a4bd47bf5cdb6e297247a
+  - enabled: 1
+    path: Assets/Scenes/Problem A/Full/Problem_A_full_3.unity
+    guid: 175da41d7ac105b4cae94b0217ff7f95
+  - enabled: 1
+    path: Assets/Scenes/Problem A/Full/Problem_A_full_4.unity
+    guid: e354330ac48d25543bf672aae83610c3
+  - enabled: 1
+    path: Assets/Scenes/Problem A/Full/Problem_A_full_5.unity
+    guid: 7242f89cc607f5e4490c616996656ed5
   m_configObjects: {}
