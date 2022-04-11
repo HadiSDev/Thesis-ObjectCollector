@@ -83,6 +83,7 @@ public class ObjectCollectorAgent : Agent, IStats
 
     public override void CollectObservations(VectorSensor sensor)
     {
+        //Debug.Log($"Name: {name}, Capacity: {m_CollectedCapacity}");
         var localVelocity = transform.InverseTransformDirection(m_AgentRb.velocity);
         sensor.AddObservation(new []{localVelocity.x, localVelocity.z});
 
@@ -178,7 +179,7 @@ public class ObjectCollectorAgent : Agent, IStats
         // Update statisics
         AgentTravelledDist += Vector3.Distance(prev_pos, m_AgentRb.position);
         AgentStepCount = StepCount;
-        AgentCumulativeReward = GetCumulativeReward();
+        AgentCumulativeReward = 0; //TODO
         prev_pos = m_AgentRb.position;
 
 
