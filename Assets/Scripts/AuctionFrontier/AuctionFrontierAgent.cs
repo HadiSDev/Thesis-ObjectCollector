@@ -88,13 +88,16 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     public Vector3 FindClosetsFrontier()
     {
         Vector3 closets = Vector3.zero;
-        Vector3 position = transform.position;
         float distance = Mathf.Infinity;
-        foreach (Vector3 coord in GridTracking.FINISHED)
+        foreach (Vector3 coord in GridTracking.FRONTIERS)
         {
-            Vector3 diff = coord - position;
-            float curDistance = diff.sqrMagnitude;
-            if (curDistance < distance) closets = coord;
+            var curdist = Vector3.Distance(transform.position, coord);
+            
+            if (curdist < distance)
+            {
+                distance = curdist;
+                closets = coord;
+            }
         }
 
         GridTracking.FRONTIERS.Remove(closets);
@@ -128,7 +131,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         /* DEBUG - DRAW STORED FRONTIER POINTS*/
         foreach (var frontier in GridTracking.FRONTIERS)
         {
-            Debug.DrawRay(frontier, Vector3.up * 10f, Color.yellow, 10f);
+            Debug.DrawRay(frontier, Vector3.up * 10f, Color.blue, checkEvery);
         }
         
         AuctionFrontierUtil.Message msg;
@@ -256,6 +259,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 var discovered = grid.GetDetectedGameObjects("objective").Where(x => x.GetComponent<DetectableVisibleObject>().isNotDetected);
                 // discovered = discovered.Where(x => x.GetComponent<DetectableVisibleObject>().isNotDetected);
 
+                /* // Remove comment when frontier works
                 if (discovered.Any())
                 {
                     // Only get those that arent discovered...
@@ -265,13 +269,13 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                         item.GetComponent<DetectableVisibleObject>().isDetected = true;
                         m_AuctionItems.Enqueue(item);
                     }
-                    m_Agent.isStopped = true;
-                    //m_Role = AuctionFrontierUtil.AuctionFrontierRole.Auctioneer;
+                    m_Role = AuctionFrontierUtil.AuctionFrontierRole.Auctioneer;
                     m_AuctioneerId = Id;
                     m_AuctionStage = AuctionFrontierUtil.AuctionStage.TaskAnnouncement;
                     
-                    //break;
+                    break;
                 }
+                */
                 
                 var cur_position = m_Agent.transform.position;
                 dist_travelled+= Vector3.Distance(previous_pos, cur_position);
@@ -280,11 +284,11 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 m_Time += Time.deltaTime;
                 if (!(m_Time >= checkEvery)) return;
                 var target = GridTracking.WFD(m_Target.transform.position, checkEvery);
-                GridTracking.FRONTIERS.Remove(m_Target.transform.position); // Remove from global list...
                 
                 if (target != Vector3.up)
                 {
                     Debug.Log($"Assigning new dest: {target}");
+                    GridTracking.FRONTIERS.Remove(target);
                     m_Target.transform.position = target;
                     m_Agent.SetDestination(target);
                     Debug.DrawRay(target, Vector3.up * 10f, Color.green, checkEvery);
@@ -292,6 +296,13 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 }
                 else
                 {
+                    if (Vector3.Distance(transform.position, m_Target.transform.position) > 10.0f)
+                    {
+                        m_Agent.SetDestination(m_Target.transform.position);
+                        Debug.Log($"Current frontier target is very far. Continue to target {m_Target.transform.position}... ");
+                        break;
+                    }
+
                     var nearest = FindClosetsFrontier();
                     m_Target.transform.position = nearest;
                     m_Agent.SetDestination(nearest);

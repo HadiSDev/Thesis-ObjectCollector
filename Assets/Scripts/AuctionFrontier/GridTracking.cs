@@ -19,7 +19,6 @@ namespace DefaultNamespace
         private static Vector3 _offsetVec = new Vector3(50f, 0f, 50f);
         
         public static List<Vector3> FRONTIERS = new List<Vector3>();
-        public static List<Vector3> FINISHED = new List<Vector3>();
 
         
         // Frontier Exploration
@@ -156,6 +155,7 @@ namespace DefaultNamespace
                     {
                         var median = tmp[tmp.Count / 2];
                         Debug.DrawRay(GridCoordToWorld(median.Item1), Vector3.up * 10f, Color.red, drawDuration);
+                        frontier.Add(median); 
                         FRONTIERS.Add(GridCoordToWorld(median.Item1));
                     }
 
