@@ -49,7 +49,8 @@ public class ObjectCollectorAgent : Agent, IStats
     // Station
     EnvironmentParameters m_ResetParams;
     private ObjectCollectorArea m_ObjectCollectorArea;
-    
+    private BufferSensorComponent _bufferSensorStations;
+
 
     public override void Initialize()
     {
@@ -62,8 +63,9 @@ public class ObjectCollectorAgent : Agent, IStats
 
         if (bufferSensors != null)
         {
-            _bufferSensorObjectives = GetComponents<BufferSensorComponent>().FirstOrDefault(b => b.SensorName == "ObjectivesSensor");
-            _bufferSensorAgents = GetComponents<BufferSensorComponent>().FirstOrDefault(b => b.SensorName == "AgentsSensor");
+            _bufferSensorObjectives = bufferSensors.FirstOrDefault(b => b.SensorName == "ObjectivesSensor");
+            _bufferSensorAgents = bufferSensors.FirstOrDefault(b => b.SensorName == "AgentsSensor");
+            _bufferSensorStations = bufferSensors.FirstOrDefault(b => b.SensorName == "StationsSensor");
         }
         
         m_ResetParams = Academy.Instance.EnvironmentParameters;
@@ -72,6 +74,11 @@ public class ObjectCollectorAgent : Agent, IStats
             POVGrid = GetComponent<GridSensorComponent3D>();
         }
         SetResetParameters();
+    }
+
+    private float Normalize(float currentValue, float minValue=-50f, float maxValue=50f)
+    {
+        return (currentValue - minValue) / (maxValue - minValue);
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -84,27 +91,31 @@ public class ObjectCollectorAgent : Agent, IStats
 
         var agentPos = transform.position;
         var areaPos = m_ObjectCollectorArea.transform.position;
-        sensor.AddObservation(new []{(areaPos.x - agentPos.x) / 50f, (areaPos.z - agentPos.z) / 50f});
-
-
+        sensor.AddObservation(new []{Normalize(agentPos.x - areaPos.x), Normalize(agentPos.z - areaPos.z)});
+        
         var forward = transform.forward;
         sensor.AddObservation(new []{forward.x, forward.z});
-        
-        var station = GameObject.FindGameObjectWithTag("station").transform.localPosition;
-        var stationX = (station.x - agentPos.x) / 50f;
-        var stationZ = (station.z - agentPos.z) / 50f;
-        
-        sensor.AddObservation(new []{stationX, stationZ});
-        
+
+        if (_bufferSensorStations != null)
+        {
+            foreach (var station in GameObject.FindGameObjectsWithTag("station"))
+            {
+                var stationPos = station.transform.position;
+                var stationX = Normalize(stationPos.x - agentPos.x);
+                var stationZ = Normalize(stationPos.z - agentPos.z);
+                _bufferSensorStations.AppendObservation(new []{stationX, stationZ});
+            }
+        }
+
         if (_bufferSensorObjectives != null)
         {
             var objectives = GameObject.FindGameObjectsWithTag("objective");
             
             foreach (var objective in objectives)
             {
-                var pos = objective.transform.localPosition;
-                var x = (pos.x - agentPos.x) / 50f;
-                var z = (pos.z - agentPos.z) / 50f;
+                var pos = objective.transform.position;
+                var x = Normalize(pos.x - agentPos.x);
+                var z = Normalize(pos.z - agentPos.z);
                 _bufferSensorObjectives.AppendObservation(new []{x, z});
             }
         }
@@ -116,8 +127,8 @@ public class ObjectCollectorAgent : Agent, IStats
             foreach (var agent in agents)
             {
                 var pos = agent.transform.localPosition;
-                var x = (pos.x - agentPos.x) / 50f;
-                var z = (pos.z - agentPos.z) / 50f;
+                var x = Normalize(pos.x - agentPos.x);
+                var z = Normalize(pos.z - agentPos.z);
                 _bufferSensorAgents.AppendObservation(new []{x, z});
             }
         }
@@ -223,7 +234,7 @@ public class ObjectCollectorAgent : Agent, IStats
         SetResetParameters();
     }
 
-    void OnTriggerObjective(Collider collision)
+    void OnTriggerObjective(Collision collision)
     {
         if (collision.gameObject.CompareTag("objective"))
         {
@@ -233,12 +244,14 @@ public class ObjectCollectorAgent : Agent, IStats
                 m_CollectedCapacity += 1f;
                 m_ObjectCollectorSettings.totalCollected += 1f;
                 m_ObjectCollectorSettings.m_AgentGroup.AddGroupReward(1f);
-                if (contribute)
-                {
-                    m_ObjectCollectorSettings.totalScore += 1;
-                }
             }
+
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        OnTriggerObjective(collision);
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -258,8 +271,6 @@ public class ObjectCollectorAgent : Agent, IStats
                 DisableAgentAndTerminateEpisodeIfDone();
             }
         }
-
-        OnTriggerObjective(collision);
     }
 
     private void EndEpsiodeIfNoObjectives()
