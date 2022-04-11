@@ -1,2 +1,6 @@
-Id,NumOfAgents,CompletionTime,MinReward,AvgReward,MaxReward,MinAgentStep,AvgAgentStep,MaxAgentStep,MinDistTravelled,AvgDistTravelled,MaxDistTravelled
-0,1,0,0,0,0,0,0,0,0,0,0
+Id,NumOfAgents,CompletionTime,MinReward,AvgReward,MaxReward,SDReward,MinAgentStep,AvgAgentStep,MaxAgentStep,SDAgentStep,MinDistTravelled,AvgDistTravelled,MaxDistTravelled,SDDistTravelled
+0,1,30,0,0,0,0,0,0,0,0,0,0,0,0
+1,1,5,0,0,0,0,0,0,0,0,0,0,0,0
+2,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+3,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+4,1,0,0,0,0,0,0,0,0,0,0,0,0,0

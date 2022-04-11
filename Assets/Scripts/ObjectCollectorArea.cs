@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using DefaultNamespace;
 using MBaske.Sensors.Grid;
 using Unity.MLAgents;
 using Unity.MLAgentsExamples;
@@ -9,6 +10,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(MeshFilter))]
 public class ObjectCollectorArea : Area
 {
     public GameObject objective;
@@ -18,8 +20,35 @@ public class ObjectCollectorArea : Area
     public int numObstacles;
     public GameObject[] stations;
     public int maxSpawnAttemptsPerObstacle = 10;
-    
     private IList<GameObject> m_Objectives = new List<GameObject>();
+    private GridTracking m_GridTracking;
+
+
+    public void Awake()
+    {
+        m_GridTracking = FindObjectOfType<GridTracking>();
+    }
+
+    public void SetGridWorldValue(Vector3 worldPosition, int value)
+    {
+        m_GridTracking.SetValue(worldPosition, 1);
+    }
+
+    public int GetGridWorldValue(Vector3 worldPosition)
+    {
+        return m_GridTracking.GetGridValue(worldPosition);
+    }
+
+    public void UpdateGridWorld(GameObject agent)
+    {
+        var grid = agent.GetComponent<GridSensorComponent3D>();
+        m_GridTracking.UpdateGridWithSensor(agent.transform, grid.LonAngle*2, grid.MaxDistance, 1);
+    }
+
+    public void ScanGridWorld()
+    {
+        // DEBUG.log("Hello");
+    }
 
     void CreateObjectives(int num, GameObject type)
     {
@@ -103,8 +132,7 @@ public class ObjectCollectorArea : Area
                 agent.transform.position = new Vector3(Random.Range(-range, range), 1f,
                     Random.Range(-range, range))  + transform.position;
             }
-            
-                
+
             agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
         }
 
