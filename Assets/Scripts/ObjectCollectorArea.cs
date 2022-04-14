@@ -15,7 +15,7 @@ public class ObjectCollectorArea : Area
     public int numObstacles;
     public GameObject m_StationType;
     public int maxSpawnAttemptsPerObstacle = 10;
-    
+    public bool m_EnableStations = true;
     private IList<GameObject> m_Objectives = new List<GameObject>();
     private IList<GameObject> m_Stations = new List<GameObject>();
 
@@ -23,9 +23,9 @@ public class ObjectCollectorArea : Area
     {
         for (int i = 0; i < num; i++)
         {
-            GameObject f = Instantiate(type, new Vector3(Random.Range(-range, range), 1f,
+            GameObject f = Instantiate(type, new Vector3(Random.Range(-range, range), 0.5f,
                 Random.Range(-range, range)) + transform.position,
-                Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 90f)));
+                Quaternion.identity);
             f.GetComponent<ObjectLogic>().myArea = this;
             m_Objectives.Add(f);
         }
@@ -57,7 +57,7 @@ public class ObjectCollectorArea : Area
         {
             obj.transform.position = new Vector3(
                 Random.Range(-range, range),
-                1f,
+                0.5f,
                 Random.Range(-range, range)) + transform.position;
             obj.SetActive(true);
             
@@ -124,14 +124,17 @@ public class ObjectCollectorArea : Area
 
     public void ResetObjectiveArea(Agent[] agents)
     {
-        if (m_Stations.Count > 0)
+        if (m_EnableStations)
         {
-            ResetStations();
-        }
-        else
-        {
-            var numStations = Random.Range(1, 4);
-            CreateStations(numStations);
+            if (m_Stations.Count > 0)
+            {
+                ResetStations();
+            }
+            else
+            {
+                var numStations = Random.Range(1, 4);
+                CreateStations(numStations);
+            }
         }
         
         foreach (var agent in agents)
@@ -142,7 +145,7 @@ public class ObjectCollectorArea : Area
                 continue;
             }
 
-            var station = m_Stations[Random.Range(0, m_Stations.Count)];
+            var station = m_Stations.Count > 0 ?  m_Stations[Random.Range(0, m_Stations.Count)] : null;
             
             if (station != null)
             {
