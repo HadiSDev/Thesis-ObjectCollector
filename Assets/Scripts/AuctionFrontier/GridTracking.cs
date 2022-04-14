@@ -18,9 +18,8 @@ namespace DefaultNamespace
         private static Vector3 _cellsizeVec = new Vector3(5f, 1f, 5f);
         private static Vector3 _offsetVec = new Vector3(50f, 0f, 50f);
         
-        public static List<Vector3> FRONTIERS = new List<Vector3>();
+        public static HashSet<Vector3> FRONTIERS = new HashSet<Vector3>();
 
-        
         // Frontier Exploration
         private static AuctionFrontierUtil.CELL_STATE[,] m_CellState;
 
@@ -105,14 +104,17 @@ namespace DefaultNamespace
                 if (IsCellFrontier(elem))
                 {
                     var counter = 0;
+                    var frontier_size_limit = 5;
                     var queue_f = new Queue<Vector3>();
                     var new_frontier = new List<(Vector3, float)>();
+                    
+                    
                     // Mark current pos as Frontier Open
                     m_CellState[(int)elem.z, (int)elem.x] = AuctionFrontierUtil.CELL_STATE.FRONTIER_OPEN;
                     queue_f.Enqueue(elem);
                     
                     // Extract connected frontier cells (Cap frontier to atmost 10 connected points)
-                    while (queue_f.Count > 0 && counter <= 10)
+                    while (queue_f.Count > 0 && counter < frontier_size_limit)
                     {
                         
                         var cell = queue_f.Dequeue();
@@ -134,12 +136,12 @@ namespace DefaultNamespace
                                 var w_cellstate = m_CellState[(int)w.z, (int)w.x];
                                 if (w_cellstate == AuctionFrontierUtil.CELL_STATE.MAP_OPEN)
                                 {
-                                    if (counter < 10)
+                                    if (counter < frontier_size_limit)
                                     {
                                         queue_f.Enqueue(w);
                                         counter++;
                                     }
-                                    
+
                                     //Debug.DrawRay(GridCoordToWorld(w), Vector3.up * 10f, Color.red, drawDuration);
                                     m_CellState[(int)w.z, (int)w.x] = AuctionFrontierUtil.CELL_STATE.FRONTIER_OPEN;
                                 }
@@ -155,7 +157,7 @@ namespace DefaultNamespace
                     {
                         var median = tmp[tmp.Count / 2];
                         Debug.DrawRay(GridCoordToWorld(median.Item1), Vector3.up * 10f, Color.red, drawDuration);
-                        frontier.Add(median); 
+                        frontier.Add(median);
                         FRONTIERS.Add(GridCoordToWorld(median.Item1));
                     }
 
@@ -213,7 +215,11 @@ namespace DefaultNamespace
             {
                 for (float x = x_lower; x <= x_upper; x++)
                 {
-                    if (m_GridWorld.GetGridValue((int)x, (int)z) == 0 && cell.z != z && cell.x != x) found++;
+                    if (m_GridWorld.GetGridValue((int)x, (int)z) == 0 && cell.z != z && cell.x != x)
+                    {
+                        found++;
+                        break;
+                    }
                 }
             }
 
@@ -298,9 +304,15 @@ namespace DefaultNamespace
             {
                 for (int x = x_min; x <= x_max; x++)
                 {
+                    // Check if cell is a stored frontier point. Remove if true
+                    coord = GridCoordToWorld(new Vector3(x, 1f, z));//new Vector3((x*cellSize)-50f, pos.y, (z*cellSize)-50f);
+                    if (!IsCellFrontier(coord))
+                    {
+                        FRONTIERS.Remove(coord);
+                    }
+
                     if(m_GridWorld.GetGridValue(x, z) > 0) continue;
                     // Check if point between is in FOV
-                    coord = new Vector3((x*cellSize)-50f, pos.y, (z*cellSize)-50f);
                     angle1 = Vector3.Angle(v1, coord-pos);
                     angle2 = Vector3.Angle(v2, coord-pos);
                     dist = Vector3.Distance(pos, coord);

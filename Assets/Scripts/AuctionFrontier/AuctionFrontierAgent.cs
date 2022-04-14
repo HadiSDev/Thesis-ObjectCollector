@@ -84,7 +84,36 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         m_Target.transform.position = m_Agent.transform.position;
         m_Agent.SetDestination(m_Agent.transform.position);
     }
-    
+
+    #region auction-frontier
+
+
+    private void AssignDestination(Vector3 target)
+    {
+        if (target != Vector3.up)
+        {
+            Debug.Log($"Assigning new dest: {target}");
+            GridTracking.FRONTIERS.Remove(target);
+            m_Target.transform.position = target;
+            m_Agent.SetDestination(target);
+            Debug.DrawRay(target, Vector3.up * 10f, Color.green, checkEvery);
+        }
+        else
+        {
+            if (Vector3.Distance(transform.position, m_Target.transform.position) > 10.0f)
+            {
+                m_Agent.SetDestination(m_Target.transform.position);
+                Debug.Log($"Current frontier target is very far. Continue to target {m_Target.transform.position}... ");
+                return;
+            }
+            var nearest = FindClosetsFrontier();
+            m_Target.transform.position = nearest;
+            m_Agent.SetDestination(nearest);
+            Debug.Log($"WFD found nothing. Talking nearest from global list {nearest}");
+        }
+    }
+
+    #endregion
     public Vector3 FindClosetsFrontier()
     {
         Vector3 closets = Vector3.zero;
@@ -99,7 +128,6 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 closets = coord;
             }
         }
-
         GridTracking.FRONTIERS.Remove(closets);
         return closets;
     }
@@ -109,6 +137,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         if (collision.gameObject.CompareTag("objective"))
         {
             //Satiate();
+            AuctionFrontierUtil.DISCOVERED_TARGETS.Remove(collision.gameObject); // Remove from discovered list when collected
             collision.gameObject.GetComponent<ObjectLogic>().OnEaten();
             m_CollectedCapacity++;
         }
@@ -135,6 +164,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         }
         
         AuctionFrontierUtil.Message msg;
+        var target = Vector3.zero;
         switch (m_Role)
         {
             // Initiate auction for discovered objectives
@@ -202,13 +232,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                             m_Agent.isStopped = false;
                             break;
                         }
-                        else
-                        {
-                            // DEBUG: Remove later
-                            m_Agent.SetDestination(winner.gameObject.transform.position);
-                        }
-
-
+                        
                         m_AuctionStage = AuctionFrontierUtil.AuctionStage.NoAuction;
                         m_AuctionItem = null;
                         ResetBiddingTable();
@@ -259,7 +283,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 var discovered = grid.GetDetectedGameObjects("objective").Where(x => x.GetComponent<DetectableVisibleObject>().isNotDetected);
                 // discovered = discovered.Where(x => x.GetComponent<DetectableVisibleObject>().isNotDetected);
 
-                /* // Remove comment when frontier works
+                // Remove comment when frontier works
                 if (discovered.Any())
                 {
                     // Only get those that arent discovered...
@@ -267,6 +291,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                     {
                         item.GetComponent<DetectableVisibleObject>().isNotDetected = false;
                         item.GetComponent<DetectableVisibleObject>().isDetected = true;
+                        AuctionFrontierUtil.DISCOVERED_TARGETS.Add(item);
                         m_AuctionItems.Enqueue(item);
                     }
                     m_Role = AuctionFrontierUtil.AuctionFrontierRole.Auctioneer;
@@ -275,7 +300,6 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                     
                     break;
                 }
-                */
                 
                 var cur_position = m_Agent.transform.position;
                 dist_travelled+= Vector3.Distance(previous_pos, cur_position);
@@ -283,46 +307,11 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 
                 m_Time += Time.deltaTime;
                 if (!(m_Time >= checkEvery)) return;
-                var target = GridTracking.WFD(m_Target.transform.position, checkEvery);
+                target = GridTracking.WFD(m_Target.transform.position, checkEvery);
                 
-                if (target != Vector3.up)
-                {
-                    Debug.Log($"Assigning new dest: {target}");
-                    GridTracking.FRONTIERS.Remove(target);
-                    m_Target.transform.position = target;
-                    m_Agent.SetDestination(target);
-                    Debug.DrawRay(target, Vector3.up * 10f, Color.green, checkEvery);
-
-                }
-                else
-                {
-                    if (Vector3.Distance(transform.position, m_Target.transform.position) > 10.0f)
-                    {
-                        m_Agent.SetDestination(m_Target.transform.position);
-                        Debug.Log($"Current frontier target is very far. Continue to target {m_Target.transform.position}... ");
-                        break;
-                    }
-
-                    var nearest = FindClosetsFrontier();
-                    m_Target.transform.position = nearest;
-                    m_Agent.SetDestination(nearest);
-                    Debug.Log($"WFD found nothing. Talking nearest from global list {nearest}");
-
-                }
-
-                /*m_Target = FindClosestObject()?.transform;
-                if (m_Target == null)
-                {
-                    StatisticsWriter.AppendAgentStatsMaxStep(0f, dist_travelled, 0, 0, DateTime.Now-sTime);
-                    //m_ObjectCollectorSettings.EnvironmentReset();
-                    dist_travelled = 0f;
-                    sTime = DateTime.Now;
-                }
-                else
-                {
-                    m_Agent.SetDestination(m_Target.position);
-                }
-                */
+                // Assign destination based-on policy
+                AssignDestination(target);
+                sTime = DateTime.Now;
                 m_Time = 0;
                 break;
 
@@ -338,12 +327,10 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 {
                     Debug.Log("Finished the work. Reverting back to exlporer");
                     m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
-
-                    // TODO: Assign nearest unassigned frontier point to agent 
-                    // var target = GridTracking.WFD(transform.position, checkEvery);
-
+                    
+                    target = GridTracking.WFD(transform.position, checkEvery);
+                    AssignDestination(target);
                 }
-
                 break;
         }
 
@@ -415,14 +402,6 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     {
         m_Messages.Enqueue(msg);
     }
-
-    public AuctionFrontierUtil.Message TryGetMessage()
-    {
-        AuctionFrontierUtil.Message msg = null;
-        m_Messages.TryDequeue(out msg);
-        return msg;
-    }
-
     
     public void TryProcessMessage(AuctionFrontierUtil.Message msg)
     {
@@ -474,8 +453,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                     m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
                     m_AuctionStage = AuctionFrontierUtil.AuctionStage.NoAuction;
                     
-                    // TODO: Change to resume going towards allocated frontier location
-                    m_Agent.SetDestination(msg.Sender.transform.position); // DEBUG
+                    // Resume going towards allocated frontier point
                     m_Agent.isStopped = false;
                     m_AuctionItem = null;
                 }
