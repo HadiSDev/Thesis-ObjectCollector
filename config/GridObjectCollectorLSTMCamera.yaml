@@ -3,7 +3,7 @@ behaviors:
     trainer_type: ppo
     hyperparameters:
       batch_size: 1024
-      buffer_size: 10240
+      buffer_size: 1024
       learning_rate: 0.0003
       beta: 0.005
       epsilon: 0.2
@@ -16,14 +16,14 @@ behaviors:
       num_layers: 3
       vis_encode_type: simple
       memory:
-        memory_size: 256
+        memory_size: 128
         sequence_length: 64
     reward_signals:
       extrinsic:
         gamma: 0.99
         strength: 1.0
     keep_checkpoints: 5
-    max_steps: 25000000
+    max_steps: 20000000
     time_horizon: 64
     summary_freq: 10000
 torch_settings:

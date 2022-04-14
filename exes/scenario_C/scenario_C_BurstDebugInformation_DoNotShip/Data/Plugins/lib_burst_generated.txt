@@ -1,14 +1,14 @@
 Library: lib_burst_generated
 --platform=Linux
---backend=burst-llvm-11
+--backend=burst-llvm-12
 --target=X64_SSE2
 --global-safety-checks-setting=Off
 --dump=Function
 --float-precision=Standard
 --disable-warnings=BC1370
---compilation-defines=UNITY_2021_2_17
---compilation-defines=UNITY_2021_2
---compilation-defines=UNITY_2021
+--compilation-defines=UNITY_2022_1_0
+--compilation-defines=UNITY_2022_1
+--compilation-defines=UNITY_2022
 --compilation-defines=UNITY_5_3_OR_NEWER
 --compilation-defines=UNITY_5_4_OR_NEWER
 --compilation-defines=UNITY_5_5_OR_NEWER
@@ -30,12 +30,14 @@ Library: lib_burst_generated
 --compilation-defines=UNITY_2020_3_OR_NEWER
 --compilation-defines=UNITY_2021_1_OR_NEWER
 --compilation-defines=UNITY_2021_2_OR_NEWER
+--compilation-defines=UNITY_2022_1_OR_NEWER
 --compilation-defines=PLATFORM_ARCH_64
 --compilation-defines=UNITY_64
 --compilation-defines=USE_SEARCH_ENGINE_API
 --compilation-defines=USE_SEARCH_TABLE
 --compilation-defines=USE_SEARCH_MODULE
 --compilation-defines=USE_PROPERTY_DATABASE
+--compilation-defines=USE_QUERY_BUILDER
 --compilation-defines=USE_SEARCH_EXTENSION_API
 --compilation-defines=SCENE_TEMPLATE_MODULE
 --compilation-defines=ENABLE_AUDIO
@@ -63,6 +65,7 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_CLOUD_SERVICES_ANALYTICS
 --compilation-defines=ENABLE_CLOUD_SERVICES_UNET
 --compilation-defines=ENABLE_CLOUD_SERVICES_BUILD
+--compilation-defines=ENABLE_EDITOR_GAME_SERVICES
 --compilation-defines=ENABLE_CLOUD_LICENSE
 --compilation-defines=ENABLE_EDITOR_HUB_LICENSE
 --compilation-defines=ENABLE_WEBSOCKET_CLIENT
@@ -97,6 +100,14 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_MONO
 --compilation-defines=NET_STANDARD_2_0
 --compilation-defines=NET_STANDARD
+--compilation-defines=NET_STANDARD_2_1
+--compilation-defines=NETSTANDARD
+--compilation-defines=NETSTANDARD2_1
+--compilation-defines=DEVELOPMENT_BUILD
+--compilation-defines=ENABLE_PROFILER
+--compilation-defines=DEBUG
+--compilation-defines=TRACE
+--compilation-defines=UNITY_ASSERTIONS
 --compilation-defines=UNITY_PRO_LICENSE
 --compilation-defines=ENABLE_CUSTOM_RENDER_TEXTURE
 --compilation-defines=ENABLE_DIRECTOR
@@ -124,27 +135,28 @@ Library: lib_burst_generated
 --compilation-defines=NMC_CAN_ACCESS_TERRAIN
 --compilation-defines=TIMELINE_FRAMEACCURATE
 --generate-link-xml=Temp\burst.link.xml
---output=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Plugins\lib_burst_generated
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\UnityEngine.UI.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Test.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Flow.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Mathematics.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.ONNX.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.State.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Core.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Burst.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Core.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.AI.Navigation.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.TextMeshPro.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Timeline.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.CommunicatorObjects.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.Input.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.BurstBLAS.dll
---assembly-folder=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\
+--debug=Full
+--output=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Plugins\lib_burst_generated
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\UnityEngine.UI.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Test.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Flow.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Mathematics.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.ONNX.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.State.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Core.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Burst.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Core.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.AI.Navigation.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.TextMeshPro.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Timeline.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.CommunicatorObjects.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.Input.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.BurstBLAS.dll
+--assembly-folder=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\
 --pdb-search-paths=Temp/ManagedSymbols/
 --method=Unity.Burst.Intrinsics.X86, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::DoGetCSRTrampoline()--89425a97f3f500fa810ad03f0c382542
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+ReluJob_Full_Float, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+ReluJob_Full_Float&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--21c3b559bfa975847856f274c63ea26e
@@ -289,15 +301,15 @@ Library: lib_burst_generated
 --method=Unity.Burst.BurstCompiler+BurstCompilerHelper, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::IsBurstEnabled()--8c2be93e18276203cbd918daa2748a10
 --method=Unity.Burst.Intrinsics.X86, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::DoSetCSRTrampoline(System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--da352d92cabf024fc9986011d52a4537
 --platform=Linux
---backend=burst-llvm-11
+--backend=burst-llvm-12
 --target=AVX2
 --global-safety-checks-setting=Off
 --dump=Function
 --float-precision=Standard
 --disable-warnings=BC1370
---compilation-defines=UNITY_2021_2_17
---compilation-defines=UNITY_2021_2
---compilation-defines=UNITY_2021
+--compilation-defines=UNITY_2022_1_0
+--compilation-defines=UNITY_2022_1
+--compilation-defines=UNITY_2022
 --compilation-defines=UNITY_5_3_OR_NEWER
 --compilation-defines=UNITY_5_4_OR_NEWER
 --compilation-defines=UNITY_5_5_OR_NEWER
@@ -319,12 +331,14 @@ Library: lib_burst_generated
 --compilation-defines=UNITY_2020_3_OR_NEWER
 --compilation-defines=UNITY_2021_1_OR_NEWER
 --compilation-defines=UNITY_2021_2_OR_NEWER
+--compilation-defines=UNITY_2022_1_OR_NEWER
 --compilation-defines=PLATFORM_ARCH_64
 --compilation-defines=UNITY_64
 --compilation-defines=USE_SEARCH_ENGINE_API
 --compilation-defines=USE_SEARCH_TABLE
 --compilation-defines=USE_SEARCH_MODULE
 --compilation-defines=USE_PROPERTY_DATABASE
+--compilation-defines=USE_QUERY_BUILDER
 --compilation-defines=USE_SEARCH_EXTENSION_API
 --compilation-defines=SCENE_TEMPLATE_MODULE
 --compilation-defines=ENABLE_AUDIO
@@ -352,6 +366,7 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_CLOUD_SERVICES_ANALYTICS
 --compilation-defines=ENABLE_CLOUD_SERVICES_UNET
 --compilation-defines=ENABLE_CLOUD_SERVICES_BUILD
+--compilation-defines=ENABLE_EDITOR_GAME_SERVICES
 --compilation-defines=ENABLE_CLOUD_LICENSE
 --compilation-defines=ENABLE_EDITOR_HUB_LICENSE
 --compilation-defines=ENABLE_WEBSOCKET_CLIENT
@@ -386,6 +401,14 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_MONO
 --compilation-defines=NET_STANDARD_2_0
 --compilation-defines=NET_STANDARD
+--compilation-defines=NET_STANDARD_2_1
+--compilation-defines=NETSTANDARD
+--compilation-defines=NETSTANDARD2_1
+--compilation-defines=DEVELOPMENT_BUILD
+--compilation-defines=ENABLE_PROFILER
+--compilation-defines=DEBUG
+--compilation-defines=TRACE
+--compilation-defines=UNITY_ASSERTIONS
 --compilation-defines=UNITY_PRO_LICENSE
 --compilation-defines=ENABLE_CUSTOM_RENDER_TEXTURE
 --compilation-defines=ENABLE_DIRECTOR
@@ -413,29 +436,29 @@ Library: lib_burst_generated
 --compilation-defines=NMC_CAN_ACCESS_TERRAIN
 --compilation-defines=TIMELINE_FRAMEACCURATE
 --generate-link-xml=Temp\burst.link.xml
---output=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Plugins\lib_burst_generated
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\UnityEngine.UI.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Test.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Flow.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Mathematics.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.ONNX.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.State.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Core.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Burst.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Core.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.AI.Navigation.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.TextMeshPro.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Timeline.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.CommunicatorObjects.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.Input.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.BurstBLAS.dll
---assembly-folder=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\
+--debug=Full
+--output=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Plugins\lib_burst_generated
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\UnityEngine.UI.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Test.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Flow.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Mathematics.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.ONNX.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.State.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Core.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Burst.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Core.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.AI.Navigation.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.TextMeshPro.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Timeline.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.CommunicatorObjects.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.Input.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.BurstBLAS.dll
+--assembly-folder=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\
 --pdb-search-paths=Temp/ManagedSymbols/
---method=Unity.Burst.Intrinsics.X86, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::DoGetCSRTrampoline()--89425a97f3f500fa810ad03f0c382542
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+ReluJob_Full_Float, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+ReluJob_Full_Float&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--21c3b559bfa975847856f274c63ea26e
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+Relu6Job_Full_Float, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+Relu6Job_Full_Float&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--2fca3d79f6ebcaec09ef40997ca69572
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+LeakyReluJob_Full_Float, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+LeakyReluJob_Full_Float&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--209b953a8db221659a71eb372f9fae43
@@ -530,6 +553,7 @@ Library: lib_burst_generated
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+BroadcastDivJob_Full_Half, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+BroadcastDivJob_Full_Half&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--3307fb8ba4b01180c5dac4b285e573bf
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+ScalarBroadcastMinJob_Full_Half, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+ScalarBroadcastMinJob_Full_Half&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--9682f34f69d5a8a98b130653a85471ba
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+BroadcastMinJob_Full_Half, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+BroadcastMinJob_Full_Half&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--41767210188fcfe80a19ee9d2d80b34e
+--method=Unity.Burst.Intrinsics.X86, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::DoGetCSRTrampoline()--89425a97f3f500fa810ad03f0c382542
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+ScalarBroadcastMaxJob_Full_Half, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+ScalarBroadcastMaxJob_Full_Half&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--5195d265d8c664ea532c8cade0aefbaf
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+BroadcastMaxJob_Full_Half, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+BroadcastMaxJob_Full_Half&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--939438f98ccaca95c51648cce110f1d3
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+ScalarBroadcastPowJob_Full_Half, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+ScalarBroadcastPowJob_Full_Half&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--e9630dcd4772d355c929ebb9239db6b5
@@ -578,16 +602,16 @@ Library: lib_burst_generated
 --method=Unity.Burst.BurstCompiler+BurstCompilerHelper, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::IsBurstEnabled()--8c2be93e18276203cbd918daa2748a10
 --method=Unity.Burst.Intrinsics.X86, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::DoSetCSRTrampoline(System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--da352d92cabf024fc9986011d52a4537
 --platform=Linux
---backend=burst-llvm-11
+--backend=burst-llvm-12
 --target=X64_SSE2
 --global-safety-checks-setting=Off
 --dump=Function
 --float-precision=Low
 --float-mode=Fast
 --disable-warnings=BC1370
---compilation-defines=UNITY_2021_2_17
---compilation-defines=UNITY_2021_2
---compilation-defines=UNITY_2021
+--compilation-defines=UNITY_2022_1_0
+--compilation-defines=UNITY_2022_1
+--compilation-defines=UNITY_2022
 --compilation-defines=UNITY_5_3_OR_NEWER
 --compilation-defines=UNITY_5_4_OR_NEWER
 --compilation-defines=UNITY_5_5_OR_NEWER
@@ -609,12 +633,14 @@ Library: lib_burst_generated
 --compilation-defines=UNITY_2020_3_OR_NEWER
 --compilation-defines=UNITY_2021_1_OR_NEWER
 --compilation-defines=UNITY_2021_2_OR_NEWER
+--compilation-defines=UNITY_2022_1_OR_NEWER
 --compilation-defines=PLATFORM_ARCH_64
 --compilation-defines=UNITY_64
 --compilation-defines=USE_SEARCH_ENGINE_API
 --compilation-defines=USE_SEARCH_TABLE
 --compilation-defines=USE_SEARCH_MODULE
 --compilation-defines=USE_PROPERTY_DATABASE
+--compilation-defines=USE_QUERY_BUILDER
 --compilation-defines=USE_SEARCH_EXTENSION_API
 --compilation-defines=SCENE_TEMPLATE_MODULE
 --compilation-defines=ENABLE_AUDIO
@@ -642,6 +668,7 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_CLOUD_SERVICES_ANALYTICS
 --compilation-defines=ENABLE_CLOUD_SERVICES_UNET
 --compilation-defines=ENABLE_CLOUD_SERVICES_BUILD
+--compilation-defines=ENABLE_EDITOR_GAME_SERVICES
 --compilation-defines=ENABLE_CLOUD_LICENSE
 --compilation-defines=ENABLE_EDITOR_HUB_LICENSE
 --compilation-defines=ENABLE_WEBSOCKET_CLIENT
@@ -676,6 +703,14 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_MONO
 --compilation-defines=NET_STANDARD_2_0
 --compilation-defines=NET_STANDARD
+--compilation-defines=NET_STANDARD_2_1
+--compilation-defines=NETSTANDARD
+--compilation-defines=NETSTANDARD2_1
+--compilation-defines=DEVELOPMENT_BUILD
+--compilation-defines=ENABLE_PROFILER
+--compilation-defines=DEBUG
+--compilation-defines=TRACE
+--compilation-defines=UNITY_ASSERTIONS
 --compilation-defines=UNITY_PRO_LICENSE
 --compilation-defines=ENABLE_CUSTOM_RENDER_TEXTURE
 --compilation-defines=ENABLE_DIRECTOR
@@ -703,27 +738,28 @@ Library: lib_burst_generated
 --compilation-defines=NMC_CAN_ACCESS_TERRAIN
 --compilation-defines=TIMELINE_FRAMEACCURATE
 --generate-link-xml=Temp\burst.link.xml
---output=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Plugins\lib_burst_generated
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\UnityEngine.UI.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Test.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Flow.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Mathematics.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.ONNX.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.State.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Core.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Burst.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Core.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.AI.Navigation.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.TextMeshPro.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Timeline.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.CommunicatorObjects.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.Input.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.BurstBLAS.dll
---assembly-folder=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\
+--debug=Full
+--output=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Plugins\lib_burst_generated
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\UnityEngine.UI.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Test.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Flow.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Mathematics.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.ONNX.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.State.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Core.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Burst.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Core.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.AI.Navigation.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.TextMeshPro.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Timeline.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.CommunicatorObjects.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.Input.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.BurstBLAS.dll
+--assembly-folder=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\
 --pdb-search-paths=Temp/ManagedSymbols/
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+VectorBroadcastScaleBiasJob_Full_Float, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+VectorBroadcastScaleBiasJob_Full_Float&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--6449213db9a975a440befb5ef2658b9b
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+VectorBroadcastScaleBiasJob_ActAsFloat_WeightAsHalf, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+VectorBroadcastScaleBiasJob_ActAsFloat_WeightAsHalf&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--a28f25d99621a2d8047626dca22d43cc
@@ -758,16 +794,16 @@ Library: lib_burst_generated
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+MaxPool2DJob_Full_Half, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+MaxPool2DJob_Full_Half&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--b092734994d4cd383e6380e5366018b5
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+AvgPool2DJob_Full_Half, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+AvgPool2DJob_Full_Half&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--1e477bbed8d009a8e01cb88cb9196fd1
 --platform=Linux
---backend=burst-llvm-11
+--backend=burst-llvm-12
 --target=AVX2
 --global-safety-checks-setting=Off
 --dump=Function
 --float-precision=Low
 --float-mode=Fast
 --disable-warnings=BC1370
---compilation-defines=UNITY_2021_2_17
---compilation-defines=UNITY_2021_2
---compilation-defines=UNITY_2021
+--compilation-defines=UNITY_2022_1_0
+--compilation-defines=UNITY_2022_1
+--compilation-defines=UNITY_2022
 --compilation-defines=UNITY_5_3_OR_NEWER
 --compilation-defines=UNITY_5_4_OR_NEWER
 --compilation-defines=UNITY_5_5_OR_NEWER
@@ -789,12 +825,14 @@ Library: lib_burst_generated
 --compilation-defines=UNITY_2020_3_OR_NEWER
 --compilation-defines=UNITY_2021_1_OR_NEWER
 --compilation-defines=UNITY_2021_2_OR_NEWER
+--compilation-defines=UNITY_2022_1_OR_NEWER
 --compilation-defines=PLATFORM_ARCH_64
 --compilation-defines=UNITY_64
 --compilation-defines=USE_SEARCH_ENGINE_API
 --compilation-defines=USE_SEARCH_TABLE
 --compilation-defines=USE_SEARCH_MODULE
 --compilation-defines=USE_PROPERTY_DATABASE
+--compilation-defines=USE_QUERY_BUILDER
 --compilation-defines=USE_SEARCH_EXTENSION_API
 --compilation-defines=SCENE_TEMPLATE_MODULE
 --compilation-defines=ENABLE_AUDIO
@@ -822,6 +860,7 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_CLOUD_SERVICES_ANALYTICS
 --compilation-defines=ENABLE_CLOUD_SERVICES_UNET
 --compilation-defines=ENABLE_CLOUD_SERVICES_BUILD
+--compilation-defines=ENABLE_EDITOR_GAME_SERVICES
 --compilation-defines=ENABLE_CLOUD_LICENSE
 --compilation-defines=ENABLE_EDITOR_HUB_LICENSE
 --compilation-defines=ENABLE_WEBSOCKET_CLIENT
@@ -856,6 +895,14 @@ Library: lib_burst_generated
 --compilation-defines=ENABLE_MONO
 --compilation-defines=NET_STANDARD_2_0
 --compilation-defines=NET_STANDARD
+--compilation-defines=NET_STANDARD_2_1
+--compilation-defines=NETSTANDARD
+--compilation-defines=NETSTANDARD2_1
+--compilation-defines=DEVELOPMENT_BUILD
+--compilation-defines=ENABLE_PROFILER
+--compilation-defines=DEBUG
+--compilation-defines=TRACE
+--compilation-defines=UNITY_ASSERTIONS
 --compilation-defines=UNITY_PRO_LICENSE
 --compilation-defines=ENABLE_CUSTOM_RENDER_TEXTURE
 --compilation-defines=ENABLE_DIRECTOR
@@ -883,27 +930,28 @@ Library: lib_burst_generated
 --compilation-defines=NMC_CAN_ACCESS_TERRAIN
 --compilation-defines=TIMELINE_FRAMEACCURATE
 --generate-link-xml=Temp\burst.link.xml
---output=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Plugins\lib_burst_generated
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\UnityEngine.UI.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Test.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Flow.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Mathematics.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.ONNX.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.State.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Core.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Burst.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Core.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.AI.Navigation.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.TextMeshPro.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Timeline.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.CommunicatorObjects.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.Input.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.dll
---root-assembly=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.BurstBLAS.dll
---assembly-folder=I:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\
+--debug=Full
+--output=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Plugins\lib_burst_generated
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\UnityEngine.UI.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Test.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Flow.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Mathematics.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Assembly-CSharp.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.ONNX.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.State.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.VisualScripting.Core.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Burst.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\NaughtyAttributes.Core.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.AI.Navigation.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.TextMeshPro.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Timeline.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.CommunicatorObjects.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.Input.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.ML-Agents.Extensions.dll
+--root-assembly=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\Unity.Barracuda.BurstBLAS.dll
+--assembly-folder=D:\Thesis-ObjectCollector\Temp\StagingArea\Data\Managed\
 --pdb-search-paths=Temp/ManagedSymbols/
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+VectorBroadcastScaleBiasJob_Full_Float, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+VectorBroadcastScaleBiasJob_Full_Float&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--6449213db9a975a440befb5ef2658b9b
 --method=Unity.Jobs.IJobParallelForExtensions+ParallelForJobStruct`1[[Unity.Barracuda.BurstCPUOps+VectorBroadcastScaleBiasJob_ActAsFloat_WeightAsHalf, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null]], UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::Execute(Unity.Barracuda.BurstCPUOps+VectorBroadcastScaleBiasJob_ActAsFloat_WeightAsHalf&, Unity.Barracuda, Version=2.3.1.0, Culture=neutral, PublicKeyToken=null|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|System.IntPtr, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|Unity.Jobs.LowLevel.Unsafe.JobRanges&, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null|System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)--a28f25d99621a2d8047626dca22d43cc

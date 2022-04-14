@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.MLAgents;
@@ -8,11 +7,12 @@ using Statistics;
 
 public class ObjectCollectorSettings : MonoBehaviour
 {
-    public GameObject[] agents;
-    [HideInInspector] public ObjectCollectorArea[] listArea;
+    private Agent[] agents;
+    [HideInInspector] 
+    public ObjectCollectorArea[] listArea;
     
-    // Statistics
     public bool m_Is_evaluating;
+    // Statistics
     private List<Stats> m_Records = new List<Stats>();
     private int resetCounter;
     private int m_Counter = 1;
@@ -20,9 +20,10 @@ public class ObjectCollectorSettings : MonoBehaviour
     public string fileName;
     public string directory;
     
+    
     private DateTime m_StartTime;
     private TimeSpan m_ElapsedTime;
-    
+
     // Visualized variables
     [HideInInspector] public int totalScore;
 
@@ -30,12 +31,39 @@ public class ObjectCollectorSettings : MonoBehaviour
     public Text scoreText;
 
     StatsRecorder m_Recorder;
+    private bool firstReset = true;
     [HideInInspector]
     public float totalCollected;
+    
+    [HideInInspector]
+    public SimpleMultiAgentGroup m_AgentGroup;
+    
+    [Header("Max Environment Steps")] public int MaxEnvironmentSteps = 5000;
+    private int m_ResetTimer;
+    
+    private void Start()
+    {
+        m_AgentGroup = new SimpleMultiAgentGroup();
+        foreach (var item in agents)
+        {
+            // Add to team manager
+            m_AgentGroup.RegisterAgent(item);
+        }
+    }
+
+    void FixedUpdate()
+    {
+        m_ResetTimer += 1;
+        if (m_ResetTimer >= MaxEnvironmentSteps && MaxEnvironmentSteps > 0)
+        {
+            m_AgentGroup.GroupEpisodeInterrupted();
+            EnvironmentReset();
+        }
+    }
 
     public void Awake()
     {
-        agents = GameObject.FindGameObjectsWithTag("agent").AsEnumerable().Where(a => a.layer == 0).ToArray();
+        agents = FindObjectsOfType<Agent>();
         Academy.Instance.OnEnvironmentReset += EnvironmentReset;
         m_Recorder = Academy.Instance.StatsRecorder;
         
@@ -43,36 +71,42 @@ public class ObjectCollectorSettings : MonoBehaviour
         StatisticsWriter.FileName = fileName;
         StatisticsWriter.WriteDirectory = directory;
         StatisticsWriter.IsEvaluating = m_Is_evaluating;
+
     }
 
     public void EnvironmentReset()
     {
         resetCounter++;
-        if (resetCounter % agents.Length == 0)
+        //Reset counter
+        m_ResetTimer = 0;
+        
+        if (m_Is_evaluating == false || m_Counter < sampleSize)
         {
-            if (m_Is_evaluating == false || m_Counter < sampleSize)
+            // Reset map
+            listArea = FindObjectsOfType<ObjectCollectorArea>();
+            foreach (var fa in listArea)
             {
-                // Reset map
-                listArea = FindObjectsOfType<ObjectCollectorArea>();
-                foreach (var fa in listArea)
+                fa.ResetObjectiveArea(agents);
+                    
+                foreach (var agent in FindObjectsOfType<Agent>())
                 {
-                    fa.ResetObjectiveArea(agents);
+                    m_AgentGroup.RegisterAgent(agent);
                 }
-                ClearObjects(GameObject.FindGameObjectsWithTag("obstacle"));
+            }
+            ClearObjects(GameObject.FindGameObjectsWithTag("obstacle"));
             
-                m_StartTime = DateTime.Now;
-                totalScore = 0;
-                totalCollected = 0;
-                m_Counter++;
-            }
-            else if(m_Is_evaluating && m_Counter == sampleSize) // To avoid multiple writes when all agents call method EnvironmentReset (GreedyAgent)
-            {
-                m_Counter++;
-                StatisticsWriter.plotResults();
+            m_StartTime = DateTime.Now;
+            totalScore = 0;
+            totalCollected = 0;
+            m_Counter++;
+        }
+        else if(m_Is_evaluating && m_Counter == sampleSize) // To avoid multiple writes when all agents call method EnvironmentReset (GreedyAgent)
+        {
+            m_Counter++;
+            StatisticsWriter.plotResults();
 #if UNITY_EDITOR
-                UnityEditor.EditorApplication.ExitPlaymode();
+            UnityEditor.EditorApplication.ExitPlaymode();
 #endif
-            }
         }
     }
     
@@ -87,32 +121,10 @@ public class ObjectCollectorSettings : MonoBehaviour
     public void Update()
     {
         m_ElapsedTime = DateTime.Now - m_StartTime;
+
         scoreText.text = $"Score: {totalScore}";
         elapsedTime.text = m_ElapsedTime.Minutes.ToString();
 
-        var coords = agents.Select(a => (a.transform.position + new Vector3(50, 0, 50), a.transform.rotation));
-        
-
-        foreach (var area in listArea)
-        {
-
-            foreach (var agent in agents)
-            {
-                area.UpdateGridWorld(agent);
-            }
-            
-            
-            /*
-            foreach (var pos in coords)
-            {
-                var curr_val = area.GetGridWorldValue(pos.Item1);
-                
-                //TODO: Decide if it should keep increment or not
-                area.SetGridWorldValue(pos.Item1, ++curr_val);
-            }
-            */
-        }
-        
         // Send stats via SideChannel so that they'll appear in TensorBoard.
         // These values get averaged every summary_frequency steps, so we don't
         // need to send every Update() call.
@@ -121,7 +133,6 @@ public class ObjectCollectorSettings : MonoBehaviour
             m_Recorder.Add("TotalScore", totalScore);
         }
     }
-    
     
 }
     

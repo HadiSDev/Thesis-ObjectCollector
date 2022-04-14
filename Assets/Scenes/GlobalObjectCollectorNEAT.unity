@@ -952,7 +952,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 5000
+  MaxStep: 1000
   enableGlobalSensorComponents: 0
   turnSpeed: 300
   moveSpeed: 2
@@ -978,7 +978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 6
+    VectorObservationSize: 7
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 2
@@ -1116,6 +1116,7 @@ MonoBehaviour:
   totalScore: 0
   elapsedTime: {fileID: 625137508}
   scoreText: {fileID: 1418304526}
+  totalCollected: 0
 --- !u!4 &1574236049
 Transform:
   m_ObjectHideFlags: 0
