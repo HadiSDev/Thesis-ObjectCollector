@@ -43,6 +43,8 @@ public class ObjectCollectorArea : Area
             (45, 45), (-45, 45), (-45, -45), (45, -45)
         };
 
+        stationPositions = stationPositions.OrderBy(_ => Random.Range(0, 100)).ToList();
+
         for (int i = 0; i < num; i++)
         {
             var index = Random.Range(0, stationPositions.Count);
