@@ -4,12 +4,13 @@ using CustomDetectableObjects;
 using Interfaces;
 using MBaske.Sensors.Grid;
 using Statistics;
+using Unity.Barracuda;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
-using Unity.VisualScripting;
-using UnityEngine.UI;
+using Unity.MLAgentsExamples;
+using Random = UnityEngine.Random;
 
 public class ObjectCollectorAgent : Agent, IStats
 {
@@ -18,7 +19,7 @@ public class ObjectCollectorAgent : Agent, IStats
 
     // Speed of agent rotation.
     public float turnSpeed = 300;
-
+    int m_Configuration;
     // Speed of agent movement.
     public float moveSpeed = 1;
     public bool contribute;
@@ -31,7 +32,7 @@ public class ObjectCollectorAgent : Agent, IStats
     public float AgentTravelledDist;
     public int AgentStepCount;
     public float AgentCumulativeReward;
-
+    public ObjectCollectorSettings Settings;
 
     // Punishment Settings
     public float stepCost = -0.001f;
@@ -50,15 +51,29 @@ public class ObjectCollectorAgent : Agent, IStats
     EnvironmentParameters m_ResetParams;
     private ObjectCollectorArea m_ObjectCollectorArea;
     private BufferSensorComponent _bufferSensorStations;
+    
+    // NN Models
+    // Brain to use when there are no stations and unlimited capacity
+    public NNModel UnlimitedCapacity;
+    // Brain to use when there are stations but unlimited capacity
+    public NNModel stationsUnlimited;
+    // Brain to use when there are stations and limited capacity
+    public NNModel LimitedCapacity;
+    
+    string m_UnlimitedCapacity = "UnlimitedCapacity";
+    string m_LimitedCapacity = "LimitedCapacity";
+    
 
 
     public override void Initialize()
     {
         m_AgentRb = GetComponent<Rigidbody>();
         prev_pos = transform.position; 
+        m_Configuration = Random.Range(0, 2);
         
         m_ObjectCollectorSettings = FindObjectOfType<ObjectCollectorSettings>();
         m_ObjectCollectorArea = FindObjectOfType<ObjectCollectorArea>();
+
         var bufferSensors = GetComponents<BufferSensorComponent>();
 
         if (bufferSensors != null)
@@ -74,6 +89,17 @@ public class ObjectCollectorAgent : Agent, IStats
             POVGrid = GetComponent<GridSensorComponent3D>();
         }
         SetResetParameters();
+        
+        // Update model references if we're overriding
+        var modelOverrider = GetComponent<ModelOverrider>();
+        if (modelOverrider.HasOverrides)
+        {
+            UnlimitedCapacity = modelOverrider.GetModelForBehaviorName(m_UnlimitedCapacity);
+            m_UnlimitedCapacity = ModelOverrider.GetOverrideBehaviorName(m_UnlimitedCapacity);
+
+            LimitedCapacity = modelOverrider.GetModelForBehaviorName(m_LimitedCapacity);
+            m_LimitedCapacity = ModelOverrider.GetOverrideBehaviorName(m_LimitedCapacity);
+        }
     }
 
     private float Normalize(float currentValue, float minValue=-50f, float maxValue=50f)
@@ -231,11 +257,12 @@ public class ObjectCollectorAgent : Agent, IStats
         m_ObjectCollectorSettings.EnvironmentReset();
         m_AgentRb.velocity = Vector3.zero;
         m_CollectedCapacity = 0;
+        m_Configuration = Random.Range(0, 2);
         ResetStats();
         SetResetParameters();
     }
 
-    void OnTriggerObjective(Collision collision)
+    void OnTriggerObjective(Collider collision)
     {
         if (collision.gameObject.CompareTag("objective"))
         {
@@ -245,15 +272,20 @@ public class ObjectCollectorAgent : Agent, IStats
                 m_CollectedCapacity += 1f;
                 m_ObjectCollectorSettings.totalCollected += 1f;
                 m_ObjectCollectorSettings.m_AgentGroup.AddGroupReward(1f);
+                
+                var n_objects = GameObject.FindGameObjectsWithTag("objective").Length;
+                if (maxCapacity == 40 && n_objects == 0)
+                {
+                    DisableAgentAndTerminateEpisodeIfDone();
+                }
             }
-
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         OnTriggerObjective(collision);
-    }
+    }*/
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -272,6 +304,7 @@ public class ObjectCollectorAgent : Agent, IStats
                 DisableAgentAndTerminateEpisodeIfDone();
             }
         }
+        OnTriggerObjective(collision);
     }
 
     private void EndEpsiodeIfNoObjectives()
@@ -296,7 +329,6 @@ public class ObjectCollectorAgent : Agent, IStats
             StatisticsWriter.PrepareEpisodeStats();                                         // Reset lists
             m_ObjectCollectorSettings.m_AgentGroup.EndGroupEpisode();
             m_ObjectCollectorSettings.EnvironmentReset();
-
         }
     }
     
@@ -342,5 +374,29 @@ public class ObjectCollectorAgent : Agent, IStats
         AgentCumulativeReward = 0f;
         AgentStepCount = 0;
         AgentTravelledDist = 0f;
+    }
+
+    void FixedUpdate()
+    {
+        if (m_Configuration != -1)
+        {
+
+            ConfigureAgent(m_Configuration);
+            m_Configuration = -1;
+        }
+    }
+    
+    void ConfigureAgent(int config)
+    {
+        if (config == 0)
+        {
+            maxCapacity = m_ResetParams.GetWithDefault("unlimited_capacity", 40);
+            SetModel(m_UnlimitedCapacity, UnlimitedCapacity);
+        }
+        else
+        {
+            maxCapacity = m_ResetParams.GetWithDefault("limited_capacity", 40);
+            SetModel(m_LimitedCapacity, LimitedCapacity);
+        }
     }
 }

@@ -49,9 +49,8 @@ public class ObjectCollectorArea : Area
         {
             var index = Random.Range(0, stationPositions.Count);
             var pos = stationPositions[index];
-            GameObject f = Instantiate(m_StationType, new Vector3(pos.Item1, 1f,
-                    pos.Item2) + transform.position,
-                Quaternion.Euler(new Vector3(0, Random.Range(0f, 360f), 0)));
+            GameObject f = Instantiate(m_StationType, new Vector3(pos.Item1, 0.5f,
+                    pos.Item2) + transform.position, Quaternion.identity);
             m_Stations.Add(f);
             stationPositions.RemoveAt(index);
         }
@@ -72,12 +71,24 @@ public class ObjectCollectorArea : Area
     
     public void ResetStations()
     {
+        var stationPositions = new List<(int, int)>()
+        {
+            (45, 45), (-45, 45), (-45, -45), (45, -45)
+        };
+        
+
+        stationPositions = stationPositions.OrderBy(_ => Random.Range(0, 100)).ToList();
         foreach (var obj in m_Stations)
         {
+            var index = Random.Range(0, stationPositions.Count);
+            var pos = stationPositions[index];
             obj.transform.position = new Vector3(
-                Random.Range(-range, range),
-                1f,
-                Random.Range(-range, range)) + transform.position;
+                pos.Item1
+                ,
+                0.5f, pos.Item2
+                ) + transform.position;
+            
+            stationPositions.RemoveAt(index);
         }
     }
 
@@ -118,7 +129,16 @@ public class ObjectCollectorArea : Area
 
     public void ResetObjectiveArea(Agent[] agents)
     {
-        var firstStation = m_Stations.FirstOrDefault();
+        if (m_Stations.Count > 0)
+        {
+            ResetStations();
+        }
+        else
+        {
+            var numStations = Random.Range(1, 4);
+            CreateStations(numStations);
+        }
+        
         foreach (var agent in agents)
         {
             agent.gameObject.SetActive(true);
@@ -126,12 +146,14 @@ public class ObjectCollectorArea : Area
             {
                 continue;
             }
+
+            var station = m_Stations[Random.Range(0, m_Stations.Count)];
             
-            if (firstStation != null)
+            if (station != null)
             {
                 var offsetX = Random.Range(-2, 2);
                 var offsetY = Random.Range(-2, 2);
-                agent.transform.position = firstStation.transform.position + new Vector3(offsetX, 1f, offsetY);
+                agent.transform.position = station.transform.position + new Vector3(offsetX, 1f, offsetY);
             }
             else
             {
@@ -143,15 +165,7 @@ public class ObjectCollectorArea : Area
             agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
         }
 
-        if (m_Stations.Count > 0)
-        {
-            //ResetStations();
-        }
-        else
-        {
-            var numStations = Random.Range(2, 4);
-            CreateStations(numStations);
-        }
+
 
         if (m_Objectives.Count > 0)
         {
