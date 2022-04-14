@@ -25,7 +25,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     
     private NavMeshAgent m_Agent;
     private GridSensorComponent3D grid;
-    private ObjectCollectorSettings m_ObjectCollectorSettings;
+    private AuctionFrontierCollectorSettings m_ObjectCollectorSettings;
 
     public DateTime sTime;
     public float dist_travelled;
@@ -69,7 +69,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         Debug.Log("Start...");
         InitAgentNetwork();
         StartCoroutine(RotateCoroutine());
-        m_ObjectCollectorSettings = FindObjectOfType<ObjectCollectorSettings>();
+        m_ObjectCollectorSettings = FindObjectOfType<AuctionFrontierCollectorSettings>();
         m_ObjectCollectorSettings.EnvironmentReset();
         m_Agent = GetComponent<NavMeshAgent>();
         grid = GetComponent<GridSensorComponent3D>();
@@ -138,7 +138,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         {
             //Satiate();
             AuctionFrontierUtil.DISCOVERED_TARGETS.Remove(collision.gameObject); // Remove from discovered list when collected
-            collision.gameObject.GetComponent<ObjectLogic>().OnEaten();
+            collision.gameObject.GetComponent<AuctionFrontierObjectLogic>().OnEaten();
             m_CollectedCapacity++;
         }
     }
