@@ -203,11 +203,6 @@ RectTransform:
   m_AnchoredPosition: {x: -343, y: -197.2}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &177429029 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1819751139121548, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
-  m_PrefabInstance: {fileID: 190823800}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &190823800
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -399,7 +394,7 @@ PrefabInstance:
       addedObject: {fileID: 1840575146}
     - targetCorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1133003164}
+      addedObject: {fileID: 2074837370}
   m_SourcePrefab: {fileID: 100100000, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
 --- !u!1 &625137506
 GameObject:
@@ -486,18 +481,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
   m_PrefabInstance: {fileID: 190823800}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &679774809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 177429029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f8abecd5902d09449e947799d9330a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &860333478
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,7 +987,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
   m_PrefabInstance: {fileID: 1088510840}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1133003163
+--- !u!1001 &1328097223
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1125,152 +1108,6 @@ PrefabInstance:
     - {fileID: 5548054832699030813, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
---- !u!4 &1133003164 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 1133003163}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1133003165 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 1133003163}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1133003166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133003165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1133003167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133003165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ObservationShape: 5 channels x 30 width x 20 height
-  m_SensorName: GridSensor
-  m_ObservationStacks: 1
-  m_CompressionType: 1
-  m_ObservationType: 0
-  m_ChannelLabels: []
-  m_Debug_CreateSensorOnAwake: 0
-  m_Debug_CreateSensorOnValidate: 1
-  m_Debug_FrameInterval: 1
-  m_Debug_DrawGridBuffer: 0
-  m_Debug_GridBufferDrawer:
-    Context: {fileID: 0}
-    Editor: {fileID: 0}
-    GridSizeRatio: 0
-    IsEnabled: 0
-    IsStandby: 0
-  m_GridShape:
-    NumChannels: 5
-    Width: 30
-    Height: 20
-  m_ClearCacheOnReset: 0
-  m_ColliderBufferSize: 64
-  m_TmpObjectToAdd: {fileID: 0}
-  m_GameObjectSettingsList:
-  - Tag: agent
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 1
-    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.6638494, g: 0.07689534, b: 0.9231095, a: 1}
-    m_DetectorSpaceType: 1
-  - Tag: station
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 1
-    Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.86881053, g: 0.06478016, b: 0.10850443, a: 1}
-    m_DetectorSpaceType: 1
-  - Tag: wall
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 1
-    Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.99570894, g: 0.16242209, b: 0.8263045, a: 1}
-    m_DetectorSpaceType: 1
-  - Tag: objective
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 1
-    Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
-    m_UserObservables:
-      m_Observables:
-      - Name: Detected
-        Type: 2
-        Index: 0
-        Enabled: 1
-        Color: {r: 0.52614874, g: 0.2056267, b: 0.23998472, a: 1}
-      - Name: NotDetected
-        Type: 2
-        Index: 1
-        Enabled: 1
-        Color: {r: 0.56656575, g: 0.38286367, b: 0.98195523, a: 1}
-    m_Observables:
-    - Name: Detected
-      Type: 2
-      Index: 0
-      Enabled: 1
-      Color: {r: 0.52614874, g: 0.2056267, b: 0.23998472, a: 1}
-    - Name: NotDetected
-      Type: 2
-      Index: 1
-      Enabled: 1
-      Color: {r: 0.56656575, g: 0.38286367, b: 0.98195523, a: 1}
-    m_DetectorSpaceType: 1
-  m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
-  m_CellArc: 3
-  m_LatAngleNorth: 45
-  m_LatAngleSouth: 15
-  m_LonAngle: 45
-  m_MinDistance: 1
-  m_MaxDistance: 50
-  m_DistanceNormalization:
-    Value: 1
-    Weighted: 0
-  m_LonLatRect:
-    serializedVersion: 2
-    x: -45
-    y: -15
-    width: 90
-    height: 60
-  m_GridResolution: 2.6179938
 --- !u!1 &1418304524
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,7 +1247,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
   m_PrefabInstance: {fileID: 1088510840}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1840575157
+--- !u!114 &1840575158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088510841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1840575168
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1446,19 +1295,34 @@ MonoBehaviour:
   m_ColliderBufferSize: 64
   m_TmpObjectToAdd: {fileID: 0}
   m_GameObjectSettingsList:
-  - Tag: agent
+  - Tag: objective
     Enabled: 1
     DetectionType: 2
     Modifier: 1
-    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
     m_UserObservables:
-      m_Observables: []
+      m_Observables:
+      - Name: Detected
+        Type: 2
+        Index: 0
+        Enabled: 1
+        Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
+      - Name: NotDetected
+        Type: 2
+        Index: 1
+        Enabled: 1
+        Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
+    - Name: Detected
+      Type: 2
+      Index: 0
       Enabled: 1
-      Color: {r: 0.6638494, g: 0.07689534, b: 0.9231095, a: 1}
+      Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
+    - Name: NotDetected
+      Type: 2
+      Index: 1
+      Enabled: 1
+      Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_DetectorSpaceType: 1
   - Tag: station
     Enabled: 1
@@ -1472,7 +1336,7 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.86881053, g: 0.06478016, b: 0.10850443, a: 1}
+      Color: {r: 0.31324813, g: 0.6001775, b: 0.12942569, a: 1}
     m_DetectorSpaceType: 1
   - Tag: wall
     Enabled: 1
@@ -1486,36 +1350,21 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.99570894, g: 0.16242209, b: 0.8263045, a: 1}
+      Color: {r: 0.0022534956, g: 0.49612084, b: 0.74995303, a: 1}
     m_DetectorSpaceType: 1
-  - Tag: objective
+  - Tag: agent
     Enabled: 1
-    DetectionType: 2
+    DetectionType: 0
     Modifier: 1
-    Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
+    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
     m_UserObservables:
-      m_Observables:
-      - Name: Detected
-        Type: 2
-        Index: 0
-        Enabled: 1
-        Color: {r: 0.52614874, g: 0.2056267, b: 0.23998472, a: 1}
-      - Name: NotDetected
-        Type: 2
-        Index: 1
-        Enabled: 1
-        Color: {r: 0.56656575, g: 0.38286367, b: 0.98195523, a: 1}
+      m_Observables: []
     m_Observables:
-    - Name: Detected
-      Type: 2
-      Index: 0
+    - Name: Distance
+      Type: 0
+      Index: -1
       Enabled: 1
-      Color: {r: 0.52614874, g: 0.2056267, b: 0.23998472, a: 1}
-    - Name: NotDetected
-      Type: 2
-      Index: 1
-      Enabled: 1
-      Color: {r: 0.56656575, g: 0.38286367, b: 0.98195523, a: 1}
+      Color: {r: 0.72970843, g: 0.30203995, b: 0.70245916, a: 1}
     m_DetectorSpaceType: 1
   m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
   m_CellArc: 3
@@ -1534,18 +1383,6 @@ MonoBehaviour:
     width: 90
     height: 60
   m_GridResolution: 2.6179938
---- !u!114 &1840575158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088510841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1956702417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1676,6 +1513,152 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaAO: 1
   m_PVRTiledBaking: 0
   m_NumRaysToShootPerTexel: -1
+--- !u!1 &2074837369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+  m_PrefabInstance: {fileID: 1328097223}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2074837370 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+  m_PrefabInstance: {fileID: 1328097223}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2074837371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074837369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ObservationShape: 5 channels x 30 width x 20 height
+  m_SensorName: GridSensor
+  m_ObservationStacks: 1
+  m_CompressionType: 1
+  m_ObservationType: 0
+  m_ChannelLabels: []
+  m_Debug_CreateSensorOnAwake: 0
+  m_Debug_CreateSensorOnValidate: 1
+  m_Debug_FrameInterval: 1
+  m_Debug_DrawGridBuffer: 0
+  m_Debug_GridBufferDrawer:
+    Context: {fileID: 0}
+    Editor: {fileID: 0}
+    GridSizeRatio: 0
+    IsEnabled: 0
+    IsStandby: 0
+  m_GridShape:
+    NumChannels: 5
+    Width: 30
+    Height: 20
+  m_ClearCacheOnReset: 0
+  m_ColliderBufferSize: 64
+  m_TmpObjectToAdd: {fileID: 0}
+  m_GameObjectSettingsList:
+  - Tag: objective
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
+    m_UserObservables:
+      m_Observables:
+      - Name: Detected
+        Type: 2
+        Index: 0
+        Enabled: 1
+        Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
+      - Name: NotDetected
+        Type: 2
+        Index: 1
+        Enabled: 1
+        Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
+    m_Observables:
+    - Name: Detected
+      Type: 2
+      Index: 0
+      Enabled: 1
+      Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
+    - Name: NotDetected
+      Type: 2
+      Index: 1
+      Enabled: 1
+      Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: station
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.31324813, g: 0.6001775, b: 0.12942569, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: wall
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.0022534956, g: 0.49612084, b: 0.74995303, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: agent
+    Enabled: 1
+    DetectionType: 0
+    Modifier: 1
+    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.72970843, g: 0.30203995, b: 0.70245916, a: 1}
+    m_DetectorSpaceType: 1
+  m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
+  m_CellArc: 3
+  m_LatAngleNorth: 45
+  m_LatAngleSouth: 15
+  m_LonAngle: 45
+  m_MinDistance: 1
+  m_MaxDistance: 50
+  m_DistanceNormalization:
+    Value: 1
+    Weighted: 0
+  m_LonLatRect:
+    serializedVersion: 2
+    x: -45
+    y: -15
+    width: 90
+    height: 60
+  m_GridResolution: 2.6179938
+--- !u!114 &2074837372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074837369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2124876351
 PrefabInstance:
   m_ObjectHideFlags: 0

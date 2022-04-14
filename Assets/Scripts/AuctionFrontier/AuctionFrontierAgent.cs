@@ -6,12 +6,8 @@ using CustomDetectableObjects;
 using DefaultNamespace;
 using Interfaces;
 using MBaske.Sensors.Grid;
-using Statistics;
-using Unity.MLAgents;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.AI;
-using Random = System.Random;
 
 [RequireComponent(typeof(GridSensorComponent3D))]
 public class AuctionFrontierAgent : MonoBehaviour, IStats
