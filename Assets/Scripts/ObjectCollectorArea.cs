@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using MBaske.Sensors.Grid;
@@ -37,12 +38,20 @@ public class ObjectCollectorArea : Area
     
     void CreateStations(int num)
     {
+        var stationPositions = new List<(int, int)>()
+        {
+            (45, 45), (-45, 45), (-45, -45), (45, -45)
+        };
+
         for (int i = 0; i < num; i++)
         {
-            GameObject f = Instantiate(m_StationType, new Vector3(Random.Range(-range, range), 1f,
-                    Random.Range(-range, range)) + transform.position,
+            var index = Random.Range(0, stationPositions.Count);
+            var pos = stationPositions[index];
+            GameObject f = Instantiate(m_StationType, new Vector3(pos.Item1, 1f,
+                    pos.Item2) + transform.position,
                 Quaternion.Euler(new Vector3(0, Random.Range(0f, 360f), 0)));
             m_Stations.Add(f);
+            stationPositions.RemoveAt(index);
         }
     }
 
@@ -118,8 +127,6 @@ public class ObjectCollectorArea : Area
             
             if (firstStation != null)
             {
-                firstStation.transform.position = new Vector3(Random.Range(-range, range), 0.5f,
-                    Random.Range(-range, range))  + transform.position;
                 var offsetX = Random.Range(-2, 2);
                 var offsetY = Random.Range(-2, 2);
                 agent.transform.position = firstStation.transform.position + new Vector3(offsetX, 1f, offsetY);
@@ -136,11 +143,12 @@ public class ObjectCollectorArea : Area
 
         if (m_Stations.Count > 0)
         {
-            ResetStations();
+            //ResetStations();
         }
         else
         {
-            CreateStations(3);
+            var numStations = Random.Range(2, 4);
+            CreateStations(numStations);
         }
 
         if (m_Objectives.Count > 0)
