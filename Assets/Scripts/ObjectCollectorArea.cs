@@ -1,12 +1,7 @@
-
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using MBaske.Sensors.Grid;
 using Unity.MLAgents;
 using Unity.MLAgentsExamples;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
