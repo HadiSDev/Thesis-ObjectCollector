@@ -883,7 +883,7 @@ PrefabInstance:
       objectReference: {fileID: 1574236048}
     - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
       propertyPath: stepCost
-      value: -0.05
+      value: -0.001
       objectReference: {fileID: 0}
     - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
       propertyPath: maxCapacity
@@ -899,7 +899,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5548054832699030785, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
       propertyPath: m_BrainParameters.NumStackedVectorObservations
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
       propertyPath: m_RootOrder
@@ -980,6 +980,8 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
     - {fileID: 5548054832699030813, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    - {fileID: 1294075510911226811, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    - {fileID: 2511637530700528849, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
 --- !u!1 &1088510841 stripped
@@ -1009,7 +1011,7 @@ PrefabInstance:
       objectReference: {fileID: 1574236048}
     - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
       propertyPath: stepCost
-      value: -0.05
+      value: -0.001
       objectReference: {fileID: 0}
     - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
       propertyPath: maxCapacity
@@ -1025,7 +1027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5548054832699030785, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
       propertyPath: m_BrainParameters.NumStackedVectorObservations
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
       propertyPath: m_RootOrder
@@ -1106,6 +1108,8 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
     - {fileID: 5548054832699030813, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    - {fileID: 1294075510911226811, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    - {fileID: 2511637530700528849, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
 --- !u!1 &1418304524

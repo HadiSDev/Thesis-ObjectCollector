@@ -505,6 +505,8 @@ GameObject:
   - component: {fileID: 5548054832699030810}
   - component: {fileID: 4631511907383027040}
   - component: {fileID: 2934782241696393802}
+  - component: {fileID: 2511637530700528849}
+  - component: {fileID: 1294075510911226811}
   m_Layer: 0
   m_Name: Agent
   m_TagString: agent
@@ -571,7 +573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 8
+    VectorObservationSize: 0
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 2
@@ -588,7 +590,7 @@ MonoBehaviour:
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_DeterministicInference: 0
-  m_ObservableAttributeHandling: 0
+  m_ObservableAttributeHandling: 1
 --- !u!114 &5548054832699030784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,11 +610,10 @@ MonoBehaviour:
   enableGlobalSensorComponents: 0
   turnSpeed: 300
   moveSpeed: 1
-  contribute: 1
-  useVectorObs: 1
   AgentTravelledDist: 0
   AgentStepCount: 0
   AgentCumulativeReward: 0
+  Settings: {fileID: 0}
   stepCost: -0.001
   maxCapacity: 25
   markDetectedObjects: 0
@@ -698,6 +699,142 @@ MonoBehaviour:
   m_SensorName: StationsSensor
   m_ObservableSize: 2
   m_MaxNumObservables: 5
+--- !u!114 &2511637530700528849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5548054832699030791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1294075510911226811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5548054832699030791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ObservationShape: 5 channels x 21 width x 17 height
+  m_SensorName: GridSensor
+  m_ObservationStacks: 1
+  m_CompressionType: 1
+  m_ObservationType: 0
+  m_ChannelLabels: []
+  m_Debug_CreateSensorOnAwake: 0
+  m_Debug_CreateSensorOnValidate: 1
+  m_Debug_FrameInterval: 1
+  m_Debug_DrawGridBuffer: 0
+  m_Debug_GridBufferDrawer:
+    Context: {fileID: 0}
+    Editor: {fileID: 0}
+    GridSizeRatio: 0
+    IsEnabled: 0
+    IsStandby: 0
+  m_GridShape:
+    NumChannels: 5
+    Width: 21
+    Height: 17
+  m_ClearCacheOnReset: 0
+  m_ColliderBufferSize: 64
+  m_TmpObjectToAdd: {fileID: 0}
+  m_GameObjectSettingsList:
+  - Tag: objective
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
+    m_UserObservables:
+      m_Observables:
+      - Name: Detected
+        Type: 2
+        Index: 0
+        Enabled: 1
+        Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
+      - Name: NotDetected
+        Type: 2
+        Index: 1
+        Enabled: 1
+        Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
+    m_Observables:
+    - Name: Detected
+      Type: 2
+      Index: 0
+      Enabled: 1
+      Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
+    - Name: NotDetected
+      Type: 2
+      Index: 1
+      Enabled: 1
+      Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: station
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.31324813, g: 0.6001775, b: 0.12942569, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: wall
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.0022534956, g: 0.49612084, b: 0.74995303, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: agent
+    Enabled: 1
+    DetectionType: 0
+    Modifier: 1
+    Detectable: {fileID: 5548054832699030810}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.72970843, g: 0.30203995, b: 0.70245916, a: 1}
+    m_DetectorSpaceType: 1
+  m_SensorResolution: 1.31 meters (3.00 deg at 25.00 meters)
+  m_CellArc: 3
+  m_LatAngleNorth: 24.4
+  m_LatAngleSouth: 24.4
+  m_LonAngle: 31.1
+  m_MinDistance: 1
+  m_MaxDistance: 25
+  m_DistanceNormalization:
+    Value: 1
+    Weighted: 0
+  m_LonLatRect:
+    serializedVersion: 2
+    x: -31.5
+    y: -25.5
+    width: 63
+    height: 51
+  m_GridResolution: 1.3089969
 --- !u!1 &5548054833010202904
 GameObject:
   m_ObjectHideFlags: 0

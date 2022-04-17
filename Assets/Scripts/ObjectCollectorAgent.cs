@@ -4,13 +4,11 @@ using CustomDetectableObjects;
 using Interfaces;
 using MBaske.Sensors.Grid;
 using Statistics;
-using Unity.Barracuda;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
-using Unity.MLAgentsExamples;
-using Random = UnityEngine.Random;
+using Unity.MLAgents.Sensors.Reflection;
 
 public class ObjectCollectorAgent : Agent, IStats
 {
@@ -19,12 +17,8 @@ public class ObjectCollectorAgent : Agent, IStats
 
     // Speed of agent rotation.
     public float turnSpeed = 300;
-    int m_Configuration;
     // Speed of agent movement.
     public float moveSpeed = 1;
-    public bool contribute;
-    public bool useVectorObs;
-
     // Statistics
     private Vector3 prev_pos;
     private DateTime m_Start;
@@ -52,24 +46,39 @@ public class ObjectCollectorAgent : Agent, IStats
     private ObjectCollectorArea m_ObjectCollectorArea;
     private BufferSensorComponent _bufferSensorStations;
     
-    // NN Models
-    // Brain to use when there are no stations and unlimited capacity
-    public NNModel UnlimitedCapacity;
-    // Brain to use when there are stations but unlimited capacity
-    public NNModel stationsUnlimited;
-    // Brain to use when there are stations and limited capacity
-    public NNModel LimitedCapacity;
-    
-    string m_UnlimitedCapacity = "UnlimitedCapacity";
-    string m_LimitedCapacity = "LimitedCapacity";
-    
+    const string k_MaxCapacityFlag = "--max-capacity";
 
+    [Observable(nameof(PositionDelta), numStackedObservations: 9)]
+    Vector2 PositionDelta
+    {
+        get
+        {
+            var agentPos = transform.position;
+            var areaPos = m_ObjectCollectorArea.transform.position;
+            return new Vector3(Normalize(agentPos.x - areaPos.x), Normalize(agentPos.z - areaPos.z));
+        }
+    }
+    
+    [Observable(nameof(Forward), numStackedObservations: 9)]
+    Vector2 Forward => transform.forward;
+    
+    [Observable(nameof(CapacityRatio), numStackedObservations: 5)]
+    float CapacityRatio =>  m_CollectedCapacity / maxCapacity;
+    
+    [Observable()]
+    Vector2 Velocity
+    {
+        get
+        {
+            var velocity = transform.InverseTransformDirection(m_AgentRb.velocity);
+            return new Vector2(velocity.x, velocity.z);
+        }
+    }
 
     public override void Initialize()
     {
         m_AgentRb = GetComponent<Rigidbody>();
         prev_pos = transform.position; 
-        m_Configuration = Random.Range(0, 2);
         
         m_ObjectCollectorSettings = FindObjectOfType<ObjectCollectorSettings>();
         m_ObjectCollectorArea = FindObjectOfType<ObjectCollectorArea>();
@@ -90,15 +99,15 @@ public class ObjectCollectorAgent : Agent, IStats
         }
         SetResetParameters();
         
-        // Update model references if we're overriding
-        var modelOverrider = GetComponent<ModelOverrider>();
-        if (modelOverrider.HasOverrides)
+        var args = Environment.GetCommandLineArgs();
+        
+        for (int i = 0; i < args.Length; i++)
         {
-            UnlimitedCapacity = modelOverrider.GetModelForBehaviorName(m_UnlimitedCapacity);
-            m_UnlimitedCapacity = ModelOverrider.GetOverrideBehaviorName(m_UnlimitedCapacity);
-
-            LimitedCapacity = modelOverrider.GetModelForBehaviorName(m_LimitedCapacity);
-            m_LimitedCapacity = ModelOverrider.GetOverrideBehaviorName(m_LimitedCapacity);
+            if (args[i] == k_MaxCapacityFlag && i < args.Length - 1)
+            {
+                maxCapacity = float.Parse(args[i + 1]);
+                break;
+            }
         }
     }
 
@@ -109,19 +118,8 @@ public class ObjectCollectorAgent : Agent, IStats
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        //Debug.Log($"Name: {name}, Capacity: {m_CollectedCapacity}");
-        var localVelocity = transform.InverseTransformDirection(m_AgentRb.velocity);
-        sensor.AddObservation(new []{localVelocity.x, localVelocity.z});
-
-        var capacityRatio = m_CollectedCapacity / maxCapacity;
-        sensor.AddObservation(capacityRatio);
-
+        base.CollectObservations(sensor);
         var agentPos = transform.position;
-        var areaPos = m_ObjectCollectorArea.transform.position;
-        sensor.AddObservation(new []{Normalize(agentPos.x - areaPos.x), Normalize(agentPos.z - areaPos.z)});
-        
-        var forward = transform.forward;
-        sensor.AddObservation(new []{forward.x, forward.z});
 
         if (_bufferSensorStations != null)
         {
@@ -257,7 +255,6 @@ public class ObjectCollectorAgent : Agent, IStats
         m_ObjectCollectorSettings.EnvironmentReset();
         m_AgentRb.velocity = Vector3.zero;
         m_CollectedCapacity = 0;
-        m_Configuration = Random.Range(0, 2);
         ResetStats();
         SetResetParameters();
     }
@@ -374,29 +371,5 @@ public class ObjectCollectorAgent : Agent, IStats
         AgentCumulativeReward = 0f;
         AgentStepCount = 0;
         AgentTravelledDist = 0f;
-    }
-
-    void FixedUpdate()
-    {
-        if (m_Configuration != -1)
-        {
-
-            ConfigureAgent(m_Configuration);
-            m_Configuration = -1;
-        }
-    }
-    
-    void ConfigureAgent(int config)
-    {
-        if (config == 0)
-        {
-            maxCapacity = m_ResetParams.GetWithDefault("unlimited_capacity", 40);
-            SetModel(m_UnlimitedCapacity, UnlimitedCapacity);
-        }
-        else
-        {
-            maxCapacity = m_ResetParams.GetWithDefault("limited_capacity", 40);
-            SetModel(m_LimitedCapacity, LimitedCapacity);
-        }
     }
 }
