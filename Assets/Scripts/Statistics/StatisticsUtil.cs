@@ -68,7 +68,7 @@ namespace Statistics
         
         public static void AppendStatToRecordList(int id,  TimeSpan elapTime)
         {
-            var record = new Stats(id, elapTime.Seconds.ToString());
+            var record = new Stats(id, elapTime.TotalSeconds.ToString());
             record.ComputeAgentSpecificStats(m_AgentRewards, m_AgentSteps, m_AgentTravelDist);
             m_Records.Add(record);
         }

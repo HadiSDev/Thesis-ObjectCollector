@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.MLAgents;
@@ -13,9 +14,8 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
     
     // Statistics
     public bool m_Is_evaluating;
-    private List<Stats> m_Records = new List<Stats>();
     private int resetCounter;
-    private int m_Counter = 1;
+    private int m_Counter = 0;
     public int sampleSize;
     public string fileName;
     public string directory;
@@ -47,33 +47,29 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
 
     public void EnvironmentReset()
     {
-        resetCounter++;
-        if (resetCounter % agents.Length == 0)
+        GridTracking.GridTrackingReset();
+        if (m_Is_evaluating == false || m_Counter < sampleSize)
         {
-            if (m_Is_evaluating == false || m_Counter < sampleSize)
+            // Reset map
+            listArea = FindObjectsOfType<AuctionFrontierCollectorArea>();
+            foreach (var fa in listArea)
             {
-                // Reset map
-                listArea = FindObjectsOfType<AuctionFrontierCollectorArea>();
-                foreach (var fa in listArea)
-                {
-                    fa.ResetObjectiveArea(agents);
-                }
-                ClearObjects(GameObject.FindGameObjectsWithTag("obstacle"));
-            
-                m_StartTime = DateTime.Now;
-                totalScore = 0;
-                totalCollected = 0;
-                m_Counter++;
+                fa.ResetObjectiveArea(agents);
             }
-            else if(m_Is_evaluating && m_Counter == sampleSize) // To avoid multiple writes when all agents call method EnvironmentReset (GreedyAgent)
-            {
-                m_Counter++;
-                StatisticsWriter.plotResults();
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.ExitPlaymode();
-#endif
-            }
+            ClearObjects(GameObject.FindGameObjectsWithTag("obstacle"));
+        
+            m_StartTime = DateTime.Now;
+            totalScore = 0;
+            totalCollected = 0;
+            m_Counter++;
         }
+        else if(m_Is_evaluating && m_Counter >= sampleSize) 
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.ExitPlaymode();
+#endif
+        }
+        
     }
     
     void ClearObjects(GameObject[] objects)
@@ -86,31 +82,23 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
 
     public void Update()
     {
+        // Actively listen if episode is finished
+        if (GameObject.FindGameObjectsWithTag("agent").Length == 0 && GridTracking.GridWorldComplete())
+        {
+            EnvironmentReset();
+        }
+        
         m_ElapsedTime = DateTime.Now - m_StartTime;
         scoreText.text = $"Score: {totalScore}";
-        elapsedTime.text = m_ElapsedTime.Minutes.ToString();
-
-        var coords = agents.Select(a => (a.transform.position + new Vector3(50, 0, 50), a.transform.rotation));
+        elapsedTime.text = m_ElapsedTime.ToString();
         
-
         foreach (var area in listArea)
         {
 
             foreach (var agent in agents)
             {
-                area.UpdateGridWorld(agent);
+                if (agent.activeSelf) area.UpdateGridWorld(agent);
             }
-            
-            
-            /*
-            foreach (var pos in coords)
-            {
-                var curr_val = area.GetGridWorldValue(pos.Item1);
-                
-                //TODO: Decide if it should keep increment or not
-                area.SetGridWorldValue(pos.Item1, ++curr_val);
-            }
-            */
         }
         
         // Send stats via SideChannel so that they'll appear in TensorBoard.

@@ -6,8 +6,8 @@ namespace DefaultNamespace
     public static class AuctionFrontierUtil
     {
         private static int nextId = -1;
-
-        public static HashSet<GameObject> DISCOVERED_TARGETS = new HashSet<GameObject>();
+        private static float env_diagonal_distance = 141.42f;
+        public static Queue<GameObject> DISCOVERED_TARGETS = new Queue<GameObject>();
 
         public static GameObject GetNearestDiscoveredObject(Vector3 worldPosition)
         {
@@ -18,15 +18,32 @@ namespace DefaultNamespace
             {
                 var curdist = Vector3.Distance(worldPosition, obj.transform.position);
         
-                if (curdist < distance)
+                if (curdist < distance && obj.activeSelf)
                 {
                     distance = curdist;
                     closest = obj;
                 }
             }
 
-            DISCOVERED_TARGETS.Remove(closest);
             return closest;
+        }
+        
+        public static Vector3 FindClosetsObjectWithTag(Vector3 worldPosition, string tag)
+        {
+            GameObject[] gos;
+            gos = GameObject.FindGameObjectsWithTag(tag);
+            GameObject closest = null;
+            float distance = Mathf.Infinity;
+            foreach (GameObject obj in gos)
+            {
+                var curdist = Vector3.Distance(worldPosition, obj.transform.position);
+                if (curdist < distance && obj.activeSelf)
+                {
+                    distance = curdist;
+                    closest = obj;
+                }
+            }
+            return closest.transform.position;
         }
 
         public static int GetNextId()
@@ -37,7 +54,7 @@ namespace DefaultNamespace
         public static float CalculateAgentBid(Vector3 worldPosition, Vector3 targetPosition, float explorerRate, float capacityRatio)
         {
             var distance = Vector3.Distance(worldPosition, targetPosition);
-            return (100f-distance) * explorerRate * capacityRatio;
+            return (env_diagonal_distance - distance) * (1f - explorerRate) * (1f - capacityRatio); 
         }
 
         public enum AuctionStage

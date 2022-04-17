@@ -27,6 +27,7 @@ public class AuctionFrontierCollectorArea : Area
     public void Awake()
     {
         m_GridTracking = FindObjectOfType<GridTracking>();
+        stations = GameObject.FindGameObjectsWithTag("station");
     }
 
     public void SetGridWorldValue(Vector3 worldPosition, int value)
@@ -42,7 +43,9 @@ public class AuctionFrontierCollectorArea : Area
     public void UpdateGridWorld(GameObject agent)
     {
         var grid = agent.GetComponent<GridSensorComponent3D>();
-        m_GridTracking.UpdateGridWithSensor(agent.transform, grid.LonAngle*2, grid.MaxDistance, 1);
+        var afagent = agent.GetComponent<AuctionFrontierAgent>();
+        var num_discovered_cells = m_GridTracking.UpdateGridWithSensor(agent.transform, grid.LonAngle*2, grid.MaxDistance, 1);
+        afagent.AddExplorationScore(num_discovered_cells);
     }
 
     public void ScanGridWorld()
@@ -52,6 +55,7 @@ public class AuctionFrontierCollectorArea : Area
 
     void CreateObjectives(int num, GameObject type)
     {
+        Debug.Log("Creating objectives");
         for (int i = 0; i < num; i++)
         {
             GameObject f = Instantiate(type, new Vector3(Random.Range(-range, range), 1f,
@@ -74,6 +78,7 @@ public class AuctionFrontierCollectorArea : Area
             
         }
     }
+    
 
     void CreateObstacles()
     {
@@ -112,7 +117,8 @@ public class AuctionFrontierCollectorArea : Area
 
     public void ResetObjectiveArea(GameObject[] agents)
     {
-        var firstStation = stations.Length == 0 ? null : stations[0];
+        var HasStatioon = stations.Length > 0 ;
+        int idx = 0;
         foreach (GameObject agent in agents)
         {
             agent.SetActive(true);
@@ -121,11 +127,9 @@ public class AuctionFrontierCollectorArea : Area
                 continue;
             }
             
-            if (firstStation != null)
+            if (HasStatioon)
             {
-                firstStation.transform.position = new Vector3(Random.Range(-range, range), 0.5f,
-                    Random.Range(-range, range))  + transform.position;
-                agent.transform.position = firstStation.transform.position;
+                agent.transform.position = stations[idx % stations.Length].transform.position;
             }
             else
             {
@@ -134,6 +138,7 @@ public class AuctionFrontierCollectorArea : Area
             }
 
             agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
+            idx++;
         }
 
         if (m_Objectives.Count > 0)

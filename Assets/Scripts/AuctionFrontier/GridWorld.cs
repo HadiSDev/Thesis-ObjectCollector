@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using MBaske.Sensors.Grid;
 using UnityEngine;
 using UnityEngine.UI;
@@ -80,6 +82,20 @@ namespace DefaultNamespace
 
         }
 
+        public bool GridCompleted()
+        {
+            var total = 0f;
+            for (int z = 0; z <= m_Height-1; z++)
+            {
+                for (int x = 0; x <= m_Width-1; x++)
+                {
+                    total += GetGridValue(x, z);
+                }
+            }
+
+            return total == m_Height * m_Width;
+        }
+
         public int GetGridValue(int x, int z)
         {
             return m_GridArray[z, x];
@@ -152,7 +168,7 @@ namespace DefaultNamespace
         {
             return m_Width;
         }
-
+        
         public IEnumerable<Vector3> GetAdjacentCells(float x, float z)
         {
             
@@ -178,8 +194,13 @@ namespace DefaultNamespace
 
         public void ResetGrid()
         {
-            m_GridArray = new int[m_Height, m_Width];
-            m_TextArray = new TextMesh[m_Height, m_Width];
+            for (int z = 0; z < m_GridArray.GetLength(0); z++)
+            {
+                for (int x = 0; x < m_GridArray.GetLength(1);x++)
+                {
+                    SetValue(x, z, 0);
+                }
+            }        
         }
 
         public float Offset()
