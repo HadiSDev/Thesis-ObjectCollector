@@ -14,7 +14,7 @@ behaviors:
       normalize: False
       hidden_units: 512
       num_layers: 3
-      vis_encode_type: simple
+      vis_encode_type: resnet
     reward_signals:
       extrinsic:
         gamma: 0.99
