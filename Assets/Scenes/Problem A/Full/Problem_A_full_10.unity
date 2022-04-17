@@ -123,87 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: d0275f1d9e26baa44a9298f63b2aa9f9, type: 2}
---- !u!1 &143078420
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 143078423}
-  - component: {fileID: 143078422}
-  - component: {fileID: 143078421}
-  m_Layer: 5
-  m_Name: Text (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &143078421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143078420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: New Text
---- !u!222 &143078422
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143078420}
-  m_CullTransparentMesh: 0
---- !u!224 &143078423
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143078420}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1064449898}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -343, y: -197.2}
-  m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &162975412
+--- !u!1001 &118412034
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -324,35 +244,23 @@ PrefabInstance:
     - {fileID: 5548054832699030813, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
---- !u!4 &162975413 stripped
+--- !u!4 &118412035 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 162975412}
+  m_PrefabInstance: {fileID: 118412034}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &162975414 stripped
+--- !u!1 &118412036 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 162975412}
+  m_PrefabInstance: {fileID: 118412034}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &162975415
+--- !u!114 &118412037
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162975414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &162975416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162975414}
+  m_GameObject: {fileID: 118412036}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
@@ -382,24 +290,10 @@ MonoBehaviour:
   m_ColliderBufferSize: 64
   m_TmpObjectToAdd: {fileID: 0}
   m_GameObjectSettingsList:
-  - Tag: agent
-    Enabled: 1
-    DetectionType: 0
-    Modifier: 0
-    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.6638494, g: 0.07689534, b: 0.9231095, a: 1}
-    m_DetectorSpaceType: 1
   - Tag: objective
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
     m_UserObservables:
       m_Observables:
@@ -407,28 +301,28 @@ MonoBehaviour:
         Type: 2
         Index: 0
         Enabled: 1
-        Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
+        Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
       - Name: NotDetected
         Type: 2
         Index: 1
         Enabled: 1
-        Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
+        Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_Observables:
     - Name: Detected
       Type: 2
       Index: 0
       Enabled: 1
-      Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
+      Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
     - Name: NotDetected
       Type: 2
       Index: 1
       Enabled: 1
-      Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
+      Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_DetectorSpaceType: 1
   - Tag: station
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
     m_UserObservables:
       m_Observables: []
@@ -437,12 +331,12 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.86881053, g: 0.06478016, b: 0.10850443, a: 1}
+      Color: {r: 0.31324813, g: 0.6001775, b: 0.12942569, a: 1}
     m_DetectorSpaceType: 1
   - Tag: wall
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
     m_UserObservables:
       m_Observables: []
@@ -451,7 +345,21 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.99570894, g: 0.16242209, b: 0.8263045, a: 1}
+      Color: {r: 0.0022534956, g: 0.49612084, b: 0.74995303, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: agent
+    Enabled: 1
+    DetectionType: 0
+    Modifier: 1
+    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.72970843, g: 0.30203995, b: 0.70245916, a: 1}
     m_DetectorSpaceType: 1
   m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
   m_CellArc: 3
@@ -470,23 +378,99 @@ MonoBehaviour:
     width: 90
     height: 60
   m_GridResolution: 2.6179938
---- !u!114 &162975417
+--- !u!114 &118412038
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162975414}
-  m_Enabled: 0
+  m_GameObject: {fileID: 118412036}
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Record: 0
-  NumStepsToRecord: 0
-  DemonstrationName: Problem_A
-  DemonstrationDirectory: Assets/Demonstrations/
---- !u!1001 &171690181
+--- !u!1 &143078420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 143078423}
+  - component: {fileID: 143078422}
+  - component: {fileID: 143078421}
+  m_Layer: 5
+  m_Name: Text (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &143078421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143078420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Text
+--- !u!222 &143078422
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143078420}
+  m_CullTransparentMesh: 0
+--- !u!224 &143078423
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143078420}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1064449898}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -343, y: -197.2}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &162142589
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -572,7 +556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
       propertyPath: m_Name
-      value: Agent (6)
+      value: Agent (9)
       objectReference: {fileID: 0}
     - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
       propertyPath: m_Enabled
@@ -607,35 +591,23 @@ PrefabInstance:
     - {fileID: 5548054832699030813, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
---- !u!4 &171690182 stripped
+--- !u!4 &162142590 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 171690181}
+  m_PrefabInstance: {fileID: 162142589}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &171690183 stripped
+--- !u!1 &162142591 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 171690181}
+  m_PrefabInstance: {fileID: 162142589}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &171690184
+--- !u!114 &162142592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171690183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &171690185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171690183}
+  m_GameObject: {fileID: 162142591}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
@@ -665,24 +637,10 @@ MonoBehaviour:
   m_ColliderBufferSize: 64
   m_TmpObjectToAdd: {fileID: 0}
   m_GameObjectSettingsList:
-  - Tag: agent
-    Enabled: 1
-    DetectionType: 0
-    Modifier: 0
-    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.6638494, g: 0.07689534, b: 0.9231095, a: 1}
-    m_DetectorSpaceType: 1
   - Tag: objective
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
     m_UserObservables:
       m_Observables:
@@ -690,28 +648,28 @@ MonoBehaviour:
         Type: 2
         Index: 0
         Enabled: 1
-        Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
+        Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
       - Name: NotDetected
         Type: 2
         Index: 1
         Enabled: 1
-        Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
+        Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_Observables:
     - Name: Detected
       Type: 2
       Index: 0
       Enabled: 1
-      Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
+      Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
     - Name: NotDetected
       Type: 2
       Index: 1
       Enabled: 1
-      Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
+      Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_DetectorSpaceType: 1
   - Tag: station
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
     m_UserObservables:
       m_Observables: []
@@ -720,12 +678,12 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.86881053, g: 0.06478016, b: 0.10850443, a: 1}
+      Color: {r: 0.31324813, g: 0.6001775, b: 0.12942569, a: 1}
     m_DetectorSpaceType: 1
   - Tag: wall
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
     m_UserObservables:
       m_Observables: []
@@ -734,7 +692,21 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.99570894, g: 0.16242209, b: 0.8263045, a: 1}
+      Color: {r: 0.0022534956, g: 0.49612084, b: 0.74995303, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: agent
+    Enabled: 1
+    DetectionType: 0
+    Modifier: 1
+    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.72970843, g: 0.30203995, b: 0.70245916, a: 1}
     m_DetectorSpaceType: 1
   m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
   m_CellArc: 3
@@ -753,27 +725,18 @@ MonoBehaviour:
     width: 90
     height: 60
   m_GridResolution: 2.6179938
---- !u!114 &171690186
+--- !u!114 &162142593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171690183}
-  m_Enabled: 0
+  m_GameObject: {fileID: 162142591}
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Record: 0
-  NumStepsToRecord: 0
-  DemonstrationName: Problem_A
-  DemonstrationDirectory: Assets/Demonstrations/
---- !u!1 &177429029 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1819751139121548, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
-  m_PrefabInstance: {fileID: 190823800}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &190823800
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -907,6 +870,10 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 114181230191376748, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
+      propertyPath: m_EnableStations
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114181230191376748, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       propertyPath: stations.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -957,37 +924,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
-      insertIndex: -1
+      insertIndex: 0
       addedObject: {fileID: 1840575146}
     - targetCorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 162975413}
+      addedObject: {fileID: 118412035}
     - targetCorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1083524196}
+      addedObject: {fileID: 1364921097}
     - targetCorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 347917266}
+      addedObject: {fileID: 440555031}
     - targetCorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 450745335}
+      addedObject: {fileID: 906937675}
     - targetCorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1757702586}
+      addedObject: {fileID: 881611249}
     - targetCorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 171690182}
+      addedObject: {fileID: 1840565451}
     - targetCorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1397470345}
+      addedObject: {fileID: 1431254505}
     - targetCorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 240092300}
+      addedObject: {fileID: 206690874}
     - targetCorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1794186647}
+      addedObject: {fileID: 162142590}
   m_SourcePrefab: {fileID: 100100000, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
---- !u!1001 &240092299
+--- !u!1001 &206690873
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1108,35 +1075,23 @@ PrefabInstance:
     - {fileID: 5548054832699030813, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
---- !u!4 &240092300 stripped
+--- !u!4 &206690874 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 240092299}
+  m_PrefabInstance: {fileID: 206690873}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &240092301 stripped
+--- !u!1 &206690875 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 240092299}
+  m_PrefabInstance: {fileID: 206690873}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &240092302
+--- !u!114 &206690876
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240092301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &240092303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240092301}
+  m_GameObject: {fileID: 206690875}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
@@ -1166,24 +1121,10 @@ MonoBehaviour:
   m_ColliderBufferSize: 64
   m_TmpObjectToAdd: {fileID: 0}
   m_GameObjectSettingsList:
-  - Tag: agent
-    Enabled: 1
-    DetectionType: 0
-    Modifier: 0
-    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.6638494, g: 0.07689534, b: 0.9231095, a: 1}
-    m_DetectorSpaceType: 1
   - Tag: objective
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
     m_UserObservables:
       m_Observables:
@@ -1191,28 +1132,28 @@ MonoBehaviour:
         Type: 2
         Index: 0
         Enabled: 1
-        Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
+        Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
       - Name: NotDetected
         Type: 2
         Index: 1
         Enabled: 1
-        Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
+        Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_Observables:
     - Name: Detected
       Type: 2
       Index: 0
       Enabled: 1
-      Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
+      Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
     - Name: NotDetected
       Type: 2
       Index: 1
       Enabled: 1
-      Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
+      Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_DetectorSpaceType: 1
   - Tag: station
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
     m_UserObservables:
       m_Observables: []
@@ -1221,12 +1162,12 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.86881053, g: 0.06478016, b: 0.10850443, a: 1}
+      Color: {r: 0.31324813, g: 0.6001775, b: 0.12942569, a: 1}
     m_DetectorSpaceType: 1
   - Tag: wall
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
     m_UserObservables:
       m_Observables: []
@@ -1235,7 +1176,21 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.99570894, g: 0.16242209, b: 0.8263045, a: 1}
+      Color: {r: 0.0022534956, g: 0.49612084, b: 0.74995303, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: agent
+    Enabled: 1
+    DetectionType: 0
+    Modifier: 1
+    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.72970843, g: 0.30203995, b: 0.70245916, a: 1}
     m_DetectorSpaceType: 1
   m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
   m_CellArc: 3
@@ -1254,23 +1209,19 @@ MonoBehaviour:
     width: 90
     height: 60
   m_GridResolution: 2.6179938
---- !u!114 &240092304
+--- !u!114 &206690877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240092301}
-  m_Enabled: 0
+  m_GameObject: {fileID: 206690875}
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Record: 0
-  NumStepsToRecord: 0
-  DemonstrationName: Problem_A
-  DemonstrationDirectory: Assets/Demonstrations/
---- !u!1001 &347917265
+--- !u!1001 &440555030
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1391,35 +1342,23 @@ PrefabInstance:
     - {fileID: 5548054832699030813, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
---- !u!4 &347917266 stripped
+--- !u!4 &440555031 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 347917265}
+  m_PrefabInstance: {fileID: 440555030}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &347917267 stripped
+--- !u!1 &440555032 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 347917265}
+  m_PrefabInstance: {fileID: 440555030}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &347917268
+--- !u!114 &440555033
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 347917267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &347917269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 347917267}
+  m_GameObject: {fileID: 440555032}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
@@ -1449,24 +1388,10 @@ MonoBehaviour:
   m_ColliderBufferSize: 64
   m_TmpObjectToAdd: {fileID: 0}
   m_GameObjectSettingsList:
-  - Tag: agent
-    Enabled: 1
-    DetectionType: 0
-    Modifier: 0
-    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.6638494, g: 0.07689534, b: 0.9231095, a: 1}
-    m_DetectorSpaceType: 1
   - Tag: objective
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
     m_UserObservables:
       m_Observables:
@@ -1474,28 +1399,28 @@ MonoBehaviour:
         Type: 2
         Index: 0
         Enabled: 1
-        Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
+        Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
       - Name: NotDetected
         Type: 2
         Index: 1
         Enabled: 1
-        Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
+        Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_Observables:
     - Name: Detected
       Type: 2
       Index: 0
       Enabled: 1
-      Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
+      Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
     - Name: NotDetected
       Type: 2
       Index: 1
       Enabled: 1
-      Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
+      Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_DetectorSpaceType: 1
   - Tag: station
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
     m_UserObservables:
       m_Observables: []
@@ -1504,12 +1429,12 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.86881053, g: 0.06478016, b: 0.10850443, a: 1}
+      Color: {r: 0.31324813, g: 0.6001775, b: 0.12942569, a: 1}
     m_DetectorSpaceType: 1
   - Tag: wall
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
     m_UserObservables:
       m_Observables: []
@@ -1518,7 +1443,21 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.99570894, g: 0.16242209, b: 0.8263045, a: 1}
+      Color: {r: 0.0022534956, g: 0.49612084, b: 0.74995303, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: agent
+    Enabled: 1
+    DetectionType: 0
+    Modifier: 1
+    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.72970843, g: 0.30203995, b: 0.70245916, a: 1}
     m_DetectorSpaceType: 1
   m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
   m_CellArc: 3
@@ -1537,23 +1476,451 @@ MonoBehaviour:
     width: 90
     height: 60
   m_GridResolution: 2.6179938
---- !u!114 &347917270
+--- !u!114 &440555034
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 347917267}
-  m_Enabled: 0
+  m_GameObject: {fileID: 440555032}
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Record: 0
-  NumStepsToRecord: 0
-  DemonstrationName: Problem_A
-  DemonstrationDirectory: Assets/Demonstrations/
---- !u!1001 &450745334
+--- !u!1 &625137506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 625137507}
+  - component: {fileID: 625137509}
+  - component: {fileID: 625137508}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &625137507
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625137506}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 965533424}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &625137508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625137506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9338235, g: 0.9338235, b: 0.9338235, a: 0.784}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 300
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 8
+    m_MaxSize: 300
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: NOM
+--- !u!222 &625137509
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625137506}
+  m_CullTransparentMesh: 0
+--- !u!4 &679774806 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
+  m_PrefabInstance: {fileID: 190823800}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &860333478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 860333479}
+  - component: {fileID: 860333480}
+  - component: {fileID: 860333481}
+  m_Layer: 5
+  m_Name: Text (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &860333479
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860333478}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1064449898}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -343, y: -173.3}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &860333480
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860333478}
+  m_CullTransparentMesh: 0
+--- !u!114 &860333481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860333478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Text
+--- !u!1001 &881611248
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 679774806}
+    m_Modifications:
+    - target: {fileID: 2934782241696393802, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_MaxNumObservables
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: MaxStep
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: Settings
+      value: 
+      objectReference: {fileID: 1574236048}
+    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: stepCost
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: maxCapacity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030785, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_BehaviorName
+      value: UnlimitedCapacity
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030785, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030785, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_BrainParameters.NumStackedVectorObservations
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -34.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.559753
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_Name
+      value: Agent (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_ObservationShape
+      value: 4 channels x 21 width x 17 height
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_GridShape.NumChannels
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_Debug_GridBufferDrawer.Editor
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_GameObjectSettingsList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_GameObjectSettingsList.Array.data[3].Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030815, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    - {fileID: 5548054832699030813, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+--- !u!4 &881611249 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+  m_PrefabInstance: {fileID: 881611248}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &881611250 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+  m_PrefabInstance: {fileID: 881611248}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &881611251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881611250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ObservationShape: 5 channels x 30 width x 20 height
+  m_SensorName: GridSensor
+  m_ObservationStacks: 1
+  m_CompressionType: 1
+  m_ObservationType: 0
+  m_ChannelLabels: []
+  m_Debug_CreateSensorOnAwake: 0
+  m_Debug_CreateSensorOnValidate: 1
+  m_Debug_FrameInterval: 1
+  m_Debug_DrawGridBuffer: 0
+  m_Debug_GridBufferDrawer:
+    Context: {fileID: 0}
+    Editor: {fileID: 0}
+    GridSizeRatio: 0
+    IsEnabled: 0
+    IsStandby: 0
+  m_GridShape:
+    NumChannels: 5
+    Width: 30
+    Height: 20
+  m_ClearCacheOnReset: 0
+  m_ColliderBufferSize: 64
+  m_TmpObjectToAdd: {fileID: 0}
+  m_GameObjectSettingsList:
+  - Tag: objective
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
+    m_UserObservables:
+      m_Observables:
+      - Name: Detected
+        Type: 2
+        Index: 0
+        Enabled: 1
+        Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
+      - Name: NotDetected
+        Type: 2
+        Index: 1
+        Enabled: 1
+        Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
+    m_Observables:
+    - Name: Detected
+      Type: 2
+      Index: 0
+      Enabled: 1
+      Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
+    - Name: NotDetected
+      Type: 2
+      Index: 1
+      Enabled: 1
+      Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: station
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.31324813, g: 0.6001775, b: 0.12942569, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: wall
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.0022534956, g: 0.49612084, b: 0.74995303, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: agent
+    Enabled: 1
+    DetectionType: 0
+    Modifier: 1
+    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.72970843, g: 0.30203995, b: 0.70245916, a: 1}
+    m_DetectorSpaceType: 1
+  m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
+  m_CellArc: 3
+  m_LatAngleNorth: 45
+  m_LatAngleSouth: 15
+  m_LonAngle: 45
+  m_MinDistance: 1
+  m_MaxDistance: 50
+  m_DistanceNormalization:
+    Value: 1
+    Weighted: 0
+  m_LonLatRect:
+    serializedVersion: 2
+    x: -45
+    y: -15
+    width: 90
+    height: 60
+  m_GridResolution: 2.6179938
+--- !u!114 &881611252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881611250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &906937674
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1674,35 +2041,23 @@ PrefabInstance:
     - {fileID: 5548054832699030813, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
---- !u!4 &450745335 stripped
+--- !u!4 &906937675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 450745334}
+  m_PrefabInstance: {fileID: 906937674}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &450745336 stripped
+--- !u!1 &906937676 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 450745334}
+  m_PrefabInstance: {fileID: 906937674}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &450745337
+--- !u!114 &906937677
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450745336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &450745338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450745336}
+  m_GameObject: {fileID: 906937676}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
@@ -1732,24 +2087,10 @@ MonoBehaviour:
   m_ColliderBufferSize: 64
   m_TmpObjectToAdd: {fileID: 0}
   m_GameObjectSettingsList:
-  - Tag: agent
-    Enabled: 1
-    DetectionType: 0
-    Modifier: 0
-    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.6638494, g: 0.07689534, b: 0.9231095, a: 1}
-    m_DetectorSpaceType: 1
   - Tag: objective
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
     m_UserObservables:
       m_Observables:
@@ -1757,28 +2098,28 @@ MonoBehaviour:
         Type: 2
         Index: 0
         Enabled: 1
-        Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
+        Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
       - Name: NotDetected
         Type: 2
         Index: 1
         Enabled: 1
-        Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
+        Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_Observables:
     - Name: Detected
       Type: 2
       Index: 0
       Enabled: 1
-      Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
+      Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
     - Name: NotDetected
       Type: 2
       Index: 1
       Enabled: 1
-      Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
+      Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_DetectorSpaceType: 1
   - Tag: station
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
     m_UserObservables:
       m_Observables: []
@@ -1787,12 +2128,12 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.86881053, g: 0.06478016, b: 0.10850443, a: 1}
+      Color: {r: 0.31324813, g: 0.6001775, b: 0.12942569, a: 1}
     m_DetectorSpaceType: 1
   - Tag: wall
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
     m_UserObservables:
       m_Observables: []
@@ -1801,7 +2142,21 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.99570894, g: 0.16242209, b: 0.8263045, a: 1}
+      Color: {r: 0.0022534956, g: 0.49612084, b: 0.74995303, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: agent
+    Enabled: 1
+    DetectionType: 0
+    Modifier: 1
+    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.72970843, g: 0.30203995, b: 0.70245916, a: 1}
     m_DetectorSpaceType: 1
   m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
   m_CellArc: 3
@@ -1820,199 +2175,18 @@ MonoBehaviour:
     width: 90
     height: 60
   m_GridResolution: 2.6179938
---- !u!114 &450745339
+--- !u!114 &906937678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450745336}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Record: 0
-  NumStepsToRecord: 0
-  DemonstrationName: Problem_A
-  DemonstrationDirectory: Assets/Demonstrations/
---- !u!1 &625137506
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 625137507}
-  - component: {fileID: 625137509}
-  - component: {fileID: 625137508}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &625137507
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625137506}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 965533424}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &625137508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625137506}
+  m_GameObject: {fileID: 906937676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.9338235, g: 0.9338235, b: 0.9338235, a: 0.784}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 300
-    m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 8
-    m_MaxSize: 300
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: NOM
---- !u!222 &625137509
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625137506}
-  m_CullTransparentMesh: 0
---- !u!4 &679774806 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
-  m_PrefabInstance: {fileID: 190823800}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &679774809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 177429029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f8abecd5902d09449e947799d9330a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &860333478
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 860333479}
-  - component: {fileID: 860333480}
-  - component: {fileID: 860333481}
-  m_Layer: 5
-  m_Name: Text (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &860333479
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860333478}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1064449898}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -343, y: -173.3}
-  m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &860333480
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860333478}
-  m_CullTransparentMesh: 0
---- !u!114 &860333481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860333478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: New Text
 --- !u!1001 &916917435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2313,289 +2487,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1001 &1083524195
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 2
-    m_TransformParent: {fileID: 679774806}
-    m_Modifications:
-    - target: {fileID: 2934782241696393802, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_MaxNumObservables
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: MaxStep
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: Settings
-      value: 
-      objectReference: {fileID: 1574236048}
-    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: stepCost
-      value: -0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: maxCapacity
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030785, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_BehaviorName
-      value: UnlimitedCapacity
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030785, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_BrainParameters.VectorObservationSize
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030785, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_BrainParameters.NumStackedVectorObservations
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -34.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -9.559753
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_Name
-      value: Agent (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_ObservationShape
-      value: 4 channels x 21 width x 17 height
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_GridShape.NumChannels
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_Debug_GridBufferDrawer.Editor
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_GameObjectSettingsList.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_GameObjectSettingsList.Array.data[3].Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030815, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-    - {fileID: 5548054832699030813, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-    m_AddedGameObjects: []
-  m_SourcePrefab: {fileID: 100100000, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
---- !u!4 &1083524196 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 1083524195}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1083524197 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 1083524195}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1083524198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1083524197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1083524199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1083524197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ObservationShape: 5 channels x 30 width x 20 height
-  m_SensorName: GridSensor
-  m_ObservationStacks: 1
-  m_CompressionType: 1
-  m_ObservationType: 0
-  m_ChannelLabels: []
-  m_Debug_CreateSensorOnAwake: 0
-  m_Debug_CreateSensorOnValidate: 1
-  m_Debug_FrameInterval: 1
-  m_Debug_DrawGridBuffer: 0
-  m_Debug_GridBufferDrawer:
-    Context: {fileID: 0}
-    Editor: {fileID: 0}
-    GridSizeRatio: 0
-    IsEnabled: 0
-    IsStandby: 0
-  m_GridShape:
-    NumChannels: 5
-    Width: 30
-    Height: 20
-  m_ClearCacheOnReset: 0
-  m_ColliderBufferSize: 64
-  m_TmpObjectToAdd: {fileID: 0}
-  m_GameObjectSettingsList:
-  - Tag: agent
-    Enabled: 1
-    DetectionType: 0
-    Modifier: 0
-    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.6638494, g: 0.07689534, b: 0.9231095, a: 1}
-    m_DetectorSpaceType: 1
-  - Tag: objective
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 0
-    Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
-    m_UserObservables:
-      m_Observables:
-      - Name: Detected
-        Type: 2
-        Index: 0
-        Enabled: 1
-        Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
-      - Name: NotDetected
-        Type: 2
-        Index: 1
-        Enabled: 1
-        Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
-    m_Observables:
-    - Name: Detected
-      Type: 2
-      Index: 0
-      Enabled: 1
-      Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
-    - Name: NotDetected
-      Type: 2
-      Index: 1
-      Enabled: 1
-      Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
-    m_DetectorSpaceType: 1
-  - Tag: station
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 0
-    Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.86881053, g: 0.06478016, b: 0.10850443, a: 1}
-    m_DetectorSpaceType: 1
-  - Tag: wall
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 0
-    Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.99570894, g: 0.16242209, b: 0.8263045, a: 1}
-    m_DetectorSpaceType: 1
-  m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
-  m_CellArc: 3
-  m_LatAngleNorth: 45
-  m_LatAngleSouth: 15
-  m_LonAngle: 45
-  m_MinDistance: 1
-  m_MaxDistance: 50
-  m_DistanceNormalization:
-    Value: 1
-    Weighted: 0
-  m_LonLatRect:
-    serializedVersion: 2
-    x: -45
-    y: -15
-    width: 90
-    height: 60
-  m_GridResolution: 2.6179938
---- !u!114 &1083524200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1083524197}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Record: 0
-  NumStepsToRecord: 0
-  DemonstrationName: Problem_A
-  DemonstrationDirectory: Assets/Demonstrations/
 --- !u!1001 &1088510840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2722,7 +2613,354 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
   m_PrefabInstance: {fileID: 1088510840}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1397470344
+--- !u!1001 &1364921096
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 679774806}
+    m_Modifications:
+    - target: {fileID: 2934782241696393802, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_MaxNumObservables
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: MaxStep
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: Settings
+      value: 
+      objectReference: {fileID: 1574236048}
+    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: stepCost
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: maxCapacity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030785, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_BehaviorName
+      value: UnlimitedCapacity
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030785, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030785, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_BrainParameters.NumStackedVectorObservations
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -34.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.559753
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_Name
+      value: Agent (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_ObservationShape
+      value: 4 channels x 21 width x 17 height
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_GridShape.NumChannels
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_Debug_GridBufferDrawer.Editor
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_GameObjectSettingsList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_GameObjectSettingsList.Array.data[3].Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5548054832699030815, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    - {fileID: 5548054832699030813, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+--- !u!4 &1364921097 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+  m_PrefabInstance: {fileID: 1364921096}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1364921098 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+  m_PrefabInstance: {fileID: 1364921096}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1364921099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364921098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ObservationShape: 5 channels x 30 width x 20 height
+  m_SensorName: GridSensor
+  m_ObservationStacks: 1
+  m_CompressionType: 1
+  m_ObservationType: 0
+  m_ChannelLabels: []
+  m_Debug_CreateSensorOnAwake: 0
+  m_Debug_CreateSensorOnValidate: 1
+  m_Debug_FrameInterval: 1
+  m_Debug_DrawGridBuffer: 0
+  m_Debug_GridBufferDrawer:
+    Context: {fileID: 0}
+    Editor: {fileID: 0}
+    GridSizeRatio: 0
+    IsEnabled: 0
+    IsStandby: 0
+  m_GridShape:
+    NumChannels: 5
+    Width: 30
+    Height: 20
+  m_ClearCacheOnReset: 0
+  m_ColliderBufferSize: 64
+  m_TmpObjectToAdd: {fileID: 0}
+  m_GameObjectSettingsList:
+  - Tag: objective
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
+    m_UserObservables:
+      m_Observables:
+      - Name: Detected
+        Type: 2
+        Index: 0
+        Enabled: 1
+        Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
+      - Name: NotDetected
+        Type: 2
+        Index: 1
+        Enabled: 1
+        Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
+    m_Observables:
+    - Name: Detected
+      Type: 2
+      Index: 0
+      Enabled: 1
+      Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
+    - Name: NotDetected
+      Type: 2
+      Index: 1
+      Enabled: 1
+      Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: station
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.31324813, g: 0.6001775, b: 0.12942569, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: wall
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.0022534956, g: 0.49612084, b: 0.74995303, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: agent
+    Enabled: 1
+    DetectionType: 0
+    Modifier: 1
+    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.72970843, g: 0.30203995, b: 0.70245916, a: 1}
+    m_DetectorSpaceType: 1
+  m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
+  m_CellArc: 3
+  m_LatAngleNorth: 45
+  m_LatAngleSouth: 15
+  m_LonAngle: 45
+  m_MinDistance: 1
+  m_MaxDistance: 50
+  m_DistanceNormalization:
+    Value: 1
+    Weighted: 0
+  m_LonLatRect:
+    serializedVersion: 2
+    x: -45
+    y: -15
+    width: 90
+    height: 60
+  m_GridResolution: 2.6179938
+--- !u!114 &1364921100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364921098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1418304524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1418304525}
+  - component: {fileID: 1418304527}
+  - component: {fileID: 1418304526}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1418304525
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418304524}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1064449898}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -343, y: -229.4}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1418304526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418304524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Text
+--- !u!222 &1418304527
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418304524}
+  m_CullTransparentMesh: 0
+--- !u!1001 &1431254504
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -2843,35 +3081,23 @@ PrefabInstance:
     - {fileID: 5548054832699030813, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
---- !u!4 &1397470345 stripped
+--- !u!4 &1431254505 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 1397470344}
+  m_PrefabInstance: {fileID: 1431254504}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1397470346 stripped
+--- !u!1 &1431254506 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 1397470344}
+  m_PrefabInstance: {fileID: 1431254504}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1397470347
+--- !u!114 &1431254507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1397470346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1397470348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1397470346}
+  m_GameObject: {fileID: 1431254506}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
@@ -2901,24 +3127,10 @@ MonoBehaviour:
   m_ColliderBufferSize: 64
   m_TmpObjectToAdd: {fileID: 0}
   m_GameObjectSettingsList:
-  - Tag: agent
-    Enabled: 1
-    DetectionType: 0
-    Modifier: 0
-    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.6638494, g: 0.07689534, b: 0.9231095, a: 1}
-    m_DetectorSpaceType: 1
   - Tag: objective
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
     m_UserObservables:
       m_Observables:
@@ -2926,28 +3138,28 @@ MonoBehaviour:
         Type: 2
         Index: 0
         Enabled: 1
-        Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
+        Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
       - Name: NotDetected
         Type: 2
         Index: 1
         Enabled: 1
-        Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
+        Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_Observables:
     - Name: Detected
       Type: 2
       Index: 0
       Enabled: 1
-      Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
+      Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
     - Name: NotDetected
       Type: 2
       Index: 1
       Enabled: 1
-      Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
+      Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_DetectorSpaceType: 1
   - Tag: station
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
     m_UserObservables:
       m_Observables: []
@@ -2956,12 +3168,12 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.86881053, g: 0.06478016, b: 0.10850443, a: 1}
+      Color: {r: 0.31324813, g: 0.6001775, b: 0.12942569, a: 1}
     m_DetectorSpaceType: 1
   - Tag: wall
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
     m_UserObservables:
       m_Observables: []
@@ -2970,7 +3182,21 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.99570894, g: 0.16242209, b: 0.8263045, a: 1}
+      Color: {r: 0.0022534956, g: 0.49612084, b: 0.74995303, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: agent
+    Enabled: 1
+    DetectionType: 0
+    Modifier: 1
+    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.72970843, g: 0.30203995, b: 0.70245916, a: 1}
     m_DetectorSpaceType: 1
   m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
   m_CellArc: 3
@@ -2989,102 +3215,18 @@ MonoBehaviour:
     width: 90
     height: 60
   m_GridResolution: 2.6179938
---- !u!114 &1397470349
+--- !u!114 &1431254508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1397470346}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Record: 0
-  NumStepsToRecord: 0
-  DemonstrationName: Problem_A
-  DemonstrationDirectory: Assets/Demonstrations/
---- !u!1 &1418304524
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1418304525}
-  - component: {fileID: 1418304527}
-  - component: {fileID: 1418304526}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1418304525
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418304524}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1064449898}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -343, y: -229.4}
-  m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1418304526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418304524}
+  m_GameObject: {fileID: 1431254506}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: New Text
---- !u!222 &1418304527
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418304524}
-  m_CullTransparentMesh: 0
 --- !u!1 &1574236047
 GameObject:
   m_ObjectHideFlags: 0
@@ -3139,7 +3281,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1757702585
+--- !u!1001 &1840565450
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -3225,7 +3367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
       propertyPath: m_Name
-      value: Agent (5)
+      value: Agent (6)
       objectReference: {fileID: 0}
     - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
       propertyPath: m_Enabled
@@ -3260,35 +3402,23 @@ PrefabInstance:
     - {fileID: 5548054832699030813, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
---- !u!4 &1757702586 stripped
+--- !u!4 &1840565451 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 1757702585}
+  m_PrefabInstance: {fileID: 1840565450}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1757702587 stripped
+--- !u!1 &1840565452 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 1757702585}
+  m_PrefabInstance: {fileID: 1840565450}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1757702588
+--- !u!114 &1840565453
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757702587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1757702589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757702587}
+  m_GameObject: {fileID: 1840565452}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
@@ -3318,24 +3448,10 @@ MonoBehaviour:
   m_ColliderBufferSize: 64
   m_TmpObjectToAdd: {fileID: 0}
   m_GameObjectSettingsList:
-  - Tag: agent
-    Enabled: 1
-    DetectionType: 0
-    Modifier: 0
-    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.6638494, g: 0.07689534, b: 0.9231095, a: 1}
-    m_DetectorSpaceType: 1
   - Tag: objective
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
     m_UserObservables:
       m_Observables:
@@ -3343,28 +3459,28 @@ MonoBehaviour:
         Type: 2
         Index: 0
         Enabled: 1
-        Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
+        Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
       - Name: NotDetected
         Type: 2
         Index: 1
         Enabled: 1
-        Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
+        Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_Observables:
     - Name: Detected
       Type: 2
       Index: 0
       Enabled: 1
-      Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
+      Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
     - Name: NotDetected
       Type: 2
       Index: 1
       Enabled: 1
-      Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
+      Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
     m_DetectorSpaceType: 1
   - Tag: station
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
     m_UserObservables:
       m_Observables: []
@@ -3373,12 +3489,12 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.86881053, g: 0.06478016, b: 0.10850443, a: 1}
+      Color: {r: 0.31324813, g: 0.6001775, b: 0.12942569, a: 1}
     m_DetectorSpaceType: 1
   - Tag: wall
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
     m_UserObservables:
       m_Observables: []
@@ -3387,7 +3503,21 @@ MonoBehaviour:
       Type: 0
       Index: -1
       Enabled: 1
-      Color: {r: 0.99570894, g: 0.16242209, b: 0.8263045, a: 1}
+      Color: {r: 0.0022534956, g: 0.49612084, b: 0.74995303, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: agent
+    Enabled: 1
+    DetectionType: 0
+    Modifier: 1
+    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.72970843, g: 0.30203995, b: 0.70245916, a: 1}
     m_DetectorSpaceType: 1
   m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
   m_CellArc: 3
@@ -3406,450 +3536,23 @@ MonoBehaviour:
     width: 90
     height: 60
   m_GridResolution: 2.6179938
---- !u!114 &1757702590
+--- !u!114 &1840565454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757702587}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Record: 0
-  NumStepsToRecord: 0
-  DemonstrationName: Problem_A
-  DemonstrationDirectory: Assets/Demonstrations/
---- !u!1001 &1794186646
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 2
-    m_TransformParent: {fileID: 679774806}
-    m_Modifications:
-    - target: {fileID: 2934782241696393802, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_MaxNumObservables
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: MaxStep
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: Settings
-      value: 
-      objectReference: {fileID: 1574236048}
-    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: stepCost
-      value: -0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030784, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: maxCapacity
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030785, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_BehaviorName
-      value: UnlimitedCapacity
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030785, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_BrainParameters.VectorObservationSize
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030785, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_BrainParameters.NumStackedVectorObservations
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -34.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -9.559753
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_Name
-      value: Agent (9)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_ObservationShape
-      value: 4 channels x 21 width x 17 height
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_GridShape.NumChannels
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_Debug_GridBufferDrawer.Editor
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_GameObjectSettingsList.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_GameObjectSettingsList.Array.data[3].Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548054832699030815, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5548054832699030812, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-    - {fileID: 5548054832699030813, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-    m_AddedGameObjects: []
-  m_SourcePrefab: {fileID: 100100000, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
---- !u!4 &1794186647 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 1794186646}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1794186648 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5548054832699030791, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-  m_PrefabInstance: {fileID: 1794186646}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1794186649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794186648}
+  m_GameObject: {fileID: 1840565452}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1794186650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794186648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ObservationShape: 5 channels x 30 width x 20 height
-  m_SensorName: GridSensor
-  m_ObservationStacks: 1
-  m_CompressionType: 1
-  m_ObservationType: 0
-  m_ChannelLabels: []
-  m_Debug_CreateSensorOnAwake: 0
-  m_Debug_CreateSensorOnValidate: 1
-  m_Debug_FrameInterval: 1
-  m_Debug_DrawGridBuffer: 0
-  m_Debug_GridBufferDrawer:
-    Context: {fileID: 0}
-    Editor: {fileID: 0}
-    GridSizeRatio: 0
-    IsEnabled: 0
-    IsStandby: 0
-  m_GridShape:
-    NumChannels: 5
-    Width: 30
-    Height: 20
-  m_ClearCacheOnReset: 0
-  m_ColliderBufferSize: 64
-  m_TmpObjectToAdd: {fileID: 0}
-  m_GameObjectSettingsList:
-  - Tag: agent
-    Enabled: 1
-    DetectionType: 0
-    Modifier: 0
-    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.6638494, g: 0.07689534, b: 0.9231095, a: 1}
-    m_DetectorSpaceType: 1
-  - Tag: objective
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 0
-    Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
-    m_UserObservables:
-      m_Observables:
-      - Name: Detected
-        Type: 2
-        Index: 0
-        Enabled: 1
-        Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
-      - Name: NotDetected
-        Type: 2
-        Index: 1
-        Enabled: 1
-        Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
-    m_Observables:
-    - Name: Detected
-      Type: 2
-      Index: 0
-      Enabled: 1
-      Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
-    - Name: NotDetected
-      Type: 2
-      Index: 1
-      Enabled: 1
-      Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
-    m_DetectorSpaceType: 1
-  - Tag: station
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 0
-    Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.86881053, g: 0.06478016, b: 0.10850443, a: 1}
-    m_DetectorSpaceType: 1
-  - Tag: wall
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 0
-    Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.99570894, g: 0.16242209, b: 0.8263045, a: 1}
-    m_DetectorSpaceType: 1
-  m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
-  m_CellArc: 3
-  m_LatAngleNorth: 45
-  m_LatAngleSouth: 15
-  m_LonAngle: 45
-  m_MinDistance: 1
-  m_MaxDistance: 50
-  m_DistanceNormalization:
-    Value: 1
-    Weighted: 0
-  m_LonLatRect:
-    serializedVersion: 2
-    x: -45
-    y: -15
-    width: 90
-    height: 60
-  m_GridResolution: 2.6179938
---- !u!114 &1794186651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794186648}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Record: 0
-  NumStepsToRecord: 0
-  DemonstrationName: Problem_A
-  DemonstrationDirectory: Assets/Demonstrations/
 --- !u!4 &1840575146 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5548054832699030788, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
   m_PrefabInstance: {fileID: 1088510840}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1840575156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088510841}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Record: 0
-  NumStepsToRecord: 0
-  DemonstrationName: Problem_A
-  DemonstrationDirectory: Assets/Demonstrations/
---- !u!114 &1840575157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088510841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ObservationShape: 5 channels x 30 width x 20 height
-  m_SensorName: GridSensor
-  m_ObservationStacks: 1
-  m_CompressionType: 1
-  m_ObservationType: 0
-  m_ChannelLabels: []
-  m_Debug_CreateSensorOnAwake: 0
-  m_Debug_CreateSensorOnValidate: 1
-  m_Debug_FrameInterval: 1
-  m_Debug_DrawGridBuffer: 0
-  m_Debug_GridBufferDrawer:
-    Context: {fileID: 0}
-    Editor: {fileID: 0}
-    GridSizeRatio: 0
-    IsEnabled: 0
-    IsStandby: 0
-  m_GridShape:
-    NumChannels: 5
-    Width: 30
-    Height: 20
-  m_ClearCacheOnReset: 0
-  m_ColliderBufferSize: 64
-  m_TmpObjectToAdd: {fileID: 0}
-  m_GameObjectSettingsList:
-  - Tag: agent
-    Enabled: 1
-    DetectionType: 0
-    Modifier: 0
-    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.6638494, g: 0.07689534, b: 0.9231095, a: 1}
-    m_DetectorSpaceType: 1
-  - Tag: objective
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 0
-    Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
-    m_UserObservables:
-      m_Observables:
-      - Name: Detected
-        Type: 2
-        Index: 0
-        Enabled: 1
-        Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
-      - Name: NotDetected
-        Type: 2
-        Index: 1
-        Enabled: 1
-        Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
-    m_Observables:
-    - Name: Detected
-      Type: 2
-      Index: 0
-      Enabled: 1
-      Color: {r: 0.50933427, g: 0.30675015, b: 0.7843846, a: 1}
-    - Name: NotDetected
-      Type: 2
-      Index: 1
-      Enabled: 1
-      Color: {r: 0.59022826, g: 0.07829189, b: 0.27360013, a: 1}
-    m_DetectorSpaceType: 1
-  - Tag: station
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 0
-    Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.86881053, g: 0.06478016, b: 0.10850443, a: 1}
-    m_DetectorSpaceType: 1
-  - Tag: wall
-    Enabled: 1
-    DetectionType: 2
-    Modifier: 0
-    Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
-    m_UserObservables:
-      m_Observables: []
-    m_Observables:
-    - Name: Distance
-      Type: 0
-      Index: -1
-      Enabled: 1
-      Color: {r: 0.99570894, g: 0.16242209, b: 0.8263045, a: 1}
-    m_DetectorSpaceType: 1
-  m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
-  m_CellArc: 3
-  m_LatAngleNorth: 45
-  m_LatAngleSouth: 15
-  m_LonAngle: 45
-  m_MinDistance: 1
-  m_MaxDistance: 50
-  m_DistanceNormalization:
-    Value: 1
-    Weighted: 0
-  m_LonLatRect:
-    serializedVersion: 2
-    x: -45
-    y: -15
-    width: 90
-    height: 60
-  m_GridResolution: 2.6179938
 --- !u!114 &1840575158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3862,6 +3565,130 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8a8c7f477e67846951e95d4e075347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1840575168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088510841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ObservationShape: 5 channels x 30 width x 20 height
+  m_SensorName: GridSensor
+  m_ObservationStacks: 1
+  m_CompressionType: 1
+  m_ObservationType: 0
+  m_ChannelLabels: []
+  m_Debug_CreateSensorOnAwake: 0
+  m_Debug_CreateSensorOnValidate: 1
+  m_Debug_FrameInterval: 1
+  m_Debug_DrawGridBuffer: 0
+  m_Debug_GridBufferDrawer:
+    Context: {fileID: 0}
+    Editor: {fileID: 0}
+    GridSizeRatio: 0
+    IsEnabled: 0
+    IsStandby: 0
+  m_GridShape:
+    NumChannels: 5
+    Width: 30
+    Height: 20
+  m_ClearCacheOnReset: 0
+  m_ColliderBufferSize: 64
+  m_TmpObjectToAdd: {fileID: 0}
+  m_GameObjectSettingsList:
+  - Tag: objective
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 1526808685384986185, guid: b59e4a7fd76af471cadd16e90133a084, type: 3}
+    m_UserObservables:
+      m_Observables:
+      - Name: Detected
+        Type: 2
+        Index: 0
+        Enabled: 1
+        Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
+      - Name: NotDetected
+        Type: 2
+        Index: 1
+        Enabled: 1
+        Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
+    m_Observables:
+    - Name: Detected
+      Type: 2
+      Index: 0
+      Enabled: 1
+      Color: {r: 0.9392418, g: 0.8462064, b: 0.3593053, a: 1}
+    - Name: NotDetected
+      Type: 2
+      Index: 1
+      Enabled: 1
+      Color: {r: 0.20566066, g: 0.18428104, b: 0.8881367, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: station
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 3598359403779466750, guid: e403b8116b6698a499ff17806152b207, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.31324813, g: 0.6001775, b: 0.12942569, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: wall
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.0022534956, g: 0.49612084, b: 0.74995303, a: 1}
+    m_DetectorSpaceType: 1
+  - Tag: agent
+    Enabled: 1
+    DetectionType: 0
+    Modifier: 1
+    Detectable: {fileID: 5548054832699030810, guid: 429b26a976abaa049b6a6b2fa54ee515, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 0.72970843, g: 0.30203995, b: 0.70245916, a: 1}
+    m_DetectorSpaceType: 1
+  m_SensorResolution: 2.62 meters (3.00 deg at 50.00 meters)
+  m_CellArc: 3
+  m_LatAngleNorth: 45
+  m_LatAngleSouth: 15
+  m_LonAngle: 45
+  m_MinDistance: 1
+  m_MaxDistance: 50
+  m_DistanceNormalization:
+    Value: 1
+    Weighted: 0
+  m_LonLatRect:
+    serializedVersion: 2
+    x: -45
+    y: -15
+    width: 90
+    height: 60
+  m_GridResolution: 2.6179938
 --- !u!1 &1956702417
 GameObject:
   m_ObjectHideFlags: 0

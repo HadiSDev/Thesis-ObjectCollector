@@ -10,23 +10,20 @@ EditorBuildSettings:
     guid: 9c6ff482aefcb4942a2ede837510c3aa
   - enabled: 1
     path: Assets/Scenes/Problem A/Full/Problem_A_full_1.unity
-    guid: 4e3a2058677df134d91d8e86329f4711
+    guid: 4831b09bf79ee7942883fd8962372060
   - enabled: 1
     path: Assets/Scenes/Problem A/Full/Problem_A_full_2.unity
-    guid: 3debbb617a4a4bd47bf5cdb6e297247a
-  - enabled: 1
-    path: Assets/Scenes/Problem A/Full/Problem_A_full_3.unity
-    guid: 175da41d7ac105b4cae94b0217ff7f95
-  - enabled: 1
-    path: Assets/Scenes/Problem A/Full/Problem_A_full_4.unity
-    guid: e354330ac48d25543bf672aae83610c3
-  - enabled: 1
-    path: Assets/Scenes/Problem A/Full/Problem_A_full_5.unity
-    guid: 7242f89cc607f5e4490c616996656ed5
-  - enabled: 1
-    path: Assets/Scenes/Problem A/Full/Problem_A_full_2_test.unity
     guid: 54acd55741689e94c905203d05aec254
   - enabled: 1
+    path: Assets/Scenes/Problem A/Full/Problem_A_full_3.unity
+    guid: 063a0a47678ab8b4998c771c4bb715b4
+  - enabled: 1
+    path: Assets/Scenes/Problem A/Full/Problem_A_full_4.unity
+    guid: 42274fd953e886c44aacdf43603cacef
+  - enabled: 1
+    path: Assets/Scenes/Problem A/Full/Problem_A_full_5.unity
+    guid: 64940f688664bd847b042d98997b3dcd
+  - enabled: 1
     path: Assets/Scenes/Problem A/Full/Problem_A_full_10.unity
-    guid: 774c7787dfeec0a48894aa35c2f42449
+    guid: c53622c09536040449300c6e7689e5f5
   m_configObjects: {}
