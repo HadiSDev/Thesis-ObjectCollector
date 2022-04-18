@@ -23,10 +23,9 @@ public class ObjectCollectorAgent : Agent, IStats
     private Vector3 prev_pos;
     private DateTime m_Start;
     private int m_Count;
-    public float AgentTravelledDist;
-    public int AgentStepCount;
-    public float AgentCumulativeReward;
-    public ObjectCollectorSettings Settings;
+    [HideInInspector] public float AgentTravelledDist;
+    [HideInInspector] public int AgentStepCount;
+    [HideInInspector] public float AgentCumulativeReward;
 
     // Punishment Settings
     public float stepCost = -0.001f;
@@ -45,6 +44,7 @@ public class ObjectCollectorAgent : Agent, IStats
     EnvironmentParameters m_ResetParams;
     private ObjectCollectorArea m_ObjectCollectorArea;
     private BufferSensorComponent _bufferSensorStations;
+    private GameObject Station { get; set; }
     
     const string k_MaxCapacityFlag = "--max-capacity";
 
@@ -55,7 +55,18 @@ public class ObjectCollectorAgent : Agent, IStats
         {
             var agentPos = transform.position;
             var areaPos = m_ObjectCollectorArea.transform.position;
-            return new Vector3(Normalize(agentPos.x - areaPos.x), Normalize(agentPos.z - areaPos.z));
+            return new Vector3(NormalizeX(agentPos.x - areaPos.x), NormalizeZ(agentPos.z - areaPos.z));
+        }
+    }
+    
+    [Observable(nameof(StationPosDelta), numStackedObservations: 9)]
+    Vector2 StationPosDelta
+    {
+        get
+        {
+            var agentPos = transform.position;
+            var stationPos = Station.transform.position;
+            return new Vector3(NormalizeX(stationPos.x - agentPos.x), NormalizeZ(stationPos.z - agentPos.z));
         }
     }
     
@@ -82,7 +93,7 @@ public class ObjectCollectorAgent : Agent, IStats
         
         m_ObjectCollectorSettings = FindObjectOfType<ObjectCollectorSettings>();
         m_ObjectCollectorArea = FindObjectOfType<ObjectCollectorArea>();
-
+        Station = GameObject.FindGameObjectWithTag("station");
         var bufferSensors = GetComponents<BufferSensorComponent>();
 
         if (bufferSensors != null)
@@ -114,6 +125,16 @@ public class ObjectCollectorAgent : Agent, IStats
     private float Normalize(float currentValue, float minValue=-50f, float maxValue=50f)
     {
         return (currentValue - minValue) / (maxValue - minValue);
+    }
+
+    private float NormalizeX(float currentValue, float minValue=-147f, float maxValue=147f)
+    {
+        return Normalize(currentValue, minValue, maxValue);
+    }
+    
+    private float NormalizeZ(float currentValue, float minValue=-13.4f, float maxValue=13.4f)
+    {
+        return Normalize(currentValue, minValue, maxValue);
     }
 
     public override void CollectObservations(VectorSensor sensor)

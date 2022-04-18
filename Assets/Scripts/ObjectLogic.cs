@@ -9,9 +9,9 @@ public class ObjectLogic : MonoBehaviour
     {
         if (respawn)
         {
-            transform.position = new Vector3(Random.Range(-myArea.range, myArea.range),
+            transform.position = new Vector3(Random.Range(-myArea.rangeX, myArea.rangeX),
                 3f,
-                Random.Range(-myArea.range, myArea.range)) + myArea.transform.position;
+                Random.Range(-myArea.rangeZ, myArea.rangeZ)) + myArea.transform.position;
         }
         else
         {
