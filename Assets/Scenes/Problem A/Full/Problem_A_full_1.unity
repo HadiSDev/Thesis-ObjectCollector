@@ -881,6 +881,30 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 679774806}
     m_Modifications:
+    - target: {fileID: 886362068338727017, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_LonLatRect.y
+      value: -49.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 886362068338727017, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_LatAngleNorth
+      value: 6.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 886362068338727017, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_GridShape.Height
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 886362068338727017, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_ObservationShape
+      value: 5 channels x 21 width x 19 height
+      objectReference: {fileID: 0}
+    - target: {fileID: 886362068338727017, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_LonLatRect.height
+      value: 57
+      objectReference: {fileID: 0}
+    - target: {fileID: 886362068338727017, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_Debug_GridBufferDrawer.Editor
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1859550319030650438, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
       propertyPath: m_Name
       value: Catamaran_vehicle_agent
@@ -932,6 +956,10 @@ PrefabInstance:
     - target: {fileID: 2063243997762391141, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
       propertyPath: moveSpeed
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767291856129864340, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_DetectableTags.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4088688862985068048, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
       propertyPath: m_ObservableAttributeHandling
