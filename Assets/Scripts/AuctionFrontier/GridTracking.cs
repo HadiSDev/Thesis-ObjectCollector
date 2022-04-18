@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using MBaske.Sensors.Grid;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,15 +10,15 @@ namespace DefaultNamespace
 {
     public class GridTracking : MonoBehaviour
     {
-        public int width;
-        public int height;
-        public int cellSize;
+        private int width = 60;
+        private int height = 6;
+        private int cellSize = 5;
         public static int TotalNumberOfCells;
 
         private Mesh m_Mesh;
         private static GridWorld m_GridWorld;
-        private static Vector3 _cellsizeVec = new Vector3(5f, 1f, 5f);
-        private static Vector3 _offsetVec = new Vector3(50f, 0f, 50f);
+        private static Vector3 _cellsizeVec;
+        private static Vector3 _offsetVec;
         
         public static HashSet<Vector3> FRONTIERS = new HashSet<Vector3>();
 
@@ -28,7 +29,22 @@ namespace DefaultNamespace
         {
             m_Mesh = new Mesh();
             GetComponent<MeshFilter>().mesh = m_Mesh;
-            SetGridWorld(new GridWorld(width, height, cellSize));
+            var grid2d = GetComponent<GridSensorComponent2D>();
+            if (grid2d != null)
+            {
+                Vector3 GridDim = grid2d.GetNumCells();
+                width = (int) GridDim.x;
+                height = (int) GridDim.z;
+                cellSize = (int) grid2d.CellSize;
+                
+                SetGridWorld(new GridWorld(width, height, cellSize));
+            }
+            else
+            {
+                SetGridWorld(new GridWorld(width, height, cellSize));
+            }
+            _offsetVec = new Vector3(m_GridWorld.OffsetX(), 0f, m_GridWorld.OffsetZ());
+            _cellsizeVec = new Vector3(grid2d.CellSize, 1f, grid2d.CellSize);
             m_CellState = new AuctionFrontierUtil.CELL_STATE[height, width];
             TotalNumberOfCells = width * height;
         }
@@ -48,7 +64,7 @@ namespace DefaultNamespace
 
         public static void GetXZ(Vector3 wolrdPosition, out int x, out int z)
         {
-            m_GridWorld.GetXZOffset(wolrdPosition, m_GridWorld.Offset(), out x, out z);
+            m_GridWorld.GetXZOffset(wolrdPosition, out x, out z);
         }
         
 
@@ -58,6 +74,11 @@ namespace DefaultNamespace
         }
 
         public void SetValue(Vector3 worldPosition, int value)
+        {
+            m_GridWorld.SetValue(worldPosition, value);
+        }
+        
+        public static void SetValueFromWorldPos(Vector3 worldPosition, int value)
         {
             m_GridWorld.SetValue(worldPosition, value);
         }
@@ -75,6 +96,16 @@ namespace DefaultNamespace
         public int GetGridValue(int x, int z)
         {
             return m_GridWorld.GetGridValue(x, z);
+        }
+
+        public static float OffsetX()
+        {
+            return m_GridWorld.OffsetX();
+        }
+        
+        public static float OffsetZ()
+        {
+            return m_GridWorld.OffsetZ();
         }
 
         public static bool GridWorldComplete()
@@ -95,21 +126,21 @@ namespace DefaultNamespace
                 foreach (var cell in adj_cells)
                 {
                     m_GridWorld.SetValue((int) cell.x, (int) cell.z, 1);
-                    m_CellState[(int)cell.x, (int)cell.z] = AuctionFrontierUtil.CELL_STATE.MAP_OPEN;
+                    m_CellState[(int)cell.z, (int)cell.x] = AuctionFrontierUtil.CELL_STATE.MAP_OPEN;
                 }
             }
         }
 
         public static void GridTrackingReset()
         {
-            m_CellState = new AuctionFrontierUtil.CELL_STATE[(int) GetWidth(),(int) GetHeight()];
+            m_CellState = new AuctionFrontierUtil.CELL_STATE[(int) GetHeight(),(int) GetWidth()];
             m_GridWorld.ResetGrid();
             MarkStationsInGrid();
         }
 
         public static Vector3 WFD(Vector3 worldPosition, float drawDuration = 1f)
         {
-            var frontier_size_limit = 25; // To allow for more frontier points
+            var frontier_size_limit = 10; // To allow for more frontier points
             var queue_m = new Queue<Vector3>(); 
             int x, z;
             GetXZ(worldPosition, out x, out z);
@@ -145,8 +176,8 @@ namespace DefaultNamespace
                     
                     // Extract connected frontier cells (Cap frontier to atmost 10 connected points)
                     while (queue_f.Count > 0 && counter < frontier_size_limit)
+                    //while (queue_f.Count > 0)
                     {
-                        
                         var cell = queue_f.Dequeue();
                         var cell_state = CellState[(int)cell.z, (int)cell.x];
                         if (cell_state == AuctionFrontierUtil.CELL_STATE.MAP_CLOSE 
@@ -165,12 +196,16 @@ namespace DefaultNamespace
                                 var w_cellstate = CellState[(int)w.z, (int)w.x];
                                 if (w_cellstate == AuctionFrontierUtil.CELL_STATE.MAP_OPEN)
                                 {
+                                    /*
+                                    queue_f.Enqueue(w);
+                                    counter++;
+                                    */
                                     if (counter < frontier_size_limit)
                                     {
                                         queue_f.Enqueue(w);
                                         counter++;
                                     }
-
+                                    
                                     CellState[(int)w.z, (int)w.x] = AuctionFrontierUtil.CELL_STATE.FRONTIER_OPEN;
                                 }
                             }
@@ -180,10 +215,11 @@ namespace DefaultNamespace
                     }
 
                     // Calculate median for new frontier and add to list over frontiers
-                    var tmp = new_frontier.OrderBy(x => x.Item2).ToList();
+                    var tmp = new_frontier.OrderBy(x => x.Item2).ToList(); // NOT USED
                     if (tmp.Count > 0)
                     {
-                        var median = tmp[tmp.Count / 2];
+                        var median = new_frontier[new_frontier.Count/2];
+                        //var median = tmp[tmp.Count / 2];
                         Debug.DrawRay(GridCoordToWorld(median.Item1), Vector3.up * 10f, Color.red, drawDuration);
                         frontier.Add(median);
                         FRONTIERS.Add(median.Item1);
@@ -287,11 +323,16 @@ namespace DefaultNamespace
             return m_GridWorld.GetAdjacentCells(x, z);
         }
 
+        public static Vector3 GetCellFromWorldCoord(Vector3 worldPosition)
+        {
+            return m_GridWorld.GetXZOffset(worldPosition);
+        }
 
         public static Vector3 GridCoordToWorld(Vector3 cell)
         {
             return Vector3.Scale(cell, _cellsizeVec) - _offsetVec;
         }
+        
 
         public static float GetHeight()
         {
@@ -302,7 +343,7 @@ namespace DefaultNamespace
         {
             return m_GridWorld.GetWidth();
         }
-
+        
         public int UpdateGridWithSensor(Transform agent, float longitude, float range, int value)
         {
             var pos = agent.position;
@@ -320,11 +361,11 @@ namespace DefaultNamespace
             float[] zs = { v1.z+pos.z, v2.z+pos.z, pos.z };
             float[] xs = { v1.x+pos.x, v2.x+pos.x, pos.x };
             
-            var z_min = (int) Math.Clamp(zs.Min() + m_GridWorld.Offset(), 0f, 99f)/cellSize;
-            var z_max = (int) Math.Clamp(zs.Max() + m_GridWorld.Offset(), 0f, 99f)/cellSize;
+            var z_min = (int) Math.Clamp(zs.Min() + m_GridWorld.OffsetZ(), 0f, m_GridWorld.OffsetZ()*2-1)/cellSize;
+            var z_max = (int) Math.Clamp(zs.Max() + m_GridWorld.OffsetZ(), 0f, m_GridWorld.OffsetZ()*2-1)/cellSize;
 
-            var x_min = (int) Math.Clamp(xs.Min() + m_GridWorld.Offset(), 0f, 99f)/cellSize;
-            var x_max = (int) Math.Clamp(xs.Max() + m_GridWorld.Offset(), 0f, 99f)/cellSize;
+            var x_min = (int) Math.Clamp(xs.Min() + m_GridWorld.OffsetX(), 0f, m_GridWorld.OffsetX()*2-1)/cellSize;
+            var x_max = (int) Math.Clamp(xs.Max() + m_GridWorld.OffsetX(), 0f, m_GridWorld.OffsetX()*2-1)/cellSize;
             
             Vector3 coord;
             var dist = 0f;
@@ -334,6 +375,7 @@ namespace DefaultNamespace
             //Debug.Log($"Z - min {z_min}  max {z_max}");
             //Debug.Log($"X - min {x_min}  max {x_max}");
 
+            
             int num_discovered_cells = 0;
             for (int z = z_min; z <= z_max; z++)
             {
@@ -346,6 +388,7 @@ namespace DefaultNamespace
                         FRONTIERS.Remove(coord);
                     }
 
+                    Debug.DrawRay(pos, coord - pos, Color.cyan, .5f);
                     if(m_GridWorld.GetGridValue(x, z) > 0) continue;
                     
                     // Check if point between is in FOV
@@ -354,15 +397,18 @@ namespace DefaultNamespace
                     dist = Vector3.Distance(pos, coord);
                     
                     
-                    /* DEBUGGING */
-                    //Debug.Log($"Angle {angle1}  Angle2 {angle2}");
-                    //Debug.DrawRay(pos, coord-pos, Color.cyan, .5f);
-                    // Debug.DrawRay(coord, new Vector3(0f, 10f, 0f), Color.yellow, 6f); // DRAW Points instead
+
                     
                     if (angle1 < longitude && angle2 < longitude && dist <= range)
                     {
-                        // Debug.Log($"******************************'");
                         num_discovered_cells++;
+                        
+                        /* DEBUGGING */
+                        //Debug.Log($"Angle {angle1}  Angle2 {angle2}");
+                        //Debug.DrawRay(coord, new Vector3(0f, 10f, 0f), Color.yellow, 6f); // DRAW Points instead
+                        //Debug.Log($"******************************'");
+                        //Debug.DrawRay(pos, coord - pos, Color.cyan, .5f);
+
                         m_GridWorld.SetValue(x, z, value);
                         m_CellState[z, x] = AuctionFrontierUtil.CELL_STATE.MAP_OPEN;
                     }

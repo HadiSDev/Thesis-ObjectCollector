@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using CustomDetectableObjects;
 using DefaultNamespace;
 using MBaske.Sensors.Grid;
 using Unity.MLAgents;
@@ -15,7 +16,9 @@ public class AuctionFrontierCollectorArea : Area
 {
     public GameObject objective;
     public int numObjectives;
-    public float range;
+    public float rangeX;
+    public float rangeZ;
+
     public NavMeshObstacle obstacle;
     public int numObstacles;
     public GameObject[] stations;
@@ -55,12 +58,12 @@ public class AuctionFrontierCollectorArea : Area
 
     void CreateObjectives(int num, GameObject type)
     {
-        Debug.Log("Creating objectives");
+        //Debug.Log("Creating objectives");
         for (int i = 0; i < num; i++)
         {
-            GameObject f = Instantiate(type, new Vector3(Random.Range(-range, range), 1f,
-                Random.Range(-range, range)) + transform.position,
-                Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 00f)));
+            GameObject f = Instantiate(type, new Vector3(Random.Range(-rangeX, rangeX), 1f,
+                Random.Range(-rangeZ, rangeZ)) + transform.position,
+                Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 0f)));
             f.GetComponent<AuctionFrontierObjectLogic>().myArea = this;
             m_Objectives.Add(f);
         }
@@ -68,14 +71,18 @@ public class AuctionFrontierCollectorArea : Area
 
     public void ResetObjectives()
     {
+        Debug.Log("Reseting objectives...");
         foreach (var obj in m_Objectives)
         {
+            var detection = obj.GetComponent<DetectableVisibleObject>();
+            detection.isDetected = false;
+            detection.isNotDetected = true;
             obj.transform.position = new Vector3(
-                Random.Range(-range, range),
-                1f,
-                Random.Range(-range, range)) + transform.position;
+                                         Random.Range(-rangeX, rangeX),
+                                         1f, 
+                                         Random.Range(-rangeZ, rangeZ)) 
+                                     + transform.position;
             obj.SetActive(true);
-            
         }
     }
     
@@ -95,8 +102,8 @@ public class AuctionFrontierCollectorArea : Area
             {
                 spawnAttempts++;
                 obstacle.transform.localScale = new Vector3(1f, Random.Range(0.8f, 10f), Random.Range(0.8f, 10f));
-                position = new Vector3(Random.Range(-range, range), 1f,
-                    Random.Range(-range, range)) + transform.position;
+                position = new Vector3(Random.Range(-rangeX, rangeX), 1f,
+                    Random.Range(-rangeZ, rangeZ))  + transform.position;
                 rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 90f));
 
                 validPosition = true;
@@ -133,11 +140,11 @@ public class AuctionFrontierCollectorArea : Area
             }
             else
             {
-                agent.transform.position = new Vector3(Random.Range(-range, range), 1f,
-                    Random.Range(-range, range))  + transform.position;
+                agent.transform.position = new Vector3(Random.Range(-rangeX, rangeX), 1f,
+                    Random.Range(-rangeZ, rangeZ))  + transform.position;
             }
 
-            agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
+            agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 180)));
             idx++;
         }
 

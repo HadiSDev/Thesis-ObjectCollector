@@ -47,6 +47,7 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
 
     public void EnvironmentReset()
     {
+        Debug.Log("Reset environment...");
         GridTracking.GridTrackingReset();
         if (m_Is_evaluating == false || m_Counter < sampleSize)
         {
@@ -83,7 +84,7 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
     public void Update()
     {
         // Actively listen if episode is finished
-        if (GameObject.FindGameObjectsWithTag("agent").Length == 0 && GridTracking.GridWorldComplete())
+        if (GameObject.FindGameObjectsWithTag("agent").Length == 0 || GridTracking.GridWorldComplete())
         {
             EnvironmentReset();
         }
@@ -94,10 +95,15 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
         
         foreach (var area in listArea)
         {
-
             foreach (var agent in agents)
             {
-                if (agent.activeSelf) area.UpdateGridWorld(agent);
+                if (agent.activeSelf)
+                {
+                    area.UpdateGridWorld(agent);
+                    GridTracking.SetValueFromWorldPos(agent.transform.position, 1);
+                    //var pos = GridTracking.GetCellFromWorldCoord(agent.transform.position);
+                }
+
             }
         }
         

@@ -111,6 +111,11 @@ namespace MBaske.Sensors.Grid
         [Tooltip("The number of grid cells per axis.")]
         private Vector3Int m_NumCells = new Vector3Int(20, 1, 20);
 
+        public Vector3 GetNumCells()
+        {
+            return m_NumCells;
+        }
+
         private void OnNumCellsChange()
         {
             Bounds b = m_EditorBounds;

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -6,8 +7,8 @@ namespace DefaultNamespace
     public static class AuctionFrontierUtil
     {
         private static int nextId = -1;
-        private static float env_diagonal_distance = 141.42f;
-        public static Queue<GameObject> DISCOVERED_TARGETS = new Queue<GameObject>();
+        private static float env_diagonal_distance = math.sqrt(math.pow(GridTracking.OffsetX(),2) + math.pow(GridTracking.OffsetZ(),2));
+        public static HashSet<GameObject> DISCOVERED_TARGETS = new HashSet<GameObject>();
 
         public static GameObject GetNearestDiscoveredObject(Vector3 worldPosition)
         {
@@ -54,7 +55,7 @@ namespace DefaultNamespace
         public static float CalculateAgentBid(Vector3 worldPosition, Vector3 targetPosition, float explorerRate, float capacityRatio)
         {
             var distance = Vector3.Distance(worldPosition, targetPosition);
-            return (env_diagonal_distance - distance) * (1f - explorerRate) * (1f - capacityRatio); 
+            return (env_diagonal_distance - distance) * (0.01f + explorerRate) * (1f - capacityRatio); 
         }
 
         public enum AuctionStage

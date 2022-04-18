@@ -11,7 +11,9 @@ namespace DefaultNamespace
     // Implementation by Code Monkey
     public class GridWorld
     {
-        private float m_Offset = 50f;
+        private float m_OffsetX = 150f;
+        private float m_OffsetZ = 15f;
+
         private int m_Width;
         private int m_Height;
         private float m_CellSize;
@@ -61,8 +63,8 @@ namespace DefaultNamespace
             m_Width = width;
             m_Height = height;
             m_CellSize = cellSize;
-                m_GridArray = new int[m_Width, m_Height];
-                m_TextArray = new TextMesh[m_Width, m_Height];
+                m_GridArray = new int[m_Height, m_Width];
+                m_TextArray = new TextMesh[m_Height, m_Width];
 
             for (int z = 0; z < m_GridArray.GetLength(0); z++)
             {
@@ -131,32 +133,24 @@ namespace DefaultNamespace
 
         }
         
-        
-        private void GetXY(Vector3 worldPosition, out int x, out int y)
-        {
-            x = Mathf.FloorToInt(worldPosition.x / m_CellSize);
-            y = Mathf.FloorToInt(worldPosition.y / m_CellSize);
-        }
-        
-        
         private void GetXZ(Vector3 worldPosition, out int x, out int z)
         {
             x = Mathf.FloorToInt(worldPosition.x / m_CellSize);
             z = Mathf.FloorToInt(worldPosition.z / m_CellSize);
         }
         
-        public void GetXZOffset(Vector3 worldPosition, float offset, out int x, out int z)
+        public void GetXZOffset(Vector3 worldPosition, out int x, out int z)
         {
-            x = Mathf.FloorToInt((worldPosition.x + offset) / m_CellSize);
-            z = Mathf.FloorToInt((worldPosition.z + offset) / m_CellSize);
+            x = Mathf.FloorToInt((worldPosition.x + m_OffsetX) / m_CellSize);
+            z = Mathf.FloorToInt((worldPosition.z + m_OffsetZ) / m_CellSize);
         }
         
-        public Vector3 GetXZOffset(Vector3 worldPosition, float offset)
+        public  Vector3 GetXZOffset(Vector3 worldPosition)
         {
-            var x = Mathf.FloorToInt((worldPosition.x + offset) / m_CellSize);
-            var z = Mathf.FloorToInt((worldPosition.z + offset) / m_CellSize);
+            var x = Mathf.FloorToInt((worldPosition.x + m_OffsetX) / m_CellSize);
+            var z = Mathf.FloorToInt((worldPosition.z + m_OffsetZ) / m_CellSize);
             
-            return new Vector3(50, 0, 50);
+            return new Vector3(x, 0, z);
         }
 
         public float GetHeight()
@@ -203,9 +197,14 @@ namespace DefaultNamespace
             }        
         }
 
-        public float Offset()
+        public float OffsetX()
         {
-            return m_Offset;
+            return m_OffsetX;
+        }
+        
+        public float OffsetZ()
+        {
+            return m_OffsetZ;
         }
     }
 }
