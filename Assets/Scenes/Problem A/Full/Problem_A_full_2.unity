@@ -1046,6 +1046,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 3833511133624954985, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_Debug_GridBufferDrawer.Editor
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4088688862985068048, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
       propertyPath: m_ObservableAttributeHandling
       value: 1

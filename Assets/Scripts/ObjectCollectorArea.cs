@@ -25,7 +25,7 @@ public class ObjectCollectorArea : Area
     {
         for (int i = 0; i < num; i++)
         {
-            GameObject f = Instantiate(type, new Vector3(Random.Range(-rangeX, rangeX), 0.5f,
+            GameObject f = Instantiate(type, new Vector3(Random.Range(-rangeX, rangeX), 1f,
                 Random.Range(-rangeZ, rangeZ)) + transform.position,
                 Quaternion.identity);
             f.GetComponent<ObjectLogic>().myArea = this;
@@ -39,7 +39,7 @@ public class ObjectCollectorArea : Area
         {
             obj.transform.position = new Vector3(
                 Random.Range(-rangeX, rangeX),
-                0.5f,
+                1f,
                 Random.Range(-rangeZ, rangeZ)) + transform.position;
             obj.SetActive(true);
             
