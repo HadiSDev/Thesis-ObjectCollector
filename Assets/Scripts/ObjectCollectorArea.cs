@@ -9,8 +9,8 @@ public class ObjectCollectorArea : Area
 {
     public GameObject objective;
     public int numObjectives;
-    public float rangeX;
-    public float rangeZ;
+    public float rangeX = 147f;
+    public float rangeZ = 13.4f;
     public NavMeshObstacle obstacle;
     public int numObstacles;
     public int maxSpawnAttemptsPerObstacle = 10;
@@ -25,7 +25,7 @@ public class ObjectCollectorArea : Area
     {
         for (int i = 0; i < num; i++)
         {
-            GameObject f = Instantiate(type, new Vector3(Random.Range(-rangeX, rangeX), 0.5f,
+            GameObject f = Instantiate(type, new Vector3(Random.Range(-rangeX, rangeX), 1f,
                 Random.Range(-rangeZ, rangeZ)) + transform.position,
                 Quaternion.identity);
             f.GetComponent<ObjectLogic>().myArea = this;
@@ -39,7 +39,7 @@ public class ObjectCollectorArea : Area
         {
             obj.transform.position = new Vector3(
                 Random.Range(-rangeX, rangeX),
-                0.5f,
+                1f,
                 Random.Range(-rangeZ, rangeZ)) + transform.position;
             obj.SetActive(true);
             
@@ -58,9 +58,9 @@ public class ObjectCollectorArea : Area
 
             if (Station != null)
             {
-                var offsetX = Random.Range(-2, 2);
-                var offsetY = Random.Range(-2, 2);
-                agent.transform.position = Station.transform.position + new Vector3(offsetX, 1.5f, offsetY);
+                var offsetX = Random.Range(-50, 50);
+                var offsetZ = Random.Range(-rangeZ, rangeZ);
+                agent.transform.position = new Vector3(offsetX, 2f, offsetZ);
             }
             else
             {

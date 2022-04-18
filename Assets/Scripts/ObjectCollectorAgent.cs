@@ -64,6 +64,10 @@ public class ObjectCollectorAgent : Agent, IStats
     {
         get
         {
+            if (Station == null)
+            {
+                Station = GameObject.FindGameObjectWithTag("station");
+            }
             var agentPos = transform.position;
             var stationPos = Station.transform.position;
             return new Vector3(NormalizeX(stationPos.x - agentPos.x), NormalizeZ(stationPos.z - agentPos.z));
