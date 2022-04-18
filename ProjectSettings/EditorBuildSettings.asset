@@ -13,17 +13,14 @@ EditorBuildSettings:
     guid: 4831b09bf79ee7942883fd8962372060
   - enabled: 1
     path: Assets/Scenes/Problem A/Full/Problem_A_full_2.unity
-    guid: 54acd55741689e94c905203d05aec254
+    guid: 09fc2b88adc84e945816784ac5f257eb
   - enabled: 1
     path: Assets/Scenes/Problem A/Full/Problem_A_full_3.unity
-    guid: 063a0a47678ab8b4998c771c4bb715b4
+    guid: 0fa6e0ebe6f25f1418f121ce8a443157
   - enabled: 1
     path: Assets/Scenes/Problem A/Full/Problem_A_full_4.unity
-    guid: 42274fd953e886c44aacdf43603cacef
+    guid: d28edcc9a39e80b44909c75b9151d507
   - enabled: 1
     path: Assets/Scenes/Problem A/Full/Problem_A_full_5.unity
-    guid: 64940f688664bd847b042d98997b3dcd
-  - enabled: 1
-    path: Assets/Scenes/Problem A/Full/Problem_A_full_10.unity
-    guid: c53622c09536040449300c6e7689e5f5
+    guid: d16c7ef5e9b67c747ab5fe3f765a3b51
   m_configObjects: {}

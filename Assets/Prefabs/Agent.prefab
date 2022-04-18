@@ -613,7 +613,6 @@ MonoBehaviour:
   AgentTravelledDist: 0
   AgentStepCount: 0
   AgentCumulativeReward: 0
-  Settings: {fileID: 0}
   stepCost: -0.001
   maxCapacity: 25
   markDetectedObjects: 0

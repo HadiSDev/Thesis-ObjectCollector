@@ -9,8 +9,8 @@ public class ObjectCollectorArea : Area
 {
     public GameObject objective;
     public int numObjectives;
-    public float rangeX;
-    public float rangeZ;
+    public float rangeX = 147f;
+    public float rangeZ = 13.4f;
     public NavMeshObstacle obstacle;
     public int numObstacles;
     public int maxSpawnAttemptsPerObstacle = 10;
@@ -58,9 +58,9 @@ public class ObjectCollectorArea : Area
 
             if (Station != null)
             {
-                var offsetX = Random.Range(-2, 2);
-                var offsetY = Random.Range(-2, 2);
-                agent.transform.position = Station.transform.position + new Vector3(offsetX, 1.5f, offsetY);
+                var offsetX = Random.Range(-50, 50);
+                var offsetZ = Random.Range(-rangeZ, rangeZ);
+                agent.transform.position = new Vector3(offsetX, 2f, offsetZ);
             }
             else
             {
