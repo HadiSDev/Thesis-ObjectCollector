@@ -25971,7 +25971,7 @@ MonoBehaviour:
   elapsedTime: {fileID: 860333481}
   scoreText: {fileID: 1418304526}
   totalCollected: 0
-  MaxEnvironmentSteps: 10000
+  MaxEnvironmentSteps: 20000
 --- !u!4 &1574236049
 Transform:
   m_ObjectHideFlags: 0

@@ -957,10 +957,18 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 2063243997762391141, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: maxCapacity
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3767291856129864340, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
       propertyPath: m_DetectableTags.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4088688862985068048, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 8d7ff9a1dc435504cbf9f43758d636e3, type: 3}
     - target: {fileID: 4088688862985068048, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
       propertyPath: m_ObservableAttributeHandling
       value: 1
@@ -25773,7 +25781,7 @@ MonoBehaviour:
   elapsedTime: {fileID: 860333481}
   scoreText: {fileID: 1418304526}
   totalCollected: 0
-  MaxEnvironmentSteps: 10000
+  MaxEnvironmentSteps: 20000
 --- !u!4 &1574236049
 Transform:
   m_ObjectHideFlags: 0
