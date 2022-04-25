@@ -9,6 +9,8 @@ namespace DefaultNamespace
         private static int nextId = -1;
         private static float env_diagonal_distance = math.sqrt(math.pow(GridTracking.OffsetX(),2) + math.pow(GridTracking.OffsetZ(),2));
         public static HashSet<GameObject> DISCOVERED_TARGETS = new HashSet<GameObject>();
+        public static bool FINISHED = false;
+        private static int counter;
 
         public static GameObject GetNearestDiscoveredObject(Vector3 worldPosition)
         {
@@ -46,16 +48,16 @@ namespace DefaultNamespace
             }
             return closest.transform.position;
         }
-
+        
         public static int GetNextId()
         {
             return ++nextId;
         }
-
+        
         public static float CalculateAgentBid(Vector3 worldPosition, Vector3 targetPosition, float explorerRate, float capacityRatio)
         {
             var distance = Vector3.Distance(worldPosition, targetPosition);
-            return (env_diagonal_distance - distance) * (0.01f + explorerRate) * (1f - capacityRatio); 
+            return (1 - distance/env_diagonal_distance) + (1-explorerRate) +  (1-capacityRatio) ; 
         }
 
         public enum AuctionStage

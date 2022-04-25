@@ -25,6 +25,7 @@ public class AuctionFrontierCollectorArea : Area
     public int maxSpawnAttemptsPerObstacle = 10;
     private IList<GameObject> m_Objectives = new List<GameObject>();
     private GridTracking m_GridTracking;
+    private List<Vector3> SpawnPositions = new List<Vector3>(){ new Vector3(-3f, 1f, -11.5f), new Vector3(3f, 1f, -11.5f), new Vector3(-3f, 1f, -7.5f), new Vector3(3f, 1f, -7.5f), new Vector3(0f, 1f, -4.5f)};
 
 
     public void Awake()
@@ -32,16 +33,7 @@ public class AuctionFrontierCollectorArea : Area
         m_GridTracking = FindObjectOfType<GridTracking>();
         stations = GameObject.FindGameObjectsWithTag("station");
     }
-
-    public void SetGridWorldValue(Vector3 worldPosition, int value)
-    {
-        m_GridTracking.SetValue(worldPosition, 1);
-    }
-
-    public int GetGridWorldValue(Vector3 worldPosition)
-    {
-        return m_GridTracking.GetGridValue(worldPosition);
-    }
+    
 
     public void UpdateGridWorld(GameObject agent)
     {
@@ -126,9 +118,12 @@ public class AuctionFrontierCollectorArea : Area
     {
         var HasStatioon = stations.Length > 0 ;
         int idx = 0;
+        
         foreach (GameObject agent in agents)
         {
-            agent.SetActive(true);
+            var afa = agent.GetComponent<AuctionFrontierAgent>();
+            afa.ResetAgent();
+            
             if (agent.transform.parent != gameObject.transform)
             {
                 continue;
@@ -136,7 +131,7 @@ public class AuctionFrontierCollectorArea : Area
             
             if (HasStatioon)
             {
-                agent.transform.position = stations[idx % stations.Length].transform.position;
+                agent.transform.position = SpawnPositions[idx % SpawnPositions.Count];
             }
             else
             {
@@ -150,7 +145,12 @@ public class AuctionFrontierCollectorArea : Area
 
         if (m_Objectives.Count > 0)
         {
-            ResetObjectives();
+            foreach (var obj in m_Objectives)
+            {
+                Destroy(obj);
+            }
+            CreateObjectives(numObjectives, objective);
+            //ResetObjectives();
         }
         else
         {

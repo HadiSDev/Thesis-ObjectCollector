@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using CsvHelper;
+using DefaultNamespace;
 using Interfaces;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -41,7 +42,9 @@ namespace Statistics
 
             if (++updateCounter % NumAgents == 0 && IsEvaluating)
             {
+                Debug.Log("Writing to csv...");
                 AppendStatToRecordList(id, elapTime);
+                AuctionFrontierUtil.FINISHED = true;
                 plotResults();
                 PrepareEpisodeStats();
             }
@@ -57,7 +60,7 @@ namespace Statistics
         public static void plotResults()
         {
             Directory.CreateDirectory( BASE_DIRECTORY + WriteDirectory);
-            using (var writer = new StreamWriter($"./Assets/Scripts/Statistics/{WriteDirectory}/{FileName}.csv"))
+            using (var writer = new StreamWriter($"./Assets/Scripts/Statistics/{WriteDirectory}/{FileName}.csv", true))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
                 csv.WriteRecords(m_Records);
