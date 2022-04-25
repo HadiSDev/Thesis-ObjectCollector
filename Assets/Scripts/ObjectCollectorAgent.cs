@@ -349,6 +349,7 @@ public class ObjectCollectorAgent : Agent, IStats
         {
             StatisticsWriter.AppendStatToRecordList(m_Count, DateTime.Now-m_Start); // Add record to list
             StatisticsWriter.PrepareEpisodeStats();                                         // Reset lists
+            m_ObjectCollectorSettings.m_AgentGroup.AddGroupReward(1f);
             m_ObjectCollectorSettings.m_AgentGroup.EndGroupEpisode();
             m_ObjectCollectorSettings.EnvironmentReset();
         }

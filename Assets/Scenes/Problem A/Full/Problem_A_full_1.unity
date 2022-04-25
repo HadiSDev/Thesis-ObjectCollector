@@ -881,6 +881,30 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 679774806}
     m_Modifications:
+    - target: {fileID: 886362068338727017, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_LonLatRect.y
+      value: -49.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 886362068338727017, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_LatAngleNorth
+      value: 6.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 886362068338727017, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_GridShape.Height
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 886362068338727017, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_ObservationShape
+      value: 5 channels x 21 width x 19 height
+      objectReference: {fileID: 0}
+    - target: {fileID: 886362068338727017, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_LonLatRect.height
+      value: 57
+      objectReference: {fileID: 0}
+    - target: {fileID: 886362068338727017, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_Debug_GridBufferDrawer.Editor
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1859550319030650438, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
       propertyPath: m_Name
       value: Catamaran_vehicle_agent
@@ -933,6 +957,18 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 2063243997762391141, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: maxCapacity
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767291856129864340, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_DetectableTags.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088688862985068048, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 8d7ff9a1dc435504cbf9f43758d636e3, type: 3}
     - target: {fileID: 4088688862985068048, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
       propertyPath: m_ObservableAttributeHandling
       value: 1
@@ -25745,7 +25781,7 @@ MonoBehaviour:
   elapsedTime: {fileID: 860333481}
   scoreText: {fileID: 1418304526}
   totalCollected: 0
-  MaxEnvironmentSteps: 10000
+  MaxEnvironmentSteps: 20000
 --- !u!4 &1574236049
 Transform:
   m_ObjectHideFlags: 0

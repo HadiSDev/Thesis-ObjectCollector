@@ -38,7 +38,7 @@ public class ObjectCollectorSettings : MonoBehaviour
     [HideInInspector]
     public SimpleMultiAgentGroup m_AgentGroup;
     
-    [Header("Max Environment Steps")] public int MaxEnvironmentSteps = 5000;
+    [Header("Max Environment Steps")] public int MaxEnvironmentSteps = 10000;
     private int m_ResetTimer;
     
     private void Start()

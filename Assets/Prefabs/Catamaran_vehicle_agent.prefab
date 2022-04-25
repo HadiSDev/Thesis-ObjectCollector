@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 6869521779882888315}
   - component: {fileID: 1326070074826895006}
   - component: {fileID: 886362068338727017}
+  - component: {fileID: 3767291856129864340}
   m_Layer: 0
   m_Name: Catamaran_vehicle_agent
   m_TagString: agent
@@ -237,7 +238,7 @@ Transform:
   - {fileID: 1859550319896127297}
   - {fileID: 4986950609739742035}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1859550319030650441
 MeshFilter:
@@ -915,6 +916,32 @@ MonoBehaviour:
     width: 63
     height: 51
   m_GridResolution: 1.3089969
+--- !u!114 &3767291856129864340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859550319030650438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f67c7e722ba14acd9153bb4488bff6e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - wall
+  - agent
+  m_RaysPerDirection: 10
+  m_MaxRayDegrees: 21.6
+  m_SphereCastRadius: 1.01
+  m_RayLength: 90
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1859550319221868389
 GameObject:
   m_ObjectHideFlags: 0
