@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using MBaske.Sensors.Grid;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -43,6 +44,8 @@ namespace DefaultNamespace
             {
                 SetGridWorld(new GridWorld(width, height, cellSize));
             }
+            
+            AuctionFrontierUtil.env_diagonal_distance = math.sqrt(math.pow(OffsetX(),2) + math.pow(OffsetZ(),2));
             _offsetVec = new Vector3(m_GridWorld.OffsetX(), 0f, m_GridWorld.OffsetZ());
             _cellsizeVec = new Vector3(grid2d.CellSize, 1f, grid2d.CellSize);
             m_CellState = new AuctionFrontierUtil.CELL_STATE[height, width];
@@ -77,25 +80,11 @@ namespace DefaultNamespace
         {
             m_GridWorld.SetValue(worldPosition, value);
         }
-
-        public void SetValue(int x, int z, int value)
-        {
-            m_GridWorld.SetValue(x, z, value);
-        }
-
-        public int GetGridValue(Vector3 worldPosition)
-        {
-            return m_GridWorld.GetValue(worldPosition);
-        }
-
-        public int GetGridValue(int x, int z)
-        {
-            return m_GridWorld.GetGridValue(x, z);
-        }
+        
 
         public static float OffsetX()
         {
-            return m_GridWorld.OffsetX();
+                return m_GridWorld.OffsetX();
         }
         
         public static float OffsetZ()

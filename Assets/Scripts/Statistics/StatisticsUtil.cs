@@ -4,8 +4,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using CsvHelper;
+using CsvHelper.Configuration;
 using DefaultNamespace;
 using Interfaces;
+using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -55,13 +57,22 @@ namespace Statistics
             m_AgentRewards.Clear();
             m_AgentSteps.Clear();
             m_AgentTravelDist.Clear();
+            m_Records.Clear();
         }
-        
+
         public static void plotResults()
         {
-            Directory.CreateDirectory( BASE_DIRECTORY + WriteDirectory);
-            using (var writer = new StreamWriter($"./Assets/Scripts/Statistics/{WriteDirectory}/{FileName}.csv", true))
-            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            Directory.CreateDirectory(BASE_DIRECTORY + WriteDirectory);
+            var filePath = $"./Assets/Scripts/Statistics/{WriteDirectory}/{FileName}.csv";
+            var exist = File.Exists(filePath);
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                // Don't write the header again.
+                HasHeaderRecord = false,
+            };
+
+            using (var writer = File.AppendText(filePath))
+            using (var csv = new CsvWriter(writer, exist ? config : new CsvConfiguration(CultureInfo.InvariantCulture)))
             {
                 csv.WriteRecords(m_Records);
                 csv.Flush();

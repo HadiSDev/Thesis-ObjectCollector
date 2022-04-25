@@ -55,7 +55,6 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     public void Awake()
     {
         Id = AuctionFrontierUtil.GetNextId();
-
         InitAgent();
         m_ObjectCollectorSettings = FindObjectOfType<AuctionFrontierCollectorSettings>();
         m_Agent = GetComponent<NavMeshAgent>();
@@ -224,16 +223,14 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         
         // In case there are some sync error with appending discovered items to global objects list
         var global = GameObject.FindGameObjectsWithTag("objective").Where(o => o.GetComponent<DetectableVisibleObject>().isDetected);
-        if (GameObject.FindGameObjectsWithTag("objective")
-                .Where(o => o.GetComponent<DetectableVisibleObject>().isDetected).Count() !=
-            AuctionFrontierUtil.DISCOVERED_TARGETS.Count)
+        if ( AuctionFrontierUtil.DISCOVERED_TARGETS.Count == 0 && global.Count() > 0)
         {
             foreach (var obj in global)
             {
                 AuctionFrontierUtil.DISCOVERED_TARGETS.Add(obj);
             }
         }
-
+        
         // Find closets discovered objects
         foreach (GameObject obj in AuctionFrontierUtil.DISCOVERED_TARGETS)
         {
@@ -406,6 +403,12 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 switch (m_AuctionStage)
                 {
                     case AuctionFrontierUtil.AuctionStage.Bidding:
+                        if (m_AuctionItem == null || !m_AuctionItem.activeSelf) // Assuming that global view detects if object have already been collected by other agent
+                        {
+                            ExplorerInit(); // Revert back to being explorer
+                            break;
+                        }
+                        
                         var target_pos = m_AuctionItem.transform.position;
                         var explorerRate = CalculateExplorationRate();
                         var capacityRatio = m_CollectedCapacity / maxCapacity;
@@ -425,14 +428,12 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                         m_Time += Time.deltaTime;
                         if (m_Time > biddingTimeLimit) // If no winner has been announced - revert back to being an explorer
                         {
-                            m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
-                            m_AuctionStage = AuctionFrontierUtil.AuctionStage.NoAuction;
                             if (m_AuctionItem != null && m_AuctionItem.activeSelf)
                             {
                                 AuctionFrontierUtil.DISCOVERED_TARGETS.Add(m_AuctionItem);
                                 m_AuctionItem = null;
                             }
-                            m_Time = 0f;
+                            ExplorerInit();
                         }
 
                         if (m_Messages.TryDequeue(out msg))
@@ -532,9 +533,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                     } */
                     else // Revert back to being explorer
                     {
-                        m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
-                        target = GridTracking.WFD(transform.position, checkEvery);
-                        AssignDestination(target);
+                        ExplorerInit();
                     }
                 }
 
@@ -549,12 +548,27 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     public void DisableAgent()
     {
         if(m_ObjectCollectorSettings.m_Is_evaluating) StatisticsWriter.AppendAgentStatsMaxStep(0f, dist_travelled, 0, Id, DateTime.Now - sTime);
-        m_Agent.isStopped = true;
+        gameObject.SetActive(false);
     }
     
     public void ResetStats()
     {
         dist_travelled = 0;
+        sTime = DateTime.Now;
+    }
+
+    public void ExplorerInit()
+    {
+        m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
+        m_AuctionStage = AuctionFrontierUtil.AuctionStage.NoAuction;
+                    
+        // Resume going towards allocated frontier point
+        m_Agent.isStopped = false;
+        m_AuctionItem = null;
+        
+        var target = GridTracking.WFD(transform.position, checkEvery);
+        AssignDestination(target);
+        m_Time = 0f;
     }
 
     public float GetAgentCumulativeDistance()

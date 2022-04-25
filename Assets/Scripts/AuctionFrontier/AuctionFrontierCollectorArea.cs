@@ -122,7 +122,8 @@ public class AuctionFrontierCollectorArea : Area
         foreach (GameObject agent in agents)
         {
             var afa = agent.GetComponent<AuctionFrontierAgent>();
-            afa.ResetAgent();
+            agent.SetActive(true);
+            afa.ResetStats();
             
             if (agent.transform.parent != gameObject.transform)
             {

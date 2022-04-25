@@ -7,9 +7,9 @@ namespace DefaultNamespace
     public static class AuctionFrontierUtil
     {
         private static int nextId = -1;
-        private static float env_diagonal_distance = math.sqrt(math.pow(GridTracking.OffsetX(),2) + math.pow(GridTracking.OffsetZ(),2));
         public static HashSet<GameObject> DISCOVERED_TARGETS = new HashSet<GameObject>();
         public static bool FINISHED = false;
+        public static float env_diagonal_distance;
         private static int counter;
 
         public static GameObject GetNearestDiscoveredObject(Vector3 worldPosition)
