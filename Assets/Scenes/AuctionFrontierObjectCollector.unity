@@ -18695,7 +18695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec8722596ac4fb346894cd62602b3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ObservationShape: 3 channels x 100 width x 10 height
+  m_ObservationShape: 3 channels x 60 width x 6 height
   m_SensorName: GridSensor
   m_ObservationStacks: 1
   m_CompressionType: 1
@@ -18713,8 +18713,8 @@ MonoBehaviour:
     IsStandby: 0
   m_GridShape:
     NumChannels: 3
-    Width: 100
-    Height: 10
+    Width: 60
+    Height: 6
   m_ClearCacheOnReset: 0
   m_ColliderBufferSize: 64
   m_TmpObjectToAdd: {fileID: 0}
@@ -18783,8 +18783,8 @@ MonoBehaviour:
   m_EditorBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 150, y: 1, z: 15}
-  m_CellSize: 3
-  m_NumCells: {x: 100, y: 1, z: 10}
+  m_CellSize: 5
+  m_NumCells: {x: 60, y: 1, z: 6}
   m_DetectionSize: {x: 300, y: 2, z: 30}
   m_BoundsSize: {x: 300, y: 2, z: 30}
   m_Offset: {x: 0, y: 0, z: 0}
@@ -18826,7 +18826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objective: {fileID: 1699568242032636, guid: 6aae38f51c5d4498aa2b32f326ed6ed3, type: 3}
   numObjectives: 35
-  rangeX: 147
+  rangeX: 145
   rangeZ: 13.4
   obstacle: {fileID: -2451728617343004851, guid: 9453fb14eff1d5042b07cf9c29302fa2, type: 3}
   numObstacles: 0
@@ -19126,7 +19126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1859550319030650442, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -147.3
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 1859550319030650442, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19134,7 +19134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1859550319030650442, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.2
+      value: -4.8
       objectReference: {fileID: 0}
     - target: {fileID: 1859550319030650442, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19166,15 +19166,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7463671533895504813, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_Speed
-      value: 0.8
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7463671533895504813, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_Radius
-      value: 1
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7463671533895504813, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_AngularSpeed
-      value: 10
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463671533895504813, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: avoidancePriority
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -19293,7 +19297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15f986e748490149879c4064b27952c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ObservationShape: 2 channels x 21 width x 17 height
+  m_ObservationShape: 3 channels x 21 width x 17 height
   m_SensorName: GridSensor1
   m_ObservationStacks: 1
   m_CompressionType: 1
@@ -19310,7 +19314,7 @@ MonoBehaviour:
     IsEnabled: 0
     IsStandby: 0
   m_GridShape:
-    NumChannels: 2
+    NumChannels: 3
     Width: 21
     Height: 17
   m_ClearCacheOnReset: 0
@@ -19346,13 +19350,27 @@ MonoBehaviour:
       Enabled: 1
       Color: {r: 0.23704836, g: 0.5117978, b: 0.62639314, a: 1}
     m_DetectorSpaceType: 1
-  m_SensorResolution: 0.79 meters (3.00 deg at 15.00 meters)
+  - Tag: wall
+    Enabled: 1
+    DetectionType: 2
+    Modifier: 1
+    Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
+    m_UserObservables:
+      m_Observables: []
+    m_Observables:
+    - Name: Distance
+      Type: 0
+      Index: -1
+      Enabled: 1
+      Color: {r: 1, g: 1, b: 1, a: 1}
+    m_DetectorSpaceType: 1
+  m_SensorResolution: 1.05 meters (3.00 deg at 20.00 meters)
   m_CellArc: 3
   m_LatAngleNorth: 0
   m_LatAngleSouth: 48.8
   m_LonAngle: 31.1
-  m_MinDistance: 0
-  m_MaxDistance: 15
+  m_MinDistance: 2
+  m_MaxDistance: 20
   m_DistanceNormalization:
     Value: 1
     Weighted: 0
@@ -19362,7 +19380,7 @@ MonoBehaviour:
     y: -49.9
     width: 63
     height: 51
-  m_GridResolution: 0.7853982
+  m_GridResolution: 1.0471976
 --- !u!114 &649458896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19379,8 +19397,9 @@ MonoBehaviour:
   enableCapacity: 1
   maxCapacity: 15
   dist_travelled: 0
-  checkEvery: 4
-  timeIntervalInSteps: 200
+  biddingTimeLimit: 5
+  checkEvery: 2
+  timeIntervalInSteps: 150
 --- !u!4 &709046678 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7791438912094655452, guid: e403b8116b6698a499ff17806152b207, type: 3}
@@ -19811,8 +19830,8 @@ MonoBehaviour:
   agents: []
   listArea: []
   m_Is_evaluating: 1
-  sampleSize: 3
-  fileName: AuctionFrontierA_v2_2
+  sampleSize: 27
+  fileName: AuctionFrontierA_2_25
   directory: AuctionFrontier
   totalScore: 0
   elapsedTime: {fileID: 625137508}
@@ -20104,15 +20123,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1859550319030650442, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 146.89
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1859550319030650442, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.01
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 1859550319030650442, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.22
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1859550319030650442, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20144,11 +20163,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7463671533895504813, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_Speed
-      value: 0.8
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463671533895504813, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: m_Radius
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7463671533895504813, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
       propertyPath: m_AngularSpeed
-      value: 10
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463671533895504813, guid: 6cc4565e53027ef4abf840f22cfce908, type: 3}
+      propertyPath: avoidancePriority
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -20179,8 +20206,9 @@ MonoBehaviour:
   enableCapacity: 1
   maxCapacity: 15
   dist_travelled: 0
-  checkEvery: 4
-  timeIntervalInSteps: 200
+  biddingTimeLimit: 5
+  checkEvery: 2
+  timeIntervalInSteps: 150
 --- !u!114 &1890643365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20249,7 +20277,7 @@ MonoBehaviour:
   - Tag: wall
     Enabled: 1
     DetectionType: 2
-    Modifier: 0
+    Modifier: 1
     Detectable: {fileID: 6570915505140324872, guid: 06907898f2a634988bd0b1eae0c53dcd, type: 3}
     m_UserObservables:
       m_Observables: []
@@ -20274,23 +20302,23 @@ MonoBehaviour:
       Enabled: 1
       Color: {r: 0.8980392, g: 0.62038106, b: 0.2235294, a: 1}
     m_DetectorSpaceType: 1
-  m_SensorResolution: 0.79 meters (3.00 deg at 15.00 meters)
+  m_SensorResolution: 1.05 meters (3.00 deg at 20.00 meters)
   m_CellArc: 3
-  m_LatAngleNorth: 0
-  m_LatAngleSouth: 48.8
+  m_LatAngleNorth: 12.2
+  m_LatAngleSouth: 36.6
   m_LonAngle: 31.1
-  m_MinDistance: 1
-  m_MaxDistance: 15
+  m_MinDistance: 2
+  m_MaxDistance: 20
   m_DistanceNormalization:
     Value: 1
     Weighted: 0
   m_LonLatRect:
     serializedVersion: 2
     x: -31.5
-    y: -49.9
+    y: -37.699997
     width: 63
-    height: 51
-  m_GridResolution: 0.7853982
+    height: 50.999996
+  m_GridResolution: 1.0471976
 --- !u!114 &1890643366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20396,7 +20424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791438912094655452, guid: e403b8116b6698a499ff17806152b207, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9
+      value: -11.1
       objectReference: {fileID: 0}
     - target: {fileID: 7791438912094655452, guid: e403b8116b6698a499ff17806152b207, type: 3}
       propertyPath: m_LocalRotation.w

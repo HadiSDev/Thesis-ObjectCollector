@@ -28,6 +28,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     private DateTime sTime;
     public float dist_travelled;
     private Vector3 previous_pos;
+    public float biddingTimeLimit = 5f;
     public float checkEvery; // check every x second
     float m_Time;
     
@@ -36,6 +37,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     private Queue<AuctionFrontierUtil.Message> m_Messages;
     private Dictionary<int, float> m_Bids;
     private Queue<int> m_ExplorationEfficiency;
+    
     public int timeIntervalInSteps;
 
 
@@ -60,10 +62,17 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         grid = GetComponent<GridSensorComponent3D>();
     }
 
-    void Start()
+    public void Start()
+    {
+        ResetAgent();
+        Thread.Sleep(100);
+    }
+
+    public void ResetAgent()
     {
         Debug.Log($"Init agent{Id}...");
         InitAgent();
+        ResetStats();
         m_Network = new Dictionary<int, AuctionFrontierAgent>();
         m_Messages = new Queue<AuctionFrontierUtil.Message>();
         m_Bids = new Dictionary<int, float>();
@@ -80,11 +89,11 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         previous_pos = m_Agent.transform.position;
         m_Target = null;
         m_Agent.ResetPath();
+        m_Agent.isStopped = false;
         sTime = DateTime.Now;
-        //StartCoroutine(RotateCoroutine());
     }
 
-    
+
     IEnumerator RotateCoroutine()
     {
         Debug.Log("Starting co...");
@@ -155,7 +164,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
             //if (distLeftToTarget < 100f) // Only assign new frontier when nearing its current target
             //{
             //GridTracking.FRONTIERS.Remove(target);
-            Debug.Log($"Agent{Id}: Assigning new dest: {target}");
+            //Debug.Log($"Agent{Id}: Assigning new dest: {target}");
             m_Agent.SetDestination(target);
             Debug.DrawRay(target, Vector3.up * 10f, Color.green, checkEvery);
 
@@ -173,8 +182,11 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 return;
             }
             */
-            AssignDestinationToNearestStation();
-            Debug.Log($"WFD found nothing... Seeking nearest station to deposit collected objects");
+            if (GridTracking.GridWorldComplete())
+            {
+                Debug.Log($"Going to nearest station...");
+                AssignDestinationToNearestStation();
+            }
         }
     }
 
@@ -210,7 +222,19 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         GameObject closets = null;
         float distance = Mathf.Infinity;
         
-        // Should in reality get the list from AuctionFrontierCollecitonArea as it is marked as detected. This achieve the same effect
+        // In case there are some sync error with appending discovered items to global objects list
+        var global = GameObject.FindGameObjectsWithTag("objective").Where(o => o.GetComponent<DetectableVisibleObject>().isDetected);
+        if (GameObject.FindGameObjectsWithTag("objective")
+                .Where(o => o.GetComponent<DetectableVisibleObject>().isDetected).Count() !=
+            AuctionFrontierUtil.DISCOVERED_TARGETS.Count)
+        {
+            foreach (var obj in global)
+            {
+                AuctionFrontierUtil.DISCOVERED_TARGETS.Add(obj);
+            }
+        }
+
+        // Find closets discovered objects
         foreach (GameObject obj in AuctionFrontierUtil.DISCOVERED_TARGETS)
         {
             var curdist = Vector3.Distance(transform.position, obj.transform.position);
@@ -260,9 +284,9 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 m_CollectedCapacity = 0;
             }
             
-            if (n_objects == 0 && m_CollectedCapacity == 0)
+            if (n_objects == 0 && m_CollectedCapacity == 0 && GridTracking.GridWorldComplete() && !m_Agent.isStopped)
             {
-                DisableAgentAndTerminateEpisodeIfDone();
+                DisableAgent();
             }
         }
     }
@@ -284,11 +308,9 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         var cur_position = m_Agent.transform.position;
 
         var dist = Vector3.Distance(previous_pos, cur_position);
-        if (dist > .5f)
-        {
-            dist_travelled+= dist;
-            previous_pos = cur_position;
-        }
+        dist_travelled+= dist;
+        previous_pos = cur_position;
+        
         
         
         switch (m_Role)
@@ -297,6 +319,12 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
             case AuctionFrontierUtil.AuctionFrontierRole.Auctioneer:
                 if (AuctionFrontierUtil.DISCOVERED_TARGETS.Count > 0 && m_AuctionItem == null)
                 {
+                    // Before commiting to auction - Check queue that no other auction has been init
+                    if (m_Messages.TryDequeue(out msg))
+                    {
+                        TryProcessMessage(msg);
+                        break;
+                    }
                     var item = FindClosetsDiscoveredObject();
                     if (item.activeSelf) // Remove inactive elements
                     {
@@ -319,11 +347,19 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 {
                     // Broadcast objective location to all agents
                     case AuctionFrontierUtil.AuctionStage.TaskAnnouncement:
+                        
+                        // Before commiting to auction - Check queue that no other auction has been init
+                        if (m_Messages.TryDequeue(out msg))
+                        {
+                            TryProcessMessage(msg);
+                            break;
+                        }
                         msg = new AuctionFrontierUtil.Message(this, AuctionFrontierUtil.MessageType.AuctionStart, m_AuctionItem);
                         BroadcastMessage(msg);
                         m_AuctionStage = AuctionFrontierUtil.AuctionStage.Bidding;
-                        m_Bids[Id] = AuctionFrontierUtil.CalculateAgentBid(transform.position,
-                            m_AuctionItem.transform.position, CalculateExplorationRate(), m_CollectedCapacity/maxCapacity); 
+                        var auctioneerBid = AuctionFrontierUtil.CalculateAgentBid(transform.position,
+                            m_AuctionItem.transform.position, CalculateExplorationRate(), m_CollectedCapacity/maxCapacity);
+                        m_Bids[Id] = auctioneerBid > 0f ? auctioneerBid : 0.001f;
                         break;
                 
                     // Receive biddings from all agent
@@ -382,9 +418,23 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                         
                         SendMessage(msg);
                         m_AuctionStage = AuctionFrontierUtil.AuctionStage.NotifyWinner;
+                        m_Time = 0;
                         break;
                     
                     case AuctionFrontierUtil.AuctionStage.NotifyWinner:
+                        m_Time += Time.deltaTime;
+                        if (m_Time > biddingTimeLimit) // If no winner has been announced - revert back to being an explorer
+                        {
+                            m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
+                            m_AuctionStage = AuctionFrontierUtil.AuctionStage.NoAuction;
+                            if (m_AuctionItem != null && m_AuctionItem.activeSelf)
+                            {
+                                AuctionFrontierUtil.DISCOVERED_TARGETS.Add(m_AuctionItem);
+                                m_AuctionItem = null;
+                            }
+                            m_Time = 0f;
+                        }
+
                         if (m_Messages.TryDequeue(out msg))
                         {
                             TryProcessMessage(msg);
@@ -399,6 +449,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
 
             // Behaviour following frontier exploration algorithm 
             case AuctionFrontierUtil.AuctionFrontierRole.Explorer:
+                if (GridTracking.GridWorldComplete() || m_CollectedCapacity >= maxCapacity) AssignDestinationToNearestStation();
                 if (m_Messages.TryDequeue(out msg))
                 {
                     TryProcessMessage(msg); 
@@ -407,11 +458,6 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 
                 if (DetectObjects() || AuctionFrontierUtil.DISCOVERED_TARGETS.Count > 0)
                 {
-                    if (m_Messages.TryDequeue(out msg))
-                    {
-                        TryProcessMessage(msg); // Check that auction has not started before initiating a new auction
-                        break;
-                    }
                     m_Role = AuctionFrontierUtil.AuctionFrontierRole.Auctioneer;
                     m_AuctioneerId = Id;
                     m_AuctionStage = AuctionFrontierUtil.AuctionStage.TaskAnnouncement;
@@ -471,6 +517,19 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                         */
                         
                     }
+                    /*else if (GameObject.FindGameObjectsWithTag("objective")
+                                 .Where(o => o.GetComponent<DetectableVisibleObject>().isDetected).Count() > 0)
+                    {
+                        foreach (var obj in GameObject.FindGameObjectsWithTag("objective")
+                                     .Where(o => o.GetComponent<DetectableVisibleObject>().isDetected))
+                        {
+                            AuctionFrontierUtil.DISCOVERED_TARGETS.Add(obj);
+                        }   
+                        m_Role = AuctionFrontierUtil.AuctionFrontierRole.Auctioneer;
+                        m_AuctioneerId = Id;
+                        m_AuctionStage = AuctionFrontierUtil.AuctionStage.TaskAnnouncement;  
+                        m_AuctionItem = FindClosetsDiscoveredObject();
+                    } */
                     else // Revert back to being explorer
                     {
                         m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
@@ -487,11 +546,10 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     
     #region Statistics
     
-    public void DisableAgentAndTerminateEpisodeIfDone()
+    public void DisableAgent()
     {
-        gameObject.SetActive(false);
-        if(m_ObjectCollectorSettings.m_Is_evaluating) StatisticsWriter.AppendAgentStatsMaxStep(0f, dist_travelled, 0, Id, DateTime.Now - sTime);                                       // Reset lists
-        
+        if(m_ObjectCollectorSettings.m_Is_evaluating) StatisticsWriter.AppendAgentStatsMaxStep(0f, dist_travelled, 0, Id, DateTime.Now - sTime);
+        m_Agent.isStopped = true;
     }
     
     public void ResetStats()
@@ -577,6 +635,18 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                         null,
                         -1f);
                     m_Network[msg.Sender.Id].QueueMessage(busy_message);
+                }
+                else if (m_Role == AuctionFrontierUtil.AuctionFrontierRole.Auctioneer) // In case two agents discover ah the same
+                {
+                    m_Agent.isStopped = true;
+                    m_AuctioneerId = msg.Sender.Id;
+                    m_Role = AuctionFrontierUtil.AuctionFrontierRole.Bidder;
+                    m_AuctionStage = AuctionFrontierUtil.AuctionStage.Bidding;
+                    if (m_AuctionItem != null) // Add item back to queue
+                    {
+                        AuctionFrontierUtil.DISCOVERED_TARGETS.Add(m_AuctionItem);
+                    }
+                    m_AuctionItem = msg.Task;
                 }
 
                 break;

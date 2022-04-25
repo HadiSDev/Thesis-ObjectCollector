@@ -115,7 +115,7 @@ namespace DefaultNamespace
         public void SetValue(Vector3 worldPosition, int value)
         {
             int x, z;
-            GetXZ(worldPosition, out x, out z);
+            GetXZOffset(worldPosition, out x, out z);
             SetValue(x, z, value);
         }
         
