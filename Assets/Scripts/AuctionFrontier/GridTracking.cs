@@ -110,7 +110,7 @@ namespace DefaultNamespace
                 foreach (var cell in adj_cells)
                 {
                     m_GridWorld.SetValue((int) cell.x, (int) cell.z, 1);
-                    m_CellState[(int)cell.z, (int)cell.x] = AuctionFrontierUtil.CELL_STATE.MAP_OPEN;
+                    m_CellState[(int)cell.z, (int)cell.x] = AuctionFrontierUtil.CELL_STATE.KNOWN_OPEN;
                 }
             }
         }
@@ -130,7 +130,7 @@ namespace DefaultNamespace
             GetXZ(worldPosition, out x, out z);
             var CellState = (AuctionFrontierUtil.CELL_STATE[,]) m_CellState.Clone();
             
-            CellState[z, x] = AuctionFrontierUtil.CELL_STATE.MAP_OPEN;
+            CellState[z, x] = AuctionFrontierUtil.CELL_STATE.KNOWN_OPEN;
             queue_m.Enqueue(new Vector3(x, 1f, z));
             var frontier = new List<(Vector3, float)>();
             //var prev_pos = worldPosition;
@@ -144,8 +144,8 @@ namespace DefaultNamespace
                 //var debug_draw = GridCoordToWorld(elem);
                 //Debug.DrawRay(debug_draw, Vector3.up * 10f, Color.magenta, drawDuration);
                 
-                if (CellState[(int) elem.z, (int) elem.x] == AuctionFrontierUtil.CELL_STATE.MAP_CLOSE 
-                    || CellState[(int) elem.z, (int) elem.x] == AuctionFrontierUtil.CELL_STATE.NONE) continue;
+                if (CellState[(int) elem.z, (int) elem.x] == AuctionFrontierUtil.CELL_STATE.KNOWN_CLOSE 
+                    || CellState[(int) elem.z, (int) elem.x] == AuctionFrontierUtil.CELL_STATE.UNKNOWN_REGION) continue;
 
                 if (IsCellFrontier(elem))
                 {
@@ -164,7 +164,7 @@ namespace DefaultNamespace
                     {
                         var cell = queue_f.Dequeue();
                         var cell_state = CellState[(int)cell.z, (int)cell.x];
-                        if (cell_state == AuctionFrontierUtil.CELL_STATE.MAP_CLOSE 
+                        if (cell_state == AuctionFrontierUtil.CELL_STATE.KNOWN_CLOSE 
                             || cell_state == AuctionFrontierUtil.CELL_STATE.FRONTIER_CLOSE) continue;
 
                         if (IsCellFrontier(cell))
@@ -178,7 +178,7 @@ namespace DefaultNamespace
                             foreach (var w in cell_adj)
                             {
                                 var w_cellstate = CellState[(int)w.z, (int)w.x];
-                                if (w_cellstate == AuctionFrontierUtil.CELL_STATE.MAP_OPEN)
+                                if (w_cellstate == AuctionFrontierUtil.CELL_STATE.KNOWN_OPEN)
                                 {
                                     /*
                                     queue_f.Enqueue(w);
@@ -214,7 +214,7 @@ namespace DefaultNamespace
                     }
 
                     // Mark all points in frontier as map_close
-                    foreach (var fcell in new_frontier) { CellState[(int)fcell.Item1.z, (int)fcell.Item1.x] = AuctionFrontierUtil.CELL_STATE.MAP_CLOSE; }
+                    foreach (var fcell in new_frontier) { CellState[(int)fcell.Item1.z, (int)fcell.Item1.x] = AuctionFrontierUtil.CELL_STATE.KNOWN_CLOSE; }
                 }
                 else
                 {
@@ -226,17 +226,17 @@ namespace DefaultNamespace
                 {
                     var neightbour_state = CellState[(int)neightbour.z, (int)neightbour.x];
                     if (//neightbour_state != AuctionFrontierUtil.CELL_STATE.MAP_OPEN &&
-                        neightbour_state != AuctionFrontierUtil.CELL_STATE.MAP_CLOSE &&
-                        neightbour_state != AuctionFrontierUtil.CELL_STATE.NONE &&
+                        neightbour_state != AuctionFrontierUtil.CELL_STATE.KNOWN_CLOSE &&
+                        neightbour_state != AuctionFrontierUtil.CELL_STATE.UNKNOWN_REGION &&
                         HaveAdjOpenCell(neightbour))
                     {
                         queue_m.Enqueue(neightbour);
                         //Debug.DrawRay(GridCoordToWorld(neightbour), Vector3.up * 10f, Color.magenta, 10f);
-                        CellState[(int)neightbour.z, (int)neightbour.x] = AuctionFrontierUtil.CELL_STATE.MAP_OPEN;
+                        CellState[(int)neightbour.z, (int)neightbour.x] = AuctionFrontierUtil.CELL_STATE.KNOWN_OPEN;
                     }
                 }
 
-                CellState[(int)elem.z, (int)elem.x] = AuctionFrontierUtil.CELL_STATE.MAP_CLOSE;
+                CellState[(int)elem.z, (int)elem.x] = AuctionFrontierUtil.CELL_STATE.KNOWN_CLOSE;
             }
 
             if (frontier.Count > 0)
@@ -394,7 +394,7 @@ namespace DefaultNamespace
                         //Debug.DrawRay(pos, coord - pos, Color.cyan, .5f);
 
                         m_GridWorld.SetValue(x, z, value);
-                        m_CellState[z, x] = AuctionFrontierUtil.CELL_STATE.MAP_OPEN;
+                        m_CellState[z, x] = AuctionFrontierUtil.CELL_STATE.KNOWN_OPEN;
                     }
                 }
             }
