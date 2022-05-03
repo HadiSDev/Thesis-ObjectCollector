@@ -128,7 +128,7 @@ public class ObjectCollectorAgent : Agent, IStats
             {
                 var pos = objective.transform.position;
                 var x = NormalizeX(pos.x - agentPos.x);
-                var z = Normalize(pos.z - agentPos.z);
+                var z = NormalizeZ(pos.z - agentPos.z);
                 _bufferSensorObjectives.AppendObservation(new []{x, z});
             }
         }
