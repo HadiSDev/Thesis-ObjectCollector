@@ -11,8 +11,8 @@ behaviors:
       num_epoch: 3
       learning_rate_schedule: constant
     network_settings:
-      normalize: False
-      hidden_units: 512
+      normalize: false
+      hidden_units: 256
       num_layers: 3
       vis_encode_type: simple
     reward_signals:
@@ -22,5 +22,5 @@ behaviors:
     keep_checkpoints: 200
     checkpoint_interval: 100000
     max_steps: 50000000
-    time_horizon: 512
+    time_horizon: 256
     summary_freq: 60000

@@ -7,7 +7,7 @@ using Statistics;
 
 public class ObjectCollectorSettings : MonoBehaviour
 {
-    private Agent[] agents;
+    private ObjectCollectorAgent[] agents;
     [HideInInspector] 
     public ObjectCollectorArea[] listArea;
     
@@ -63,7 +63,7 @@ public class ObjectCollectorSettings : MonoBehaviour
 
     public void Awake()
     {
-        agents = FindObjectsOfType<Agent>();
+        agents = FindObjectsOfType<ObjectCollectorAgent>();
         Academy.Instance.OnEnvironmentReset += EnvironmentReset;
         m_Recorder = Academy.Instance.StatsRecorder;
         
