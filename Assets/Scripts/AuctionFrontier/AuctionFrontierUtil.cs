@@ -8,6 +8,8 @@ namespace DefaultNamespace
     {
         private static int nextId = -1;
         public static HashSet<GameObject> DISCOVERED_TARGETS = new HashSet<GameObject>();
+        public static HashSet<GameObject> TARGETS = new HashSet<GameObject>();
+
         public static bool FINISHED = false;
         public static float env_diagonal_distance;
         private static int counter;
@@ -70,9 +72,9 @@ namespace DefaultNamespace
         
         public enum CELL_STATE
         {
-            NONE,
-            MAP_OPEN,
-            MAP_CLOSE,
+            UNKNOWN_REGION,
+            KNOWN_OPEN,
+            KNOWN_CLOSE,
             FRONTIER_OPEN,
             FRONTIER_CLOSE
         }

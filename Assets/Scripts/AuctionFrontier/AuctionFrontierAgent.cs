@@ -137,15 +137,13 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 if (Vector3.Distance(m_Agent.transform.position, item.transform.position) < Vector3.Distance(m_Agent.transform.position, closets.transform.position))
                 {
                     Debug.Log($"Agent{Id} -> Discovered item closer to agent...");
-                    closets = item; 
-                    AuctionFrontierUtil.DISCOVERED_TARGETS.Add(m_Target); // Enqueue previous target
-                }
-                else
-                {
-                    AuctionFrontierUtil.DISCOVERED_TARGETS.Add(item);
+                    closets = item;
+                    AuctionFrontierUtil.TARGETS.Remove(m_Target);
+                    //AuctionFrontierUtil.DISCOVERED_TARGETS.Add(m_Target); // Enqueue previous target
                 }
             }
 
+            AuctionFrontierUtil.TARGETS.Add(closets);
             m_Agent.SetDestination(closets.transform.position);
             return true;
         }
@@ -158,17 +156,9 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     {
         if (target != Vector3.up && m_CollectedCapacity < maxCapacity)
         {
-            //var distLeftToTarget = Vector3.Distance(transform.position, m_Target.transform.position);
-
-            //if (distLeftToTarget < 100f) // Only assign new frontier when nearing its current target
-            //{
-            //GridTracking.FRONTIERS.Remove(target);
-            //Debug.Log($"Agent{Id}: Assigning new dest: {target}");
             m_Agent.SetDestination(target);
             Debug.DrawRay(target, Vector3.up * 10f, Color.green, checkEvery);
-
-            //} 
-            //Debug.Log($"Current frontier target is still far. Continue to target {m_Target.transform.position}... ");
+            
 
         }
         else // No more frontiers left to explore - Head home
@@ -192,7 +182,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     public void AssignDestinationToNearestStation()
     {
         var nearest = AuctionFrontierUtil.FindClosetsObjectWithTag(transform.position, "station");
-        m_Target.transform.position = nearest;
+        //m_Target.transform.position = nearest;
         m_Agent.SetDestination(nearest);
     }
     
@@ -222,15 +212,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         float distance = Mathf.Infinity;
         
         // In case there are some sync error with appending discovered items to global objects list
-        var global = GameObject.FindGameObjectsWithTag("objective").Where(o => o.GetComponent<DetectableVisibleObject>().isDetected);
-        if ( AuctionFrontierUtil.DISCOVERED_TARGETS.Count == 0 && global.Count() > 0)
-        {
-            foreach (var obj in global)
-            {
-                AuctionFrontierUtil.DISCOVERED_TARGETS.Add(obj);
-            }
-        }
-        
+        // var global = GameObject.FindGameObjectsWithTag("objective").Where(o => o.GetComponent<DetectableVisibleObject>().isDetected);
         // Find closets discovered objects
         foreach (GameObject obj in AuctionFrontierUtil.DISCOVERED_TARGETS)
         {
@@ -270,7 +252,13 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
 
         }
     }
-    
+
+    private bool EpisodeFinished()
+    {
+        var n_objects = GameObject.FindGameObjectsWithTag("objective").Length;
+        return n_objects == 0 && m_CollectedCapacity == 0 && GridTracking.GridWorldComplete();
+    }
+
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("station"))
@@ -281,7 +269,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 m_CollectedCapacity = 0;
             }
             
-            if (n_objects == 0 && m_CollectedCapacity == 0 && GridTracking.GridWorldComplete() && !m_Agent.isStopped)
+            if (n_objects == 0 && m_CollectedCapacity == 0 && GridTracking.GridWorldComplete())
             {
                 DisableAgent();
             }
@@ -323,7 +311,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                         break;
                     }
                     var item = FindClosetsDiscoveredObject();
-                    if (item.activeSelf) // Remove inactive elements
+                    if (item != null && item.activeSelf) // Remove inactive elements
                     {
                         m_AuctionItem = item;
                         m_AuctionStage = AuctionFrontierUtil.AuctionStage.TaskAnnouncement;
@@ -351,6 +339,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                             TryProcessMessage(msg);
                             break;
                         }
+                        
                         msg = new AuctionFrontierUtil.Message(this, AuctionFrontierUtil.MessageType.AuctionStart, m_AuctionItem);
                         BroadcastMessage(msg);
                         m_AuctionStage = AuctionFrontierUtil.AuctionStage.Bidding;
@@ -450,7 +439,16 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
 
             // Behaviour following frontier exploration algorithm 
             case AuctionFrontierUtil.AuctionFrontierRole.Explorer:
-                if (GridTracking.GridWorldComplete() || m_CollectedCapacity >= maxCapacity) AssignDestinationToNearestStation();
+                if (GridTracking.GridWorldComplete() || m_CollectedCapacity >= maxCapacity)
+                {
+                    AssignDestinationToNearestStation();
+                    if (EpisodeFinished())
+                    {
+                        DisableAgent();
+                    }
+                    break;
+                }
+
                 if (m_Messages.TryDequeue(out msg))
                 {
                     TryProcessMessage(msg); 
