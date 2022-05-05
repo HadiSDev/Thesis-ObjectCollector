@@ -93,7 +93,6 @@ public class ObjectCollectorSettings : MonoBehaviour
                     m_AgentGroup.RegisterAgent(agent);
                 }
             }
-            ClearObjects(GameObject.FindGameObjectsWithTag("obstacle"));
             
             m_StartTime = DateTime.Now;
             totalScore = 0;
@@ -107,14 +106,6 @@ public class ObjectCollectorSettings : MonoBehaviour
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.ExitPlaymode();
 #endif
-        }
-    }
-    
-    void ClearObjects(GameObject[] objects)
-    {
-        foreach (var objective in objects)
-        {
-            Destroy(objective);
         }
     }
 

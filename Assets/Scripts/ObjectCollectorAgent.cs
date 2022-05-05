@@ -8,8 +8,6 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Sensors.Reflection;
-using Random = UnityEngine.Random;
 
 public class ObjectCollectorAgent : Agent, IStats
 {
@@ -35,7 +33,7 @@ public class ObjectCollectorAgent : Agent, IStats
 
     // Capacity Settings
     [HideInInspector]
-    public float maxCapacity;
+    public float maxCapacity = 15f;
     private float m_CollectedCapacity;
     
     // Dynamically mark detected objectives
@@ -45,7 +43,6 @@ public class ObjectCollectorAgent : Agent, IStats
     private BufferSensorComponent _bufferSensorAgents;
     
     // Station
-    EnvironmentParameters m_ResetParams;
     private ObjectCollectorArea m_ObjectCollectorArea;
     private GameObject Station { get; set; }
     
@@ -68,14 +65,12 @@ public class ObjectCollectorAgent : Agent, IStats
             _bufferSensorAgents = bufferSensors.FirstOrDefault(b => b.SensorName == "AgentsSensor");
         }
         
-        m_ResetParams = Academy.Instance.EnvironmentParameters;
         if (markDetectedObjects)
         {
             POVGrid = GetComponent<GridSensorComponent3D>();
         }
         SetResetParameters();
         
-        /*
         var args = Environment.GetCommandLineArgs();
         
         for (int i = 0; i < args.Length; i++)
@@ -85,7 +80,7 @@ public class ObjectCollectorAgent : Agent, IStats
                 maxCapacity = float.Parse(args[i + 1]);
                 break;
             }
-        }*/
+        }
     }
 
     private float Normalize(float currentValue, float minValue=-50f, float maxValue=50f)
