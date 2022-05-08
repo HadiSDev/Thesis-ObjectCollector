@@ -179,9 +179,6 @@ MonoBehaviour:
   numObjectives: 40
   rangeX: 0
   rangeZ: 0
-  obstacle: {fileID: -2451728617343004851, guid: 9453fb14eff1d5042b07cf9c29302fa2, type: 3}
-  numObstacles: 0
-  maxSpawnAttemptsPerObstacle: 10
 --- !u!1001 &1324337554892246401
 PrefabInstance:
   m_ObjectHideFlags: 0
