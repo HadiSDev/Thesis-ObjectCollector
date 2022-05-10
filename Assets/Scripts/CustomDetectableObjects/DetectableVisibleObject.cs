@@ -4,6 +4,9 @@ namespace CustomDetectableObjects
 {
     public class DetectableVisibleObject : DetectableGameObject
     {
+        public bool isTargeted;
+        float IsTargeted() => isTargeted ? 1 : 0;
+        
         public bool isDetected;
         float isDetectedObservable() => isDetected ? 1 : 0;
         

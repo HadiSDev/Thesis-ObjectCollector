@@ -20,7 +20,8 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     public bool enableCapacity;
     public float maxCapacity = 15;
     private float m_CollectedCapacity;
-    
+    private float m_TotalCollectted;
+    private int timestep;
     private NavMeshAgent m_Agent;
     private GridSensorComponent3D grid;
     private AuctionFrontierCollectorSettings m_ObjectCollectorSettings;
@@ -37,7 +38,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     private Queue<AuctionFrontierUtil.Message> m_Messages;
     private Dictionary<int, float> m_Bids;
     private Queue<int> m_ExplorationEfficiency;
-    
+    private List<int> m_DiscoveredCells;
     public int timeIntervalInSteps;
 
 
@@ -51,6 +52,126 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     
     // Explorer & Worker
     private GameObject m_Target;
+    
+    /*
+    // FOR DEBUGGING
+    private void OnDrawGizmos()
+    {
+        var pos = transform.position;
+        var tmp = new GameObject();
+        tmp.transform.SetPositionAndRotation(transform.position, transform.rotation);
+
+        var max = 20f;
+        var lat = 24.4f;
+        var lon = 62.2f;
+        var limit = 10;
+
+        tmp.transform.Rotate(Vector3.down, lon / 2);
+        var v1 = tmp.transform.forward * max;
+
+        for (int i = 0; i <= limit; i++)
+        {
+            //Debug.DrawRay(pos, tmp.transform.forward * max, Color.yellow, 2f);
+            if (i < limit) tmp.transform.Rotate(Vector3.up, lon / limit);
+        }
+
+        var v2 = tmp.transform.forward * max;
+
+        float[] zs = new[] { v1.z + pos.z, v2.z + pos.z, pos.z };
+        float[] xs = new[] { v1.x + pos.x, v2.x + pos.x, pos.x };
+
+        var offset_z = 15f;
+        var offset_x = 150f;
+        var cellSize = 5f;
+
+        var h = 6;
+        var w = 60;
+        
+        var z_min = (int) Math.Clamp((zs.Min() + offset_z) / cellSize , 0f, h-1);
+        var z_max = (int) Math.Clamp((zs.Max() + offset_z) / cellSize , 0f, h-1);
+
+        var x_min = (int) Math.Clamp((xs.Min()  + offset_x) / cellSize , 0f, w-1);
+        var x_max = (int) Math.Clamp((xs.Max()  + offset_x) / cellSize , 0f, w-1);
+            
+        
+        //Debug.Log($"Z - min {z_min}  max {z_max}");
+        Debug.Log($"X - min {x_min}  max {x_max}");
+
+        
+        Debug.DrawRay(v1 + pos, (v2 - v1), Color.cyan, .5f);
+        DestroyImmediate(tmp);
+
+        
+        Debug.Log($"POS : {pos}");
+        Debug.Log($"V1 : {v1}");
+        Debug.Log($"V2 : {v2}");
+        
+        // Test detection with one object
+        // must create a gameobject first in scene titled - "test
+        var tst = GameObject.Find("test");
+        Debug.Log($"TST (POS): {tst.transform.position}");
+        var angle1 = Vector3.Angle(v1, tst.transform.position-pos);
+        var angle2 = Vector3.Angle(v2, tst.transform.position-pos);
+        var rdist = Vector3.Distance(pos, tst.transform.position);
+        
+        Debug.Log($"Angle {angle1}  Angle2 {angle2} dist: {rdist}");
+        Debug.DrawRay(pos, tst.transform.position - pos, Color.green, .5f);
+        
+        
+        Debug.Log($"V1 : {v1}");
+        Debug.Log($"V2 : {v2}");
+        Debug.Log($"Angle (outer): {Vector3.Angle(v1, v2)}");
+        Debug.DrawRay(pos, tst.transform.position - pos, Color.cyan, .5f)
+        
+
+
+        for (float z = z_min; z <= z_max; z++)
+        {
+            for (float x = x_min; x <= x_max; x++)
+            {
+                // Check if cell is a stored frontier point. Remove if true
+                var coord = Vector3.Scale(new Vector3(x, 1f, z), new Vector3(cellSize, 1f, cellSize)) - new Vector3(offset_x, 0f, offset_z);
+                Debug.Log(coord);
+                
+                //Debug.Log(coord);
+
+                // (Vector3.forward * (cellSize/2f)
+                angle1 = Vector3.Angle(v1, coord-pos);
+                angle2 = Vector3.Angle(v2, coord-pos);
+                var dist = Vector3.Distance(pos, coord);
+                    
+                    
+
+                    
+                if (angle1 <= lon && angle2 <= lon && dist <= max) Debug.DrawRay(pos, (coord - pos), Color.cyan, 0.01f);
+
+                //Debug.Log($"Angle (Point): {Vector3.Angle(v1, tst.transform.position - pos)} Dist: {Vector3.Distance(pos, tst.transform.position)}");
+
+
+                //DestroyImmediate(tst);
+            }
+        }
+    
+        
+    
+        Debug.DrawRay(pos, tmp.transform.forward * max, Color.red, 10f);
+        tmp.transform.Rotate(Vector3.down, lon);
+        Debug.DrawRay(pos, tmp.transform.forward * max, Color.red, 10f);
+        
+        tmp.transform.Rotate(Vector3.up, (2*lon));
+        Debug.DrawRay(pos, tmp.transform.forward * max, Color.red, 10f);
+
+        transform.Rotate(Vector3.up, lon);
+        Debug.DrawRay(pos, transform. * max, Color.red, 10f);
+        transform.Rotate(Vector3.down, -lon*2);
+        Debug.DrawRay(pos, transform.forward * max, Color.red, 10f);
+        transform.Rotate(Vector3.up, lon);
+        }
+    }
+        
+    */
+    
+
 
     public void Awake()
     {
@@ -72,6 +193,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         Debug.Log($"Init agent{Id}...");
         InitAgent();
         ResetStats();
+        timestep = 0;
         m_Network = new Dictionary<int, AuctionFrontierAgent>();
         m_Messages = new Queue<AuctionFrontierUtil.Message>();
         m_Bids = new Dictionary<int, float>();
@@ -91,13 +213,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         m_Agent.isStopped = false;
         sTime = DateTime.Now;
     }
-
-
-    IEnumerator RotateCoroutine()
-    {
-        Debug.Log("Starting co...");
-        yield return new WaitForSeconds(5);
-    }
+    
 
     #region auction-frontier
     public bool DetectObjects()
@@ -138,8 +254,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 {
                     Debug.Log($"Agent{Id} -> Discovered item closer to agent...");
                     closets = item;
-                    AuctionFrontierUtil.TARGETS.Remove(m_Target);
-                    //AuctionFrontierUtil.DISCOVERED_TARGETS.Add(m_Target); // Enqueue previous target
+                    AuctionFrontierUtil.DISCOVERED_TARGETS.Add(m_Target); // Enqueue previous target
                 }
             }
 
@@ -158,19 +273,9 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         {
             m_Agent.SetDestination(target);
             Debug.DrawRay(target, Vector3.up * 10f, Color.green, checkEvery);
-            
-
         }
         else // No more frontiers left to explore - Head home
         {
-            /*
-            if (Vector3.Distance(transform.position, m_Target.transform.position) > grid.MaxDistance/2)
-            {
-                m_Agent.SetDestination(m_Target.transform.position);
-                Debug.Log($"Current frontier target is very far. Continue to target {m_Target.transform.position}... ");
-                return;
-            }
-            */
             if (GridTracking.GridWorldComplete())
             {
                 Debug.Log($"Going to nearest station...");
@@ -182,7 +287,6 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     public void AssignDestinationToNearestStation()
     {
         var nearest = AuctionFrontierUtil.FindClosetsObjectWithTag(transform.position, "station");
-        //m_Target.transform.position = nearest;
         m_Agent.SetDestination(nearest);
     }
     
@@ -212,8 +316,11 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         float distance = Mathf.Infinity;
         
         // In case there are some sync error with appending discovered items to global objects list
-        // var global = GameObject.FindGameObjectsWithTag("objective").Where(o => o.GetComponent<DetectableVisibleObject>().isDetected);
-        // Find closets discovered objects
+
+        /*var global = GameObject.FindGameObjectsWithTag("objective").Where(o =>
+            !o.GetComponent<DetectableVisibleObject>().isTargeted &&
+            o.GetComponent<DetectableVisibleObject>().isDetected); */
+        // Find closets discovered objects;
         foreach (GameObject obj in AuctionFrontierUtil.DISCOVERED_TARGETS)
         {
             var curdist = Vector3.Distance(transform.position, obj.transform.position);
@@ -225,8 +332,18 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
             }
         }
 
-        if (closets != null) AuctionFrontierUtil.DISCOVERED_TARGETS.Remove(closets);
+        if (closets != null)
+        {
+            AuctionFrontierUtil.DISCOVERED_TARGETS.Remove(closets);
+            closets.GetComponent<DetectableVisibleObject>().isTargeted = true;
+        }
+
         return closets;
+    }
+
+    public void DiscoveredCellsUpdate(int num)
+    {
+        m_DiscoveredCells.Add(num);
     }
 
     public void AddExplorationScore(int score)
@@ -249,7 +366,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
             //Satiate();
             collision.gameObject.GetComponent<AuctionFrontierObjectLogic>().OnEaten();
             m_CollectedCapacity++;
-
+            m_TotalCollectted++;
         }
     }
 
@@ -285,7 +402,9 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         { Debug.DrawRay(frontier, Vector3.up * 10f, Color.yellow, checkEvery); }
         Debug.Log($"Agent{Id} - Role: {m_Role} : Stage: {m_AuctionStage}");
         */
-        
+        timestep++;
+        //if(m_ObjectCollectorSettings.maxTimestep == timestep) DisableAgent();
+        var HasDetectedObjects = DetectObjects();
         AuctionFrontierUtil.Message msg;
         var target = Vector3.zero;
 
@@ -296,8 +415,11 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         dist_travelled+= dist;
         previous_pos = cur_position;
         
-        
-        
+        /*
+            var D = GameObject.FindGameObjectsWithTag("objective").Where(o =>
+            !o.GetComponent<DetectableVisibleObject>().isTargeted &&
+            o.GetComponent<DetectableVisibleObject>().isDetected);
+        */
         switch (m_Role)
         {
             // Initiate auction for discovered objectives
@@ -311,7 +433,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                         break;
                     }
                     var item = FindClosetsDiscoveredObject();
-                    if (item != null && item.activeSelf) // Remove inactive elements
+                    if (item != null) 
                     {
                         m_AuctionItem = item;
                         m_AuctionStage = AuctionFrontierUtil.AuctionStage.TaskAnnouncement;
@@ -346,10 +468,23 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                         var auctioneerBid = AuctionFrontierUtil.CalculateAgentBid(transform.position,
                             m_AuctionItem.transform.position, CalculateExplorationRate(), m_CollectedCapacity/maxCapacity);
                         m_Bids[Id] = auctioneerBid > 0f ? auctioneerBid : 0.001f;
+                        m_Time = 0;
                         break;
                 
                     // Receive biddings from all agent
                     case AuctionFrontierUtil.AuctionStage.Bidding:
+                        m_Time += Time.deltaTime;
+                        if (m_Time > biddingTimeLimit) // If not all have responded... make auctioneer collect
+                        {
+                            m_Agent.SetDestination(m_AuctionItem.transform.position);
+                            m_Target = m_AuctionItem;
+                            m_Role = AuctionFrontierUtil.AuctionFrontierRole.Worker;
+                            m_Agent.isStopped = false;
+                            m_AuctionStage = AuctionFrontierUtil.AuctionStage.NoAuction;
+                            m_AuctionItem = null;
+                            ResetBiddingTable();
+                        }
+                        
                         if (m_Messages.TryDequeue(out msg))
                         {
                             TryProcessMessage(msg);
@@ -420,6 +555,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                             if (m_AuctionItem != null && m_AuctionItem.activeSelf)
                             {
                                 AuctionFrontierUtil.DISCOVERED_TARGETS.Add(m_AuctionItem);
+                                m_AuctionItem.GetComponent<DetectableVisibleObject>().isTargeted = false;
                                 m_AuctionItem = null;
                             }
                             ExplorerInit();
@@ -439,13 +575,15 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
 
             // Behaviour following frontier exploration algorithm 
             case AuctionFrontierUtil.AuctionFrontierRole.Explorer:
-                if (GridTracking.GridWorldComplete() || m_CollectedCapacity >= maxCapacity)
+                if (GridTracking.GridWorldComplete() && AuctionFrontierUtil.DISCOVERED_TARGETS.Count == 0  || m_CollectedCapacity >= maxCapacity)
                 {
                     AssignDestinationToNearestStation();
-                    if (EpisodeFinished())
+                    
+                    if (EpisodeFinished() && m_Agent.remainingDistance < 1f)
                     {
                         DisableAgent();
                     }
+                    
                     break;
                 }
 
@@ -455,7 +593,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                     break;
                 }
                 
-                if (DetectObjects() || AuctionFrontierUtil.DISCOVERED_TARGETS.Count > 0)
+                if (HasDetectedObjects || AuctionFrontierUtil.DISCOVERED_TARGETS.Count > 0)
                 {
                     m_Role = AuctionFrontierUtil.AuctionFrontierRole.Auctioneer;
                     m_AuctioneerId = Id;
@@ -477,7 +615,6 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
 
             
             case AuctionFrontierUtil.AuctionFrontierRole.Worker:
-                var HasDetectedObjects = DetectObjects();
                 if (m_Messages.TryDequeue(out msg))
                 {
                     TryProcessMessage(msg);
@@ -495,40 +632,9 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                         m_Role = AuctionFrontierUtil.AuctionFrontierRole.Auctioneer;
                         m_AuctioneerId = Id;
                         m_AuctionStage = AuctionFrontierUtil.AuctionStage.TaskAnnouncement;  
-                        m_AuctionItem = FindClosetsDiscoveredObject();
                         
-                        /*
-                        // Set destination to closets discovered item
-                        var closets = FindClosetsDiscoveredObject();
-                        if (closets == null) // All discovered are deactivated -> empty queue
-                        {
-                            AuctionFrontierUtil.DISCOVERED_TARGETS = new Queue<GameObject>();
-                            m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
-                            target = GridTracking.WFD(transform.position, checkEvery);
-                            AssignDestination(target);
-                        }
-                        else
-                        {
-                            m_Target = closets;
-                            Debug.Log($"Finished work. Selecting new dest from discovered {closets.transform.position}");
-                            m_Agent.SetDestination(closets.transform.position);
-                        }
-                        */
                         
                     }
-                    /*else if (GameObject.FindGameObjectsWithTag("objective")
-                                 .Where(o => o.GetComponent<DetectableVisibleObject>().isDetected).Count() > 0)
-                    {
-                        foreach (var obj in GameObject.FindGameObjectsWithTag("objective")
-                                     .Where(o => o.GetComponent<DetectableVisibleObject>().isDetected))
-                        {
-                            AuctionFrontierUtil.DISCOVERED_TARGETS.Add(obj);
-                        }   
-                        m_Role = AuctionFrontierUtil.AuctionFrontierRole.Auctioneer;
-                        m_AuctioneerId = Id;
-                        m_AuctionStage = AuctionFrontierUtil.AuctionStage.TaskAnnouncement;  
-                        m_AuctionItem = FindClosetsDiscoveredObject();
-                    } */
                     else // Revert back to being explorer
                     {
                         ExplorerInit();
@@ -545,13 +651,17 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     
     public void DisableAgent()
     {
-        if(m_ObjectCollectorSettings.m_Is_evaluating) StatisticsWriter.AppendAgentStatsMaxStep(0f, dist_travelled, 0, Id, DateTime.Now - sTime);
+        // AgentReward := # of collected objectives
+        // AgentStep := # of discovered cells in gridworld
+        Debug.Log($"Disabling Agent{Id}...");
+        if(m_ObjectCollectorSettings.m_Is_evaluating) StatisticsWriter.AppendAgentStatsMaxStep(m_TotalCollectted, dist_travelled, m_DiscoveredCells.Sum(), Id, DateTime.Now - sTime);
         gameObject.SetActive(false);
     }
     
     public void ResetStats()
     {
         dist_travelled = 0;
+        m_TotalCollectted = 0;
         sTime = DateTime.Now;
     }
 
@@ -594,6 +704,8 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         m_AuctioneerId = -1;
         m_ExplorationEfficiency = new Queue<int>();
         m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
+        m_DiscoveredCells = new List<int>();
+        m_TotalCollectted = 0;
     }
     
     public void BroadcastMessage(AuctionFrontierUtil.Message msg)
@@ -656,7 +768,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                     m_AuctionStage = AuctionFrontierUtil.AuctionStage.Bidding;
                     if (m_AuctionItem != null) // Add item back to queue
                     {
-                        AuctionFrontierUtil.DISCOVERED_TARGETS.Add(m_AuctionItem);
+                        m_AuctionItem.GetComponent<DetectableVisibleObject>().isTargeted = false;
                     }
                     m_AuctionItem = msg.Task;
                 }
@@ -669,11 +781,11 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 
             case AuctionFrontierUtil.MessageType.Winner:
                 var winnerId = msg.Task.GetComponent<AuctionFrontierAgent>().Id;
-                if (winnerId == Id)
+                if (winnerId == Id && m_Role == AuctionFrontierUtil.AuctionFrontierRole.Bidder)
                 {
                     Debug.Log($"Agent:{winnerId} won...");
                     m_Target = m_AuctionItem;
-                    m_Agent.SetDestination(m_Target.transform.position);
+                    m_Agent.SetDestination(m_AuctionItem.transform.position);
                     m_Role = AuctionFrontierUtil.AuctionFrontierRole.Worker;
                     m_AuctionStage = AuctionFrontierUtil.AuctionStage.NoAuction;
                     m_Agent.isStopped = false;
