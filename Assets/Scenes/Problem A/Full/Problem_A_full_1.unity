@@ -957,6 +957,10 @@ PrefabInstance:
       propertyPath: m_RaysPerDirection
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 9140309024576403861, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
+      propertyPath: m_DetectableTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
