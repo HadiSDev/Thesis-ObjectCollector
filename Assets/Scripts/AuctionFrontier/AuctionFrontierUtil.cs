@@ -45,7 +45,7 @@ namespace DefaultNamespace
             return closest;
         }
         
-        public static Vector3 FindClosetsObjectWithTag(Vector3 worldPosition, string tag)
+        public static GameObject FindClosetsObjectWithTag(Vector3 worldPosition, string tag)
         {
             GameObject[] gos;
             gos = GameObject.FindGameObjectsWithTag(tag);
@@ -60,7 +60,7 @@ namespace DefaultNamespace
                     closest = obj;
                 }
             }
-            return closest.transform.position;
+            return closest;
         }
         
         public static int GetNextId()
