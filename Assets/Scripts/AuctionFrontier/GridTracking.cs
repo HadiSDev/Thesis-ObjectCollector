@@ -13,7 +13,7 @@ namespace DefaultNamespace
     {
         private int width = 60;
         private int height = 6;
-        private int cellSize = 5;
+        private float cellSize = 5f;
         public static int TotalNumberOfCells;
 
         private Mesh m_Mesh;
@@ -314,7 +314,8 @@ namespace DefaultNamespace
 
         public static Vector3 GridCoordToWorld(Vector3 cell)
         {
-            return Vector3.Scale(cell, _cellsizeVec) - _offsetVec;
+            var worldPos = Vector3.Scale(cell, _cellsizeVec) - _offsetVec;
+            return worldPos + _cellsizeVec/2;
         }
         
 
@@ -328,7 +329,7 @@ namespace DefaultNamespace
             return m_GridWorld.GetWidth();
         }
         
-        public int UpdateGridWithSensor(Transform agent, float longitude, float range, int value)
+        public int UpdateGridWithSensor(Transform agent, float longitude, float range, int value, float drawDuration)
         {
             var pos = agent.position;
             var tmp = new GameObject();
@@ -367,13 +368,13 @@ namespace DefaultNamespace
                 {
                     // Check if cell is a stored frontier point. Remove if true
                     coord = GridCoordToWorld(new Vector3(x, 1f, z));
+                    
                     if (!IsCellFrontier(coord))
                     {
                         FRONTIERS.Remove(coord);
                     }
 
-                    //Debug.DrawRay(pos, coord - pos, Color.cyan, .1f);
-                    //if(m_GridWorld.GetGridValue(x, z) > 0) continue;
+                    // (Vector3.forward * (cellSize/2f)
                     
                     // Check if point between is in FOV
                     angle1 = Vector3.Angle(v1, coord-pos);
@@ -385,13 +386,14 @@ namespace DefaultNamespace
                     
                     if (angle1 < longitude && angle2 < longitude && dist <= range)
                     {
-                        num_discovered_cells++;
+                        if(m_GridWorld.GetGridValue(x, z) <= 0) num_discovered_cells++;
                         
                         /* DEBUGGING */
                         //Debug.Log($"Angle {angle1}  Angle2 {angle2}");
                         //Debug.DrawRay(coord, new Vector3(0f, 10f, 0f), Color.yellow, 6f); // DRAW Points instead
                         //Debug.Log($"******************************'");
-                        //Debug.DrawRay(pos, coord - pos, Color.cyan, .5f);
+                        //Debug.DrawRay(pos, (coord - pos), Color.cyan, drawDuration);
+
 
                         m_GridWorld.SetValue(x, z, value);
                         m_CellState[z, x] = AuctionFrontierUtil.CELL_STATE.KNOWN_OPEN;

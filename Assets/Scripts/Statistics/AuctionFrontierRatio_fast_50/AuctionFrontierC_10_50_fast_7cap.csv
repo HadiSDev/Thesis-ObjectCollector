@@ -1,0 +1,2 @@
+Id,NumOfAgents,CompletionTime,MinReward,AvgReward,MaxReward,SDReward,MinAgentStep,AvgAgentStep,MaxAgentStep,SDAgentStep,MinDistTravelled,AvgDistTravelled,MaxDistTravelled,SDDistTravelled
+3,10,478.08098,4,12.4,20,4.9436828377233253,1,34,106,0,446.4272,508.371582,591.6763,41.496180575893653

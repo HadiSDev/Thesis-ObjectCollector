@@ -18,7 +18,6 @@ namespace Statistics
         
         private static readonly string BASE_DIRECTORY = "./Assets/Scripts/Statistics/";
         private static List<Stats> m_Records = new List<Stats>();
-
         private static List<float> m_AgentRewards = new List<float>();
         private static List<float> m_AgentTravelDist = new List<float>();
         private static List<int> m_AgentSteps = new List<int>();
@@ -82,7 +81,7 @@ namespace Statistics
         
         public static void AppendStatToRecordList(int id,  TimeSpan elapTime)
         {
-            var record = new Stats(id, elapTime.TotalSeconds.ToString());
+            var record = new Stats(id, (elapTime.TotalSeconds * Time.timeScale).ToString());
             record.ComputeAgentSpecificStats(m_AgentRewards, m_AgentSteps, m_AgentTravelDist);
             m_Records.Add(record);
         }

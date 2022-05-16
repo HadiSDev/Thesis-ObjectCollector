@@ -16,9 +16,12 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
     public bool m_Is_evaluating;
     private int resetCounter;
     private int m_Counter = 0;
+    
     public int sampleSize;
     public string fileName;
     public string directory;
+    public int maxTimestep;
+    public int timestep;
     
     private DateTime m_StartTime;
     private TimeSpan m_ElapsedTime;
@@ -33,6 +36,11 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
     [HideInInspector]
     public float totalCollected;
 
+    public bool MaxStepReached()
+    {
+        return timestep >= maxTimestep;
+    }
+
     public void Awake()
     {
         agents = GameObject.FindGameObjectsWithTag("agent").AsEnumerable().Where(a => a.layer == 0).ToArray();
@@ -43,13 +51,17 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
         StatisticsWriter.FileName = fileName;
         StatisticsWriter.WriteDirectory = directory;
         StatisticsWriter.IsEvaluating = m_Is_evaluating;
-    }
+        
+        // Speed up play time
+        Time.timeScale = 10
+            
+            ;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;    }
 
     public void EnvironmentReset()
     {
         Debug.Log("Reset environment...");
         GridTracking.GridTrackingReset();
-        AuctionFrontierUtil.FINISHED = false;
         if (m_Is_evaluating == false || m_Counter < sampleSize)
         {
             // Reset map
@@ -58,6 +70,7 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
             {
                 fa.ResetObjectiveArea(agents);
             }
+            AuctionFrontierUtil.FINISHED = false;
             ClearObjects(GameObject.FindGameObjectsWithTag("obstacle"));
         
             m_StartTime = DateTime.Now;
@@ -84,10 +97,13 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
 
     public void Update()
     {
+        timestep++;
         // Actively listen if episode is finished
-        if (GameObject.FindGameObjectsWithTag("objective").Length == 0 && GridTracking.GridWorldComplete() && AuctionFrontierUtil.FINISHED)
+        if (GameObject.FindGameObjectsWithTag("objective").Length == 0 && GridTracking.GridWorldComplete() && AuctionFrontierUtil.FINISHED ||timestep >= maxTimestep)
         {
             EnvironmentReset();
+            AuctionFrontierUtil.CLEAR();
+            timestep = 0;
         }
         
         m_ElapsedTime = DateTime.Now - m_StartTime;

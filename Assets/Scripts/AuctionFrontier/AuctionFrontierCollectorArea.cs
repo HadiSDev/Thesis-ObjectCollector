@@ -39,15 +39,11 @@ public class AuctionFrontierCollectorArea : Area
     {
         var grid = agent.GetComponent<GridSensorComponent3D>();
         var afagent = agent.GetComponent<AuctionFrontierAgent>();
-        var num_discovered_cells = m_GridTracking.UpdateGridWithSensor(agent.transform, grid.LonAngle*2, grid.MaxDistance, 1);
+        var num_discovered_cells = m_GridTracking.UpdateGridWithSensor(agent.transform, grid.LonAngle*2, grid.MaxDistance, 1, afagent.checkEvery);
         afagent.AddExplorationScore(num_discovered_cells);
+        afagent.DiscoveredCellsUpdate(num_discovered_cells);
     }
-
-    public void ScanGridWorld()
-    {
-        // DEBUG.log("Hello");
-    }
-
+    
     void CreateObjectives(int num, GameObject type)
     {
         //Debug.Log("Creating objectives");
@@ -122,6 +118,7 @@ public class AuctionFrontierCollectorArea : Area
         foreach (GameObject agent in agents)
         {
             var afa = agent.GetComponent<AuctionFrontierAgent>();
+            if (agent.activeSelf) afa.DisableAgent();
             agent.SetActive(true);
             afa.ResetStats();
             

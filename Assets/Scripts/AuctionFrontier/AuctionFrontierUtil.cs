@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using CustomDetectableObjects;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -14,11 +16,21 @@ namespace DefaultNamespace
         public static float env_diagonal_distance;
         private static int counter;
 
+        public static void CLEAR()
+        {
+            DISCOVERED_TARGETS = new HashSet<GameObject>();
+            TARGETS = new HashSet<GameObject>();
+        }
+        
+        
+
         public static GameObject GetNearestDiscoveredObject(Vector3 worldPosition)
         {
             GameObject closest = null;
             float distance = Mathf.Infinity;
-            
+            var DISCOVERED_TARGETS = GameObject.FindGameObjectsWithTag("objective").Where(o =>
+                !o.GetComponent<DetectableVisibleObject>().isTargeted &&
+                o.GetComponent<DetectableVisibleObject>().isDetected);
             foreach (GameObject obj in DISCOVERED_TARGETS)
             {
                 var curdist = Vector3.Distance(worldPosition, obj.transform.position);
@@ -33,7 +45,7 @@ namespace DefaultNamespace
             return closest;
         }
         
-        public static Vector3 FindClosetsObjectWithTag(Vector3 worldPosition, string tag)
+        public static GameObject FindClosetsObjectWithTag(Vector3 worldPosition, string tag)
         {
             GameObject[] gos;
             gos = GameObject.FindGameObjectsWithTag(tag);
@@ -48,7 +60,7 @@ namespace DefaultNamespace
                     closest = obj;
                 }
             }
-            return closest.transform.position;
+            return closest;
         }
         
         public static int GetNextId()
@@ -58,8 +70,9 @@ namespace DefaultNamespace
         
         public static float CalculateAgentBid(Vector3 worldPosition, Vector3 targetPosition, float explorerRate, float capacityRatio)
         {
+            if (capacityRatio == 1f) return -1f;
             var distance = Vector3.Distance(worldPosition, targetPosition);
-            return (1 - distance/env_diagonal_distance) + (1-explorerRate) +  (1-capacityRatio) ; 
+            return (1 - distance/env_diagonal_distance) + (1-explorerRate) +  (1-capacityRatio); 
         }
 
         public enum AuctionStage
