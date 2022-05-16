@@ -32,7 +32,6 @@ public class ObjectCollectorAgent : Agent, IStats
     public float stepCost = -0.001f;
 
     // Capacity Settings
-    [HideInInspector]
     public float maxCapacity = 15f;
     private float m_CollectedCapacity;
     
@@ -242,12 +241,6 @@ public class ObjectCollectorAgent : Agent, IStats
             m_CollectedCapacity += 1f;
             m_ObjectCollectorSettings.totalCollected += 1f;
             m_ObjectCollectorSettings.m_AgentGroup.AddGroupReward(1f);
-                
-            var n_objects = GameObject.FindGameObjectsWithTag("objective").Length;
-            if (maxCapacity == 40 && n_objects == 0)
-            {
-                DisableAgentAndTerminateEpisodeIfDone();
-            }
         }
     }
 

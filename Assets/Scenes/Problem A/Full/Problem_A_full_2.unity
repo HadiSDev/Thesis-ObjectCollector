@@ -395,6 +395,10 @@ PrefabInstance:
       propertyPath: rangeZ
       value: 13.4
       objectReference: {fileID: 0}
+    - target: {fileID: 4274263770068362894, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
+      propertyPath: numObjectives
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4688212428263696, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
@@ -469,12 +473,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2063243997762391141, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
       propertyPath: maxCapacity
-      value: 15
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4088688862985068048, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5022602860645237092, guid: 4de1b8d3458d28a4cb2bda1ebd71c313, type: 3}
     - target: {fileID: 4088688862985068048, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
       propertyPath: m_ObservableAttributeHandling
       value: 1
@@ -1058,12 +1062,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2063243997762391141, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
       propertyPath: maxCapacity
-      value: 15
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4088688862985068048, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5022602860645237092, guid: 4de1b8d3458d28a4cb2bda1ebd71c313, type: 3}
     - target: {fileID: 4088688862985068048, guid: 0efd8c6caf817a64bb4b760c04ea3810, type: 3}
       propertyPath: m_ObservableAttributeHandling
       value: 1
