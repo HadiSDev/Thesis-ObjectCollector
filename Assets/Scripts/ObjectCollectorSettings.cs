@@ -7,7 +7,7 @@ using Statistics;
 
 public class ObjectCollectorSettings : MonoBehaviour
 {
-    private Agent[] agents;
+    private ObjectCollectorAgent[] agents;
     [HideInInspector] 
     public ObjectCollectorArea[] listArea;
     
@@ -63,7 +63,7 @@ public class ObjectCollectorSettings : MonoBehaviour
 
     public void Awake()
     {
-        agents = FindObjectsOfType<Agent>();
+        agents = FindObjectsOfType<ObjectCollectorAgent>();
         Academy.Instance.OnEnvironmentReset += EnvironmentReset;
         m_Recorder = Academy.Instance.StatsRecorder;
         
@@ -93,7 +93,6 @@ public class ObjectCollectorSettings : MonoBehaviour
                     m_AgentGroup.RegisterAgent(agent);
                 }
             }
-            ClearObjects(GameObject.FindGameObjectsWithTag("obstacle"));
             
             m_StartTime = DateTime.Now;
             totalScore = 0;
@@ -107,14 +106,6 @@ public class ObjectCollectorSettings : MonoBehaviour
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.ExitPlaymode();
 #endif
-        }
-    }
-    
-    void ClearObjects(GameObject[] objects)
-    {
-        foreach (var objective in objects)
-        {
-            Destroy(objective);
         }
     }
 

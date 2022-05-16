@@ -11,10 +11,8 @@ public class ObjectCollectorArea : Area
     public int numObjectives;
     public float rangeX = 147f;
     public float rangeZ = 13.4f;
-    public NavMeshObstacle obstacle;
-    public int numObstacles;
-    public int maxSpawnAttemptsPerObstacle = 10;
     private IList<GameObject> m_Objectives = new List<GameObject>();
+
     private GameObject Station { get; set; }
     private void Start()
     {
@@ -46,7 +44,7 @@ public class ObjectCollectorArea : Area
         }
     }
 
-    public void ResetObjectiveArea(Agent[] agents)
+    public void ResetObjectiveArea(ObjectCollectorAgent[] agents)
     {
         foreach (var agent in agents)
         {
@@ -68,12 +66,9 @@ public class ObjectCollectorArea : Area
                     Random.Range(-rangeZ, rangeZ))  + transform.position;
             }
             
-                
             agent.transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0, 360)));
         }
-
-
-
+        
         if (m_Objectives.Count > 0)
         {
             ResetObjectives();

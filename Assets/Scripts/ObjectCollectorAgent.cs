@@ -8,7 +8,6 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Sensors.Reflection;
 
 public class ObjectCollectorAgent : Agent, IStats
 {
@@ -16,9 +15,11 @@ public class ObjectCollectorAgent : Agent, IStats
     Rigidbody m_AgentRb;
 
     // Speed of agent rotation.
-    public float turnSpeed = 300;
+    public float turnSpeed = 150;
     // Speed of agent movement.
     public float moveSpeed = 1;
+
+    
     // Statistics
     private Vector3 prev_pos;
     private DateTime m_Start;
@@ -31,9 +32,10 @@ public class ObjectCollectorAgent : Agent, IStats
     public float stepCost = -0.001f;
 
     // Capacity Settings
-    public float maxCapacity = 25;
+    [HideInInspector]
+    public float maxCapacity = 15f;
     private float m_CollectedCapacity;
-
+    
     // Dynamically mark detected objectives
     public bool markDetectedObjects;
     private GridSensorComponent3D POVGrid;
@@ -41,54 +43,11 @@ public class ObjectCollectorAgent : Agent, IStats
     private BufferSensorComponent _bufferSensorAgents;
     
     // Station
-    EnvironmentParameters m_ResetParams;
     private ObjectCollectorArea m_ObjectCollectorArea;
-    private BufferSensorComponent _bufferSensorStations;
     private GameObject Station { get; set; }
     
     const string k_MaxCapacityFlag = "--max-capacity";
 
-    [Observable(nameof(PositionDelta), numStackedObservations: 9)]
-    Vector2 PositionDelta
-    {
-        get
-        {
-            var agentPos = transform.position;
-            var areaPos = m_ObjectCollectorArea.transform.position;
-            return new Vector3(NormalizeX(agentPos.x - areaPos.x), NormalizeZ(agentPos.z - areaPos.z));
-        }
-    }
-    
-    [Observable(nameof(StationPosDelta), numStackedObservations: 9)]
-    Vector2 StationPosDelta
-    {
-        get
-        {
-            if (Station == null)
-            {
-                Station = GameObject.FindGameObjectWithTag("station");
-            }
-            var agentPos = transform.position;
-            var stationPos = Station.transform.position;
-            return new Vector3(NormalizeX(stationPos.x - agentPos.x), NormalizeZ(stationPos.z - agentPos.z));
-        }
-    }
-    
-    [Observable(nameof(Forward), numStackedObservations: 9)]
-    Vector2 Forward => transform.forward;
-    
-    [Observable(nameof(CapacityRatio), numStackedObservations: 5)]
-    float CapacityRatio =>  m_CollectedCapacity / maxCapacity;
-    
-    [Observable()]
-    Vector2 Velocity
-    {
-        get
-        {
-            var velocity = transform.InverseTransformDirection(m_AgentRb.velocity);
-            return new Vector2(velocity.x, velocity.z);
-        }
-    }
 
     public override void Initialize()
     {
@@ -104,10 +63,8 @@ public class ObjectCollectorAgent : Agent, IStats
         {
             _bufferSensorObjectives = bufferSensors.FirstOrDefault(b => b.SensorName == "ObjectivesSensor");
             _bufferSensorAgents = bufferSensors.FirstOrDefault(b => b.SensorName == "AgentsSensor");
-            _bufferSensorStations = bufferSensors.FirstOrDefault(b => b.SensorName == "StationsSensor");
         }
         
-        m_ResetParams = Academy.Instance.EnvironmentParameters;
         if (markDetectedObjects)
         {
             POVGrid = GetComponent<GridSensorComponent3D>();
@@ -131,31 +88,32 @@ public class ObjectCollectorAgent : Agent, IStats
         return (currentValue - minValue) / (maxValue - minValue);
     }
 
-    private float NormalizeX(float currentValue, float minValue=-147f, float maxValue=147f)
+    private float NormalizeX(float currentValue, float minValue=-150f, float maxValue=150f)
     {
         return Normalize(currentValue, minValue, maxValue);
     }
     
-    private float NormalizeZ(float currentValue, float minValue=-13.4f, float maxValue=13.4f)
+    private float NormalizeZ(float currentValue, float minValue=-14f, float maxValue=14f)
     {
         return Normalize(currentValue, minValue, maxValue);
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        base.CollectObservations(sensor);
         var agentPos = transform.position;
+        var areaPos = m_ObjectCollectorArea.transform.position;
+        sensor.AddObservation(new Vector2(NormalizeX(agentPos.x - areaPos.x), NormalizeZ(agentPos.z - areaPos.z)));
+        
+        var stationPos = Station.transform.position;
+        sensor.AddObservation(new Vector2(NormalizeX(stationPos.x - agentPos.x), NormalizeZ(stationPos.z - agentPos.z)));
 
-        if (_bufferSensorStations != null)
-        {
-            foreach (var station in GameObject.FindGameObjectsWithTag("station"))
-            {
-                var stationPos = station.transform.position;
-                var stationX = Normalize(stationPos.x - agentPos.x);
-                var stationZ = Normalize(stationPos.z - agentPos.z);
-                _bufferSensorStations.AppendObservation(new []{stationX, stationZ});
-            }
-        }
+        var forward = transform.forward;
+        sensor.AddObservation(new Vector2(forward.x, forward.z));
+        
+        sensor.AddObservation(m_CollectedCapacity / maxCapacity);
+        
+        var velocity = transform.InverseTransformDirection(m_AgentRb.velocity);
+        sensor.AddObservation(new Vector2(velocity.x / moveSpeed, velocity.z / moveSpeed));
 
         if (_bufferSensorObjectives != null)
         {
@@ -164,8 +122,8 @@ public class ObjectCollectorAgent : Agent, IStats
             foreach (var objective in objectives)
             {
                 var pos = objective.transform.position;
-                var x = Normalize(pos.x - agentPos.x);
-                var z = Normalize(pos.z - agentPos.z);
+                var x = NormalizeX(pos.x - agentPos.x);
+                var z = NormalizeZ(pos.z - agentPos.z);
                 _bufferSensorObjectives.AppendObservation(new []{x, z});
             }
         }
@@ -177,8 +135,8 @@ public class ObjectCollectorAgent : Agent, IStats
             foreach (var agent in agents)
             {
                 var pos = agent.transform.localPosition;
-                var x = Normalize(pos.x - agentPos.x);
-                var z = Normalize(pos.z - agentPos.z);
+                var x = NormalizeX(pos.x - agentPos.x);
+                var z = NormalizeZ(pos.z - agentPos.z);
                 _bufferSensorAgents.AppendObservation(new []{x, z});
             }
         }
@@ -195,21 +153,13 @@ public class ObjectCollectorAgent : Agent, IStats
         }
     }
 
-    public Color32 ToColor(int hexVal)
-    {
-        var r = (byte)((hexVal >> 16) & 0xFF);
-        var g = (byte)((hexVal >> 8) & 0xFF);
-        var b = (byte)(hexVal & 0xFF);
-        return new Color32(r, g, b, 255);
-    }
-
     private void MoveAgent(ActionBuffers actionBuffers)
     {
         if (!enabled)
         {
             return;
         }
-        
+
         var dirToGo = Vector3.zero;
         var rotateDir = Vector3.zero;
 
@@ -230,7 +180,6 @@ public class ObjectCollectorAgent : Agent, IStats
         AgentStepCount = StepCount;
         AgentCumulativeReward = 0; //TODO
         prev_pos = m_AgentRb.position;
-
 
         if (m_AgentRb.velocity.sqrMagnitude > 25f) // slow it down
         {
@@ -280,34 +229,27 @@ public class ObjectCollectorAgent : Agent, IStats
         m_ObjectCollectorSettings.EnvironmentReset();
         m_AgentRb.velocity = Vector3.zero;
         m_CollectedCapacity = 0;
+
         ResetStats();
         SetResetParameters();
     }
-
-    void OnTriggerObjective(Collider collision)
+    
+    public void OnTriggerObjective(ObjectLogic objectCollected)
     {
-        if (collision.gameObject.CompareTag("objective"))
+        if (m_CollectedCapacity + 1f <= maxCapacity)
         {
-            if (m_CollectedCapacity + 1f <= maxCapacity)
-            {
-                collision.gameObject.GetComponent<ObjectLogic>().OnEaten();
-                m_CollectedCapacity += 1f;
-                m_ObjectCollectorSettings.totalCollected += 1f;
-                m_ObjectCollectorSettings.m_AgentGroup.AddGroupReward(1f);
+            objectCollected.OnEaten();
+            m_CollectedCapacity += 1f;
+            m_ObjectCollectorSettings.totalCollected += 1f;
+            m_ObjectCollectorSettings.m_AgentGroup.AddGroupReward(1f);
                 
-                var n_objects = GameObject.FindGameObjectsWithTag("objective").Length;
-                if (maxCapacity == 40 && n_objects == 0)
-                {
-                    DisableAgentAndTerminateEpisodeIfDone();
-                }
+            var n_objects = GameObject.FindGameObjectsWithTag("objective").Length;
+            if (maxCapacity == 40 && n_objects == 0)
+            {
+                DisableAgentAndTerminateEpisodeIfDone();
             }
         }
     }
-
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        OnTriggerObjective(collision);
-    }*/
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -326,17 +268,6 @@ public class ObjectCollectorAgent : Agent, IStats
                 DisableAgentAndTerminateEpisodeIfDone();
             }
         }
-        OnTriggerObjective(collision);
-    }
-
-    private void EndEpsiodeIfNoObjectives()
-    {
-        var nObjects = GameObject.FindGameObjectsWithTag("objective").Length;
-        if (nObjects == 0  && m_CollectedCapacity == 0)
-        {
-            Debug.Log("Agent Epsiode Ended");
-            DisableAgentAndTerminateEpisodeIfDone();
-        }
     }
 
     public void DisableAgentAndTerminateEpisodeIfDone()
@@ -354,16 +285,9 @@ public class ObjectCollectorAgent : Agent, IStats
             m_ObjectCollectorSettings.EnvironmentReset();
         }
     }
-    
-    public void SetAgentScale()
-    {
-        float agentScale = m_ResetParams.GetWithDefault("agent_scale", 1.0f);
-        //gameObject.transform.localScale = new Vector3(agentScale, agentScale/8, agentScale);
-    }
 
     public void SetResetParameters()
     {
-        SetAgentScale();
     }
 
     public float GetAgentCumulativeDistance()
