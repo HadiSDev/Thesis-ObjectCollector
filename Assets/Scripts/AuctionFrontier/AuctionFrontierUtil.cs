@@ -21,8 +21,11 @@ namespace DefaultNamespace
             DISCOVERED_TARGETS = new HashSet<GameObject>();
             TARGETS = new HashSet<GameObject>();
         }
-        
-        
+
+        public static void AddToGlobalObjectList(GameObject obj)
+        {
+            if (obj.activeSelf) DISCOVERED_TARGETS.Add(obj);
+        }
 
         public static GameObject GetNearestDiscoveredObject(Vector3 worldPosition)
         {
