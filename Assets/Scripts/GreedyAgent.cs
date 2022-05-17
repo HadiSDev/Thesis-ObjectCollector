@@ -173,7 +173,7 @@ public class GreedyAgent : MonoBehaviour, IStats
         m_Target = FindClosestObject()?.transform;
         if (m_Target == null)
         {
-            StatisticsWriter.AppendAgentStatsMaxStep(0f, dist_travelled, 0, 0, DateTime.Now-sTime);
+            StatisticsWriter.AppendAgentStatsMaxStep(0f, dist_travelled, 0, 0, DateTime.Now-sTime, 0);
             m_ObjectCollectorSettings.EnvironmentReset();
             dist_travelled = 0f;
             sTime = DateTime.Now;

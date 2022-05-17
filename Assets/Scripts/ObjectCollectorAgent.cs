@@ -313,7 +313,7 @@ public class ObjectCollectorAgent : Agent, IStats
                 AgentTravelledDist,
                 AgentStepCount,
                 m_Count,
-                (DateTime.Now-m_Start));
+                (DateTime.Now-m_Start), 0);
         }
 
         m_Start = DateTime.Now;
