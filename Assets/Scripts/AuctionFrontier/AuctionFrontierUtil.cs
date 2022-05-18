@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CustomDetectableObjects;
@@ -107,8 +108,7 @@ namespace DefaultNamespace
         {
             AuctionStart,
             Bid, 
-            Winner,
-            Loser
+            Winner
         }
 
         public class Message
@@ -116,6 +116,7 @@ namespace DefaultNamespace
             public Message(AuctionFrontierAgent sender, AuctionFrontierAgent receiver,  MessageType header, GameObject task, float bid=0f)
             {
                 Bid = bid;
+                Timestamp = DateTime.Now;
                 Sender = sender;
                 Receiver = receiver;
                 Header = header;
@@ -125,6 +126,7 @@ namespace DefaultNamespace
             public Message(AuctionFrontierAgent sender,  MessageType header, GameObject task, float bid=0f)
             {
                 Bid = bid;
+                Timestamp = DateTime.Now;
                 Sender = sender;
                 Header = header;
                 Task = task;
@@ -134,6 +136,8 @@ namespace DefaultNamespace
 
             public AuctionFrontierAgent Sender { get; set; }
             public AuctionFrontierAgent Receiver { get; set; }
+
+            public DateTime Timestamp { get; set; }
 
             public MessageType Header { get; set; }
 

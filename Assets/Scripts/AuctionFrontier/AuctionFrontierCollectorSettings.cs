@@ -103,6 +103,7 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
         {
             EnvironmentReset();
             AuctionFrontierUtil.CLEAR();
+            Debug.ClearDeveloperConsole();
             timestep = 0;
         }
         
