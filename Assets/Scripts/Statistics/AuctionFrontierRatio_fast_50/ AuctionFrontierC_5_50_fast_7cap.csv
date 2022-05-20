@@ -1,2 +1,0 @@
-Id,NumOfAgents,CompletionTime,MinReward,AvgReward,MaxReward,SDReward,MinAgentStep,AvgAgentStep,MaxAgentStep,SDAgentStep,MinDistTravelled,AvgDistTravelled,MaxDistTravelled,SDDistTravelled,TotalShares
-2,5,410.16542,4,9.6,20,6.3749509802037023,5,70,137,0,366.7593,402.4691,487.084167,43.089124490241019,0

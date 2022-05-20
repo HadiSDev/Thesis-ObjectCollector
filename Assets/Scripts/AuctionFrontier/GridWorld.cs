@@ -18,6 +18,7 @@ namespace DefaultNamespace
         private int m_Height;
         private float m_CellSize;
         private int[,] m_GridArray;
+        private bool m_DrawGrid;
         private TextMesh[,] m_TextArray; // Only for debug
         
         // Methods to help visualize grid 
@@ -58,30 +59,32 @@ namespace DefaultNamespace
             return textMesh;
         }
 
-        public GridWorld(int width, int height, float cellSize)
+        public GridWorld(int width, int height, float cellSize, bool drawGrid)
         {
             m_Width = width;
             m_Height = height;
             m_CellSize = cellSize;
-                m_GridArray = new int[m_Height, m_Width];
-                m_TextArray = new TextMesh[m_Height, m_Width];
-
-            for (int z = 0; z < m_GridArray.GetLength(0); z++)
+            m_GridArray = new int[m_Height, m_Width];
+            m_DrawGrid = drawGrid;
+            if (m_DrawGrid)
             {
-                for (int x = 0; x < m_GridArray.GetLength(1);x++)
+                m_TextArray = new TextMesh[m_Height, m_Width];
+                for (int z = 0; z < m_GridArray.GetLength(0); z++)
                 {
-                    m_TextArray[z, x] = CreateWorldText(m_GridArray[z, x].ToString(),
-                        null,
-                        GetWorldPosition(x, z) + new Vector3(m_CellSize,  m_CellSize) * .5f, // Shift by half a cell size
-                        30,
-                        Color.white);
-                    Debug.DrawLine(GetWorldPosition(x, z), GetWorldPosition(x, z + 1), Color.white, 100f);   // HorizontalLine
-                    Debug.DrawLine(GetWorldPosition(x, z), GetWorldPosition(x + 1, z), Color.white, 100f); // VerticalLine
+                    for (int x = 0; x < m_GridArray.GetLength(1);x++)
+                    {
+                        m_TextArray[z, x] = CreateWorldText(m_GridArray[z, x].ToString(),
+                            null,
+                            GetWorldPosition(x, z) + new Vector3(m_CellSize,  m_CellSize) * .5f, // Shift by half a cell size
+                            30,
+                            Color.white);
+                        Debug.DrawLine(GetWorldPosition(x, z), GetWorldPosition(x, z + 1), Color.white, 100f);   // HorizontalLine
+                        Debug.DrawLine(GetWorldPosition(x, z), GetWorldPosition(x + 1, z), Color.white, 100f); // VerticalLine
+                    }
                 }
+                Debug.DrawLine(GetWorldPosition(0, m_Height), GetWorldPosition(m_Width, m_Height), Color.white, 100f);   // Horizontal Lines
+                Debug.DrawLine(GetWorldPosition(m_Width, 0), GetWorldPosition(m_Width, m_Height), Color.white, 100f);   // Vertical Line
             }
-            Debug.DrawLine(GetWorldPosition(0, m_Height), GetWorldPosition(m_Width, m_Height), Color.white, 100f);   // Horizontal Lines
-            Debug.DrawLine(GetWorldPosition(m_Width, 0), GetWorldPosition(m_Width, m_Height), Color.white, 100f);   // Vertical Lines
-
         }
 
         public bool GridCompleted()
@@ -108,7 +111,7 @@ namespace DefaultNamespace
             if (x >= 0 && z >= 0 && x < m_Width && z < m_Height)
             {
                 m_GridArray[z, x] = value;
-                m_TextArray[z, x].text = value.ToString();
+                if (m_DrawGrid) m_TextArray[z, x].text = value.ToString();
             }
         }
 
