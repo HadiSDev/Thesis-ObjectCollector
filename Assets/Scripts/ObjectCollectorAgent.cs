@@ -43,6 +43,7 @@ public class ObjectCollectorAgent : Agent, IStats
     
     // Station
     private ObjectCollectorArea m_ObjectCollectorArea;
+    private GridSensorComponent3D _objectScanner;
     private GameObject Station { get; set; }
     
     const string k_MaxCapacityFlag = "--max-capacity";
@@ -51,7 +52,9 @@ public class ObjectCollectorAgent : Agent, IStats
     public override void Initialize()
     {
         m_AgentRb = GetComponent<Rigidbody>();
-        prev_pos = transform.position; 
+        prev_pos = transform.position;
+
+        _objectScanner = GetComponentInParent<GridSensorComponent3D>();
         
         m_ObjectCollectorSettings = FindObjectOfType<ObjectCollectorSettings>();
         m_ObjectCollectorArea = FindObjectOfType<ObjectCollectorArea>();
@@ -79,6 +82,23 @@ public class ObjectCollectorAgent : Agent, IStats
                 maxCapacity = float.Parse(args[i + 1]);
                 break;
             }
+        }
+        
+    }
+
+    private void ScanForObjects()
+    {
+        var agentPos = transform.position;
+        var j = _objectScanner.GetDetectedGameObjects("objective");
+        var newDetections = _objectScanner.GetDetectedGameObjects("objective").Where(x => x.GetComponent<DetectableVisibleObject>().isDetected == false);
+        
+        foreach (var objective in newDetections)
+        {
+            var pos = objective.transform.position;
+            var x = NormalizeX(pos.x - agentPos.x);
+            var z = NormalizeZ(pos.z - agentPos.z);
+            _bufferSensorObjectives.AppendObservation(new []{x, z});
+            objective.GetComponent<DetectableVisibleObject>().isDetected = true;
         }
     }
 
@@ -114,7 +134,7 @@ public class ObjectCollectorAgent : Agent, IStats
         var velocity = transform.InverseTransformDirection(m_AgentRb.velocity);
         sensor.AddObservation(new Vector2(velocity.x / moveSpeed, velocity.z / moveSpeed));
 
-        if (_bufferSensorObjectives != null)
+        if (_bufferSensorObjectives != null && _objectScanner == null)
         {
             var objectives = GameObject.FindGameObjectsWithTag("objective");
             
@@ -186,6 +206,8 @@ public class ObjectCollectorAgent : Agent, IStats
         }
 
         m_ObjectCollectorSettings.m_AgentGroup.AddGroupReward(stepCost);
+
+        ScanForObjects();
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
