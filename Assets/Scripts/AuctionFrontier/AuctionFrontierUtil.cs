@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using CustomDetectableObjects;
@@ -9,8 +11,8 @@ namespace DefaultNamespace
     public static class AuctionFrontierUtil
     {
         private static int nextId = -1;
-        public static HashSet<GameObject> DISCOVERED_TARGETS = new HashSet<GameObject>();
-        public static HashSet<GameObject> TARGETS = new HashSet<GameObject>();
+        public static ConcurrentBag<GameObject> DISCOVERED_TARGETS = new ConcurrentBag<GameObject>();
+        public static ConcurrentBag<GameObject> TARGETS = new ConcurrentBag<GameObject>();
 
         public static bool FINISHED = false;
         public static float env_diagonal_distance;
@@ -18,10 +20,34 @@ namespace DefaultNamespace
 
         public static void CLEAR()
         {
-            DISCOVERED_TARGETS = new HashSet<GameObject>();
-            TARGETS = new HashSet<GameObject>();
+            DISCOVERED_TARGETS.Clear();
+            TARGETS.Clear();
         }
+
         
+        public static void AddToGlobalObjectList(GameObject obj)
+        {
+            if (obj.activeSelf)
+            {
+                DISCOVERED_TARGETS.Add(obj);
+                TARGETS.TryTake(out obj);
+            }
+        }
+
+        public static bool IsObjectTargeted(GameObject obj)
+        {
+            return TARGETS.Contains(obj);
+        }
+
+        public static void RemoveFromGlobalObjectList(GameObject obj)
+        {
+            if (obj.activeSelf)
+            {
+                TARGETS.Add(obj);
+                var b = DISCOVERED_TARGETS.TryTake(out obj);
+                
+            }
+        }
         
 
         public static GameObject GetNearestDiscoveredObject(Vector3 worldPosition)
@@ -104,8 +130,7 @@ namespace DefaultNamespace
         {
             AuctionStart,
             Bid, 
-            Winner,
-            Loser
+            Winner
         }
 
         public class Message
@@ -113,6 +138,7 @@ namespace DefaultNamespace
             public Message(AuctionFrontierAgent sender, AuctionFrontierAgent receiver,  MessageType header, GameObject task, float bid=0f)
             {
                 Bid = bid;
+                Timestamp = DateTime.Now;
                 Sender = sender;
                 Receiver = receiver;
                 Header = header;
@@ -122,6 +148,7 @@ namespace DefaultNamespace
             public Message(AuctionFrontierAgent sender,  MessageType header, GameObject task, float bid=0f)
             {
                 Bid = bid;
+                Timestamp = DateTime.Now;
                 Sender = sender;
                 Header = header;
                 Task = task;
@@ -131,6 +158,8 @@ namespace DefaultNamespace
 
             public AuctionFrontierAgent Sender { get; set; }
             public AuctionFrontierAgent Receiver { get; set; }
+
+            public DateTime Timestamp { get; set; }
 
             public MessageType Header { get; set; }
 

@@ -21,6 +21,7 @@ namespace Statistics
         private static List<float> m_AgentRewards = new List<float>();
         private static List<float> m_AgentTravelDist = new List<float>();
         private static List<int> m_AgentSteps = new List<int>();
+        private static List<int> m_Shares = new List<int>();
         private static int updateCounter;
 
         public static int NumAgents { get; set; }
@@ -35,11 +36,12 @@ namespace Statistics
             m_AgentSteps.Add(agentStep);
         }
         
-        public static void AppendAgentStatsMaxStep(float agentReward, float agentTravelDist, int agentStep, int id, TimeSpan elapTime)
+        public static void AppendAgentStatsMaxStep(float agentReward, float agentTravelDist, int agentStep, int id, TimeSpan elapTime, int shares)
         {
             m_AgentRewards.Add(agentReward);
             m_AgentTravelDist.Add(agentTravelDist);
             m_AgentSteps.Add(agentStep);
+            m_Shares.Add(shares);
 
             if (++updateCounter % NumAgents == 0 && IsEvaluating)
             {
@@ -56,6 +58,7 @@ namespace Statistics
             m_AgentRewards.Clear();
             m_AgentSteps.Clear();
             m_AgentTravelDist.Clear();
+            m_Shares.Clear();
             m_Records.Clear();
         }
 
@@ -82,7 +85,7 @@ namespace Statistics
         public static void AppendStatToRecordList(int id,  TimeSpan elapTime)
         {
             var record = new Stats(id, (elapTime.TotalSeconds * Time.timeScale).ToString());
-            record.ComputeAgentSpecificStats(m_AgentRewards, m_AgentSteps, m_AgentTravelDist);
+            record.ComputeAgentSpecificStats(m_AgentRewards, m_AgentSteps, m_AgentTravelDist, m_Shares);
             m_Records.Add(record);
         }
     }
@@ -108,6 +111,8 @@ namespace Statistics
         public float MaxDistTravelled { get; set; }
         public double SDDistTravelled { get; set; }
 
+        public float TotalShares { get; set; }
+
 
 
         public Stats(int id, string completionTime)
@@ -116,7 +121,7 @@ namespace Statistics
             CompletionTime = completionTime;
         }
 
-        public void ComputeAgentSpecificStats(List<float> rewards, List<int> stepCounts, List<float> distances)
+        public void ComputeAgentSpecificStats(List<float> rewards, List<int> stepCounts, List<float> distances, List<int> shares)
         {
             NumOfAgents = distances.Count;
             MinDistTravelled = distances.Min();
@@ -132,6 +137,8 @@ namespace Statistics
             MinAgentStep = stepCounts.Min();
             AvgAgentStep = (int) stepCounts.Average();
             MaxAgentStep = stepCounts.Max();
+
+            TotalShares = shares.Sum();
         }
 
         public double StandardDeviation(IEnumerable<float> sequence)

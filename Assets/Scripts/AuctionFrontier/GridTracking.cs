@@ -15,7 +15,7 @@ namespace DefaultNamespace
         private int height = 6;
         private float cellSize = 5f;
         public static int TotalNumberOfCells;
-
+        public bool EnableDebugDrawing;
         private Mesh m_Mesh;
         private static GridWorld m_GridWorld;
         private static Vector3 _cellsizeVec;
@@ -38,11 +38,11 @@ namespace DefaultNamespace
                 height = (int) GridDim.z;
                 cellSize = (int) grid2d.CellSize;
                 
-                SetGridWorld(new GridWorld(width, height, cellSize));
+                SetGridWorld(new GridWorld(width, height, cellSize, EnableDebugDrawing));
             }
             else
             {
-                SetGridWorld(new GridWorld(width, height, cellSize));
+                SetGridWorld(new GridWorld(width, height, cellSize, EnableDebugDrawing));
             }
             
             AuctionFrontierUtil.env_diagonal_distance = math.sqrt(math.pow(OffsetX(),2) + math.pow(OffsetZ(),2));
