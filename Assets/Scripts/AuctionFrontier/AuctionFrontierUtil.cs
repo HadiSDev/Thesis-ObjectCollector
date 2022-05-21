@@ -11,8 +11,8 @@ namespace DefaultNamespace
     public static class AuctionFrontierUtil
     {
         private static int nextId = -1;
-        public static ConcurrentBag<GameObject> DISCOVERED_TARGETS = new ConcurrentBag<GameObject>();
-        public static ConcurrentBag<GameObject> TARGETS = new ConcurrentBag<GameObject>();
+        public static HashSet<GameObject> DISCOVERED_TARGETS = new HashSet<GameObject>();
+        public static HashSet<GameObject> TARGETS = new HashSet<GameObject>();
 
         public static bool FINISHED = false;
         public static float env_diagonal_distance;
@@ -30,7 +30,7 @@ namespace DefaultNamespace
             if (obj.activeSelf)
             {
                 DISCOVERED_TARGETS.Add(obj);
-                TARGETS.TryTake(out obj);
+                TARGETS.Remove(obj);
             }
         }
 
@@ -41,12 +41,8 @@ namespace DefaultNamespace
 
         public static void RemoveFromGlobalObjectList(GameObject obj)
         {
-            if (obj.activeSelf)
-            {
-                TARGETS.Add(obj);
-                var b = DISCOVERED_TARGETS.TryTake(out obj);
-                
-            }
+            TARGETS.Add(obj);
+            DISCOVERED_TARGETS.Remove(obj);
         }
         
 

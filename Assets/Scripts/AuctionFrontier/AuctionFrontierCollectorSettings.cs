@@ -15,7 +15,7 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
     // Statistics
     public bool m_Is_evaluating;
     private int resetCounter;
-    private int m_Counter = 0;
+    private int m_Counter;
     
     public int sampleSize;
     public string fileName;
@@ -57,7 +57,7 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
         Time.fixedDeltaTime = 0.02f * Time.timeScale;    
     }
 
-    public void EnvironmentReset()
+    private void EnvironmentReset()
     {
         Debug.Log("Reset environment...");
         GridTracking.GridTrackingReset();
