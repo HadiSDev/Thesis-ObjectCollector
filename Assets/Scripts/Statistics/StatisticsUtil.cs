@@ -16,7 +16,7 @@ namespace Statistics
     public static class StatisticsWriter
     {
         
-        private static readonly string BASE_DIRECTORY = "./Assets/Scripts/Statistics/";
+        public static readonly string BASE_DIRECTORY = "./Assets/Scripts/Statistics/";
         private static List<Stats> m_Records = new List<Stats>();
         private static List<float> m_AgentRewards = new List<float>();
         private static List<float> m_AgentTravelDist = new List<float>();
@@ -28,6 +28,12 @@ namespace Statistics
         public static string FileName { get; set; }
         public static string WriteDirectory { get; set; }
         public static bool IsEvaluating { get; set; }
+
+
+        public static void Main()
+        {
+            var folderPath = "";
+        }
 
         public static void AppendAgentStats(float agentReward, float agentTravelDist, int agentStep)
         {

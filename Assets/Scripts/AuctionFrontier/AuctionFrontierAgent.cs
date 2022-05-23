@@ -21,7 +21,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     public bool enableCapacity;
     public float maxCapacity = 15;
     private float m_CollectedCapacity;
-    private float m_TotalCollectted;
+    private float m_TotalCollected;
     private int timestep;
     private int m_Shares;
     private NavMeshAgent m_Agent;
@@ -262,12 +262,12 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     public void Start()
     {
         ResetAgent();
-        Thread.Sleep(100);
+        Thread.Sleep(500);
     }
 
     public void ResetAgent()
     {
-        Debug.Log($"Init agent{id}...");
+        //Debug.Log($"Init agent{id}...");
         InitAgent();
         ResetStats();
         timestep = 0;
@@ -290,8 +290,6 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         m_Agent.isStopped = false;
         sTime = DateTime.Now;
     }
-    
-
     #region auction-frontier
     public bool DetectObjects()
     {
@@ -435,13 +433,13 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("objective"))
+        if (collision.gameObject.CompareTag("objective") && collision.gameObject.activeSelf)
         {
-            //Satiate();
+            Debug.Log($"Agent{id} - Object have been collected {collision.transform.position}");
             collision.gameObject.GetComponent<AuctionFrontierObjectLogic>().OnEaten();
             AuctionFrontierUtil.RemoveFromGlobalObjectList(collision.gameObject);
             m_CollectedCapacity++;
-            m_TotalCollectted++;
+            m_TotalCollected++;
         }
     }
 
@@ -461,7 +459,14 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 m_CollectedCapacity = 0;
                 if(m_Target != null && !m_Target.CompareTag("objective")) m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer; 
             }
-            
+            else
+            {
+                if (GridTracking.GridWorldComplete() && AuctionFrontierUtil.DISCOVERED_TARGETS.Count > 0)
+                {
+                    m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
+                }
+            }
+
             if (n_objects == 0 && m_CollectedCapacity == 0 && GridTracking.GridWorldComplete())
             {
                 DisableAgent();
@@ -550,6 +555,18 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                     if (m_AuctionItem != null)
                     {
                         m_AuctionStage = AuctionFrontierUtil.AuctionStage.TaskAnnouncement;
+                        
+                        /*
+                        // In case the object have been collected before auction have been finished
+                        if (m_AuctionItem.activeSelf)
+                        {
+                            m_AuctionStage = AuctionFrontierUtil.AuctionStage.TaskAnnouncement;
+                        }
+                        else
+                        {
+                            m_AuctionItem = null;
+                        }
+                        */
                     }
                 }
                 else if (AuctionFrontierUtil.DISCOVERED_TARGETS.Count == 0 && m_AuctionItem == null)
@@ -584,6 +601,16 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
 
                         if (m_Time > biddingTimeLimit) // If not all have responded... make auctioneer collect
                         {
+                            
+                            // Edge case: The item gets collected before auction ends...
+                            // Happens sometimes when agents unintentionally spawn on object...
+                            if (m_AuctionItem == null) 
+                            {
+                                ResetBiddingTable();
+                                ExplorerInit();
+                                break;
+                            }
+                            
                             Debug.Log($"Agent{id} - Auctioneer did not receive all bids. Assigning target {m_AuctionItem.transform.position} self... ");
                             m_Target = m_AuctionItem;
                             m_Agent.SetDestination(m_Target.transform.position);
@@ -794,14 +821,16 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         // AgentReward := # of collected objectives
         // AgentStep := # of discovered cells in gridworld
         Debug.Log($"Disabling Agent{id}...");
-        if(m_ObjectCollectorSettings.m_Is_evaluating) StatisticsWriter.AppendAgentStatsMaxStep(m_TotalCollectted, dist_travelled, m_DiscoveredCells.Sum(), id, DateTime.Now - sTime, m_Shares);
+        if(m_ObjectCollectorSettings.m_Is_evaluating) StatisticsWriter.AppendAgentStatsMaxStep(m_TotalCollected, dist_travelled, m_DiscoveredCells.Sum(), id, DateTime.Now - sTime, m_Shares);
+        ResetStats();
         gameObject.SetActive(false);
     }
     
     public void ResetStats()
     {
+        m_DiscoveredCells.Clear();
         dist_travelled = 0;
-        m_TotalCollectted = 0;
+        m_TotalCollected = 0;
         sTime = DateTime.Now;
     } 
 
@@ -849,7 +878,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
         //DEBUG_SET_ROLE(AuctionFrontierUtil.AuctionFrontierRole.Explorer, "Initagent");
         m_DiscoveredCells = new List<int>();
-        m_TotalCollectted = 0;
+        m_TotalCollected = 0;
     }
     
     public void BroadcastMessage(AuctionFrontierUtil.Message msg)
@@ -909,7 +938,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                     // If requested auction started before own auction
                     if (AuctionStart > msg.Timestamp)
                     {
-                        Debug.Log($"Agent{id} - Abandon auction on {m_AuctionItem.transform.position} and continue as bidder on target: {msg.Task.transform.position}...");
+                        //Debug.Log($"Agent{id} - Abandon auction on {m_AuctionItem.transform.position} and continue as bidder on target: {msg.Task.transform.position}...");
                         m_AuctioneerId = msg.Sender.id;
                         m_Role = AuctionFrontierUtil.AuctionFrontierRole.Bidder;
                         m_AuctionStage = AuctionFrontierUtil.AuctionStage.Bidding;
@@ -932,7 +961,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 
             case AuctionFrontierUtil.MessageType.Winner:
                 var winnerId = msg.Bid; // Field used to hold winner id :)
-                Debug.LogWarning($"Agent{id} - {m_Role} - Received auction winner for {msg.Task.transform.position}");
+                //Debug.LogWarning($"Agent{id} - {m_Role} - Received auction winner for {msg.Task.transform.position}");
                 if (winnerId == id && (m_Role == AuctionFrontierUtil.AuctionFrontierRole.Bidder || m_Role == AuctionFrontierUtil.AuctionFrontierRole.Explorer))
                 {
                     m_Target = msg.Task;
@@ -964,7 +993,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                     }
                     else
                     {
-                        Debug.Log($"Agent:{id} lost bid on {msg.Task.transform.position}...");
+                        //Debug.Log($"Agent:{id} lost bid on {msg.Task.transform.position}...");
                         m_AuctioneerId = -1;
                         m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
                         //DEBUG_SET_ROLE(AuctionFrontierUtil.AuctionFrontierRole.Explorer, $"TPM-{msg.Header}");

@@ -53,7 +53,7 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
         StatisticsWriter.IsEvaluating = m_Is_evaluating;
         
         // Speed up play time
-        Time.timeScale = 20;
+        Time.timeScale = 50;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;    
     }
 
@@ -102,7 +102,6 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
         {
             EnvironmentReset();
             AuctionFrontierUtil.CLEAR();
-            Debug.ClearDeveloperConsole();
             timestep = 0;
         }
         
@@ -115,7 +114,7 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
             foreach (var agent in agents)
             {
                 area.UpdateGridWorld(agent);
-                GridTracking.SetValueFromWorldPos(agent.transform.position, 1);
+                //GridTracking.SetValueFromWorldPos(agent.transform.position, 1);
                 //var pos = GridTracking.GetCellFromWorldCoord(agent.transform.position);
             }
         }

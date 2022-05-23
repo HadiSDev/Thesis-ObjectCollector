@@ -15,6 +15,7 @@ namespace DefaultNamespace
         private int height = 6;
         private float cellSize = 5f;
         public static int TotalNumberOfCells;
+        
         public bool EnableDebugDrawing;
         private Mesh m_Mesh;
         private static GridWorld m_GridWorld;
@@ -105,11 +106,11 @@ namespace DefaultNamespace
             {
                 Vector3 pos = station.transform.position;
                 GetXZ(pos, out x, out z);
-                m_GridWorld.SetValue(x, z, 1);
                 var adj_cells = GetCellAdjacentFromXZ(x, z);
                 foreach (var cell in adj_cells)
                 {
-                    m_GridWorld.SetValue((int) cell.x, (int) cell.z, 1);
+                    /* Cells set to 0 to ensure that they are included when counting # discovered cells per agent*/
+                    m_GridWorld.SetValue((int) cell.x, (int) cell.z, 0); 
                     m_CellState[(int)cell.z, (int)cell.x] = AuctionFrontierUtil.CELL_STATE.KNOWN_OPEN;
                 }
             }
@@ -225,13 +226,11 @@ namespace DefaultNamespace
                 foreach (var neightbour in elem_adj)
                 {
                     var neightbour_state = CellState[(int)neightbour.z, (int)neightbour.x];
-                    if (//neightbour_state != AuctionFrontierUtil.CELL_STATE.MAP_OPEN &&
-                        neightbour_state != AuctionFrontierUtil.CELL_STATE.KNOWN_CLOSE &&
+                    if (neightbour_state != AuctionFrontierUtil.CELL_STATE.KNOWN_CLOSE &&
                         neightbour_state != AuctionFrontierUtil.CELL_STATE.UNKNOWN_REGION &&
                         HaveAdjOpenCell(neightbour))
                     {
                         queue_m.Enqueue(neightbour);
-                        //Debug.DrawRay(GridCoordToWorld(neightbour), Vector3.up * 10f, Color.magenta, 10f);
                         CellState[(int)neightbour.z, (int)neightbour.x] = AuctionFrontierUtil.CELL_STATE.KNOWN_OPEN;
                     }
                 }
@@ -381,20 +380,13 @@ namespace DefaultNamespace
                     angle2 = Vector3.Angle(v2, coord-pos);
                     dist = Vector3.Distance(pos, coord);
                     
-                    
-
-                    
                     if (angle1 < longitude && angle2 < longitude && dist <= range)
                     {
-                        if(m_GridWorld.GetGridValue(x, z) <= 0) num_discovered_cells++;
+                        if(m_GridWorld.GetGridValue(x, z) <= 0 && value == 1) num_discovered_cells++;
                         
                         /* DEBUGGING */
-                        //Debug.Log($"Angle {angle1}  Angle2 {angle2}");
-                        //Debug.DrawRay(coord, new Vector3(0f, 10f, 0f), Color.yellow, 6f); // DRAW Points instead
-                        //Debug.Log($"******************************'");
-                        //Debug.DrawRay(pos, (coord - pos), Color.cyan, drawDuration);
-
-
+                        if (EnableDebugDrawing) Debug.DrawRay(coord, new Vector3(0f, 10f, 0f), Color.yellow, 6f); // DRAW Points instead
+                        
                         m_GridWorld.SetValue(x, z, value);
                         m_CellState[z, x] = AuctionFrontierUtil.CELL_STATE.KNOWN_OPEN;
                     }
