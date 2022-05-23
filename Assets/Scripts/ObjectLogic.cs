@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ObjectLogic : MonoBehaviour
 {
@@ -15,7 +17,9 @@ public class ObjectLogic : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false);
+            GameObject o;
+            (o = gameObject).SetActive(false);
+            myArea.m_exploredObjectives.Remove(o);
         }
     }
 }

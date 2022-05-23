@@ -15,9 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Problem A/Full/Problem_A_full_2.unity
     guid: f69af6e1a9f33774aba9be828f9fffd3
   - enabled: 1
-    path: Assets/Scenes/Problem A/Full/Problem_A_full_1_test.unity
-    guid: 50eab67278afe59439e8fbcb4ed91036
-  - enabled: 1
-    path: Assets/Scenes/Problem A/Full/Problem_A_full_2_test.unity
-    guid: 4fec84c8b665abb4d89e2dd1f0fc3093
+    path: Assets/Scenes/Problem A/Explore/Problem_A_explorative_2.unity
+    guid: e5f2a644f2fdb9648b27c99ec915458a
   m_configObjects: {}

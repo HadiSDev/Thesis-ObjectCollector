@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - agent
+  - obstacle
+  - station
+  - wall
+  - ground
+  - objective
+  - scanner
   layers:
   - Default
   - TransparentFX

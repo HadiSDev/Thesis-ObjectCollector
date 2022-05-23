@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using CustomDetectableObjects;
 using Interfaces;
@@ -40,19 +41,20 @@ public class ObjectCollectorAgent : Agent, IStats
     private GridSensorComponent3D POVGrid;
     private BufferSensorComponent _bufferSensorObjectives;
     private BufferSensorComponent _bufferSensorAgents;
+    public bool m_isExploring;
     
     // Station
-    private ObjectCollectorArea m_ObjectCollectorArea;
+    [HideInInspector]
+    public ObjectCollectorArea m_ObjectCollectorArea;
     private GameObject Station { get; set; }
     
     const string k_MaxCapacityFlag = "--max-capacity";
 
-
     public override void Initialize()
     {
         m_AgentRb = GetComponent<Rigidbody>();
-        prev_pos = transform.position; 
-        
+        prev_pos = transform.position;
+
         m_ObjectCollectorSettings = FindObjectOfType<ObjectCollectorSettings>();
         m_ObjectCollectorArea = FindObjectOfType<ObjectCollectorArea>();
         Station = GameObject.FindGameObjectWithTag("station");
@@ -68,6 +70,7 @@ public class ObjectCollectorAgent : Agent, IStats
         {
             POVGrid = GetComponent<GridSensorComponent3D>();
         }
+        
         SetResetParameters();
         
         var args = Environment.GetCommandLineArgs();
@@ -79,6 +82,20 @@ public class ObjectCollectorAgent : Agent, IStats
                 maxCapacity = float.Parse(args[i + 1]);
                 break;
             }
+        }
+    }
+
+    private void ScanForObjects(IList<GameObject> newDetections)
+    {
+        var agentPos = transform.position;
+
+        foreach (var objective in newDetections)
+        {
+            var pos = objective.transform.position;
+            var x = NormalizeX(pos.x - agentPos.x);
+            var z = NormalizeZ(pos.z - agentPos.z);
+            _bufferSensorObjectives.AppendObservation(new []{x, z});
+            objective.GetComponent<DetectableVisibleObject>().isDetected = true;
         }
     }
 
@@ -114,7 +131,7 @@ public class ObjectCollectorAgent : Agent, IStats
         var velocity = transform.InverseTransformDirection(m_AgentRb.velocity);
         sensor.AddObservation(new Vector2(velocity.x / moveSpeed, velocity.z / moveSpeed));
 
-        if (_bufferSensorObjectives != null)
+        if (_bufferSensorObjectives != null && !m_isExploring)
         {
             var objectives = GameObject.FindGameObjectsWithTag("objective");
             
@@ -125,6 +142,10 @@ public class ObjectCollectorAgent : Agent, IStats
                 var z = NormalizeZ(pos.z - agentPos.z);
                 _bufferSensorObjectives.AppendObservation(new []{x, z});
             }
+        }
+        else if (_bufferSensorObjectives != null && m_isExploring)
+        {
+            ScanForObjects(m_ObjectCollectorArea.m_exploredObjectives);
         }
 
         if (_bufferSensorAgents != null)

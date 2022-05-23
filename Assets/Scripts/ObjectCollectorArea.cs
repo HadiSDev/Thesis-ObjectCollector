@@ -12,7 +12,10 @@ public class ObjectCollectorArea : Area
     public float rangeX = 147f;
     public float rangeZ = 13.4f;
     private IList<GameObject> m_Objectives = new List<GameObject>();
-
+    
+    [HideInInspector]
+    public IList<GameObject> m_exploredObjectives = new List<GameObject>();
+    
     private GameObject Station { get; set; }
     private void Start()
     {
@@ -46,6 +49,7 @@ public class ObjectCollectorArea : Area
 
     public void ResetObjectiveArea(ObjectCollectorAgent[] agents)
     {
+        m_exploredObjectives = new List<GameObject>();
         foreach (var agent in agents)
         {
             agent.gameObject.SetActive(true);
