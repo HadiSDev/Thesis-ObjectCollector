@@ -27,7 +27,7 @@ namespace DefaultNamespace
         
         public static void AddToGlobalObjectList(GameObject obj)
         {
-            if (obj.activeSelf)
+            if (obj != null && obj.activeSelf)
             {
                 DISCOVERED_TARGETS.Add(obj);
                 TARGETS.Remove(obj);

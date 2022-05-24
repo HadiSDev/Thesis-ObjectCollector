@@ -16,12 +16,15 @@ using UnityEngine.Serialization;
 public class AuctionFrontierAgent : MonoBehaviour, IStats
 {
     public int id;
-    public bool shareCapacity = false;
     
+    // Capacity variables
+    public bool shareCapacity = false;
+    public int CapacityShareDistance;
     public bool enableCapacity;
     public float maxCapacity = 15;
     private float m_CollectedCapacity;
     private float m_TotalCollected;
+    
     private int timestep;
     private int m_Shares;
     private NavMeshAgent m_Agent;
@@ -226,7 +229,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         var other_cap = other_agent.GetCapacity();
         if (other_cap < m_CollectedCapacity - 1)
         {
-            /*
+            
             var cap_to_transfer = (float) RoundDown((Convert.ToDecimal(m_CollectedCapacity-other_cap))/2, 0);
             other_agent.SetCapacity( other_cap + cap_to_transfer);
             m_CollectedCapacity -= cap_to_transfer;
@@ -234,18 +237,20 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
 
             if (m_Target != null && m_Target.CompareTag("station") && m_Role != AuctionFrontierUtil.AuctionFrontierRole.Auctioneer)
             {
-                Debug.LogWarning($"Agent{Id} - ShareCap - Reverting back to explorer...");
-                m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
+                //Debug.LogWarning($"Agent{id} - ShareCap - Reverting back to explorer...");
+                //m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
+                ExplorerInit();
                 //DEBUG_SET_ROLE(AuctionFrontierUtil.AuctionFrontierRole.Explorer, "Sharecapttwo");
             }
 
             if (other_agent.m_Target != null && other_agent.m_Target.CompareTag("station") && other_agent.m_Role != AuctionFrontierUtil.AuctionFrontierRole.Auctioneer)
             {
-                Debug.LogWarning($"other-Agent{other_agent.Id} - ShareCap - Reverting back to explorer...");
-                other_agent.m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
+                //Debug.LogWarning($"other-Agent{other_agent.id} - ShareCap - Reverting back to explorer...");
+                //other_agent.m_Role = AuctionFrontierUtil.AuctionFrontierRole.Explorer;
+                ExplorerInit();
                 //other_agent.DEBUG_SET_ROLE(AuctionFrontierUtil.AuctionFrontierRole.Explorer, "Sharecapttwo");
             }
-            */
+            
         }
     }
     #endregion
@@ -505,27 +510,32 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
         previous_pos = cur_position;
         
         // Capacity sharing
-        if (shareCapacity && Vector3.Distance(GameObject.FindGameObjectWithTag("station").transform.position, cur_position) > 20)
+        if (shareCapacity && (m_Role == AuctionFrontierUtil.AuctionFrontierRole.Explorer || ( m_Target != null && m_Target.CompareTag("station"))) && Vector3.Distance(GameObject.FindGameObjectWithTag("station").transform.position, cur_position) > 20)
         {
             var agents = FindObjectsOfType<AuctionFrontierAgent>();
             foreach (var agent in agents)
             {
-                if (agent.gameObject != gameObject)
+                if (agent.gameObject != gameObject && agent.m_Role == AuctionFrontierUtil.AuctionFrontierRole.Explorer)
                 {
                     var dist_to_agent = Vector3.Distance(agent.gameObject.transform.position, cur_position);
                    
+                    /*
                     //1st variant
-                    //if (dist_to_agent < 20 && agent.GetCapacity() + m_CollectedCapacity >= maxCapacity)
-                    //{
-                    //    ShareCap(agent.gameObject);
-                    //}
-
+                    if (dist_to_agent < CapacityShareDistance && agent.GetCapacity() + m_CollectedCapacity >= maxCapacity)
+                    {
+                        ShareCap(agent.gameObject);
+                    }
+                    */
+                    
+                    
                     // 2nd variant
-                    if (dist_to_agent < 10)
+                    if (dist_to_agent < CapacityShareDistance &&  agent.GetCapacity() + m_CollectedCapacity >= maxCapacity && m_CollectedCapacity >= maxCapacity * 0.8)
                     {
                         ShareCapTwo(agent.gameObject);
                         break;
                     }
+                    
+                    
                    
                    
                 }
@@ -704,7 +714,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
 
             // Behaviour following frontier exploration algorithm 
             case AuctionFrontierUtil.AuctionFrontierRole.Explorer:
-                if (HasDetectedObjects || AuctionFrontierUtil.DISCOVERED_TARGETS.Count > 0)
+                if (HasDetectedObjects || AuctionFrontierUtil.DISCOVERED_TARGETS.Count > 0 && m_CollectedCapacity < maxCapacity)
                 {
                     m_AuctioneerId = id;
                     m_Role = AuctionFrontierUtil.AuctionFrontierRole.Auctioneer;
@@ -829,6 +839,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
     public void ResetStats()
     {
         m_DiscoveredCells.Clear();
+        m_Shares = 0;
         dist_travelled = 0;
         m_TotalCollected = 0;
         sTime = DateTime.Now;
@@ -977,7 +988,7 @@ public class AuctionFrontierAgent : MonoBehaviour, IStats
                 }
                 else if (winnerId == id && (m_Role == AuctionFrontierUtil.AuctionFrontierRole.Worker || m_Role == AuctionFrontierUtil.AuctionFrontierRole.Auctioneer))
                 {
-                    Debug.LogWarning($"Agent{id} - {m_Role} - Agent is currently busy to collect {msg.Task.transform.position}. Reinserting element");
+                    //Debug.LogWarning($"Agent{id} - {m_Role} - Agent is currently busy to collect {msg.Task.transform.position}. Reinserting element");
                     AuctionFrontierUtil.AddToGlobalObjectList(msg.Task);
                     msg.Task.GetComponent<DetectableVisibleObject>().isTargeted = false;
                     m_AuctioneerId = -1;
