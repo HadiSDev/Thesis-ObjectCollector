@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -10,7 +9,6 @@ using MBaske.Sensors.Grid;
 using Statistics;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(GridSensorComponent3D))]
 public class AuctionFrontierAgent : MonoBehaviour, IStats

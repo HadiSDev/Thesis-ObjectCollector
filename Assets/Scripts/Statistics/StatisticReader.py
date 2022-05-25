@@ -13,7 +13,6 @@ all_files = glob.glob(read_dir + "/*.csv")
 dff = pd.DataFrame()
 for filename in all_files:
     df = pd.read_csv(filename)
-
     entry = dict()
     entry["aa_filename"] = filename.split("/")[-1]
     entry["agents_num"] = df["NumOfAgents"].mean()
@@ -24,8 +23,10 @@ for filename in all_files:
 
     # Distance
     entry["dist_travelled_avg"] = df["AvgDistTravelled"].mean() 
-    entry["totaldist"] = entry["agents_num"] * df["AvgDistTravelled"].mean() 
     entry["dist_travelled_avg_std"] = df["AvgDistTravelled"].std() 
+
+    entry["totaldist"] = entry["agents_num"] * df["AvgDistTravelled"].mean() 
+    entry["totaldist_std"] = (df["NumOfAgents"] * df["AvgDistTravelled"]).std()
 
     entry["max_dist_travelled_avg"] = df["MaxDistTravelled"].mean() 
     entry["max_dist_travelled_std"] = df["MaxDistTravelled"].std() 
@@ -57,4 +58,4 @@ for filename in all_files:
     dff = pd.concat([dff, df_dictionary], ignore_index=True)
 
 
-dff.to_csv(read_dir+"/AuctionFrontierD_Variant1_cap7_Dist10.csv", sep=',', mode='a')
+dff.to_csv(read_dir+"/AuctionFrontierD_var1_Dist10.csv", sep=',', mode='a')
