@@ -53,7 +53,7 @@ public class AuctionFrontierCollectorSettings : MonoBehaviour
         StatisticsWriter.IsEvaluating = m_Is_evaluating;
         
         // Speed up play time
-        Time.timeScale = 50;
+        Time.timeScale = 100;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;    
     }
 

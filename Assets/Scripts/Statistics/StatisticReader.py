@@ -2,8 +2,8 @@ import pandas as pd
 import glob
 import csv
 
-base_dir = "./AuctionFrontier_ProblemD"
-read_dir = base_dir + "/AuctionFrontierD_Variant1_Dist10"
+base_dir = "./AuctionFrontier_ProblemC"
+read_dir = base_dir + "/AuctionFrontierC_2Agents"
 
 all_files = glob.glob(read_dir + "/*.csv")
 
@@ -58,4 +58,4 @@ for filename in all_files:
     dff = pd.concat([dff, df_dictionary], ignore_index=True)
 
 
-dff.to_csv(read_dir+"/AuctionFrontierD_var1_Dist10.csv", sep=',', mode='a')
+dff.to_csv(read_dir+"/AuctionFrontierC_2agents.csv", sep=',', mode='a')
